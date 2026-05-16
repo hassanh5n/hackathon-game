@@ -1,0 +1,19 @@
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+*.pidb
+*.sln
+*.csproj
+
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+
+# Secrets
+*.key
+*.pem
+firebase-service-account.json
