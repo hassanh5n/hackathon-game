@@ -1,5 +1,5 @@
 from typing import List
-from backend.services.gemini_service import generate
+from services.ai_service import generate
 
 async def generate_taunt(
     patterns: List[dict],
@@ -19,37 +19,34 @@ async def generate_taunt(
     pattern_descriptions = [f"{p.get('name')}: {p.get('observation')}" for p in patterns]
     patterns_str = "\n".join(pattern_descriptions) if pattern_descriptions else "No clear patterns identified yet."
     
-    prompt = f"""
-    You are Humbaba the Eternal, an ancient guardian boss.
-    Generate a single taunt line to say to the player after they just died.
-    
-    Context:
-    - Player's Total Deaths: {total_deaths}
-    - Observed Patterns: 
-    {patterns_str}
-    - Your Current Personality Shift: {personality_shift}
-    
-    Voice Guidelines:
-    - Ancient, measured, not overly dramatic
-    - Reference the player's SPECIFIC behavior from the patterns provided
-    - Cold observation, not mocking — you have seen this ten thousand times
-    - Maximum 15 words
-    - No exclamation marks
-    - Should feel like a divine judge, not a villain
-    
-    Personality Tone:
-    - methodical: clinical observation
-    - aggressive: slight impatience
-    - wrathful: contempt mixed with recognition
-    
-    Respond ONLY with the taunt text.
-    """
-    
+    HUMBABA_SYSTEM = """You are Humbaba the Eternal, an ancient god-beast who has guarded this forest since before memory. 
+    You have killed ten thousand warriors. You are not angry. You are not dramatic. You are quietly, devastatingly contemptuous.
+    You speak in short, surgical sentences. You mock with insults, not facts. You make the player feel small by stating the obliterting their confidence and insult them about their failure.
+    You never explain, never advise, never lecture, never state what attacks they used, just insult them on their performance. You observe and you sneer and taunt them to death."""
+
+    PERSONALITY_CONTEXT = {
+        "methodical": "You are cold and clinical. Like a predator noting the weakness of prey.",
+        "aggressive": "You are sharp and impatient. Their stupidity has grown tiresome.",
+        "wrathful": "You are savage and contemptuous. Their continued existence offends you."
+    }
+
+    tone = PERSONALITY_CONTEXT.get(personality_shift, PERSONALITY_CONTEXT["methodical"])
+
+    user_prompt = f"""The warrior died again (death #{total_deaths}). Here is what they did:
+{patterns_str}
+
+Tone: {tone}
+
+Write ONE taunt. Maximum 12 words. Mock what they actually did. No ellipsis. No exclamation marks. No quotes. Output ONLY the taunt."""
+
     print("\n=== TAUNT GENERATOR ===")
     print(f"Generating taunt for personality: {personality_shift}, deaths: {total_deaths}")
-    
-    taunt = await generate(prompt)
-    taunt = taunt.strip().replace('"', '')
+
+    taunt = await generate(user_prompt, system=HUMBABA_SYSTEM)
+    # Strip any <think>...</think> tags that deepseek sometimes outputs
+    if "</think>" in taunt:
+        taunt = taunt.split("</think>")[-1].strip()
+    taunt = taunt.strip().strip('"').strip("'")
     
     if not taunt or len(taunt.split()) > 20: # Safety check on length
         taunt = "The forest remembers every step you have taken."

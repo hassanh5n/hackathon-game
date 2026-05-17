@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +10,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    public GameConfig Config => config;
     public GameState CurrentState { get; private set; }
+    public int DeathCount { get; private set; }
+    public string SessionId { get; private set; }
 
     private void Awake()
     {
@@ -18,10 +21,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SessionId = System.Guid.NewGuid().ToString();
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
 
@@ -31,14 +36,39 @@ public class GameManager : MonoBehaviour
         CurrentState = newState;
     }
 
-    public async void LoadScene(string sceneName)
+    public void LoadScene(string sceneName)
     {
         Debug.Log($"[GameManager] Loading scene: {sceneName}");
+        StartCoroutine(LoadSceneCoroutine(sceneName));
+    }
+
+    private IEnumerator LoadSceneCoroutine(string sceneName)
+    {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        
-        while (!asyncLoad.isDone)
+        while (asyncLoad != null && !asyncLoad.isDone)
         {
-            await Task.Yield();
+            yield return null;
         }
+    }
+
+    public void RegisterPlayerDeath()
+    {
+        DeathCount++;
+        Debug.Log($"[GameManager] Player died. Total deaths: {DeathCount}");
+        ChangeState(GameState.Dead);
+    }
+
+    public void RegisterVictory()
+    {
+        Debug.Log("[GameManager] Boss defeated!");
+        ChangeState(GameState.Victory);
+    }
+
+    /// <summary>
+    /// Call when restarting a boss run (e.g. from death screen).
+    /// </summary>
+    public void ResetForNewRun()
+    {
+        ChangeState(GameState.BossFight);
     }
 }

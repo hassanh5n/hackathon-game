@@ -1,16 +1,27 @@
 from fastapi import FastAPI, HTTPException
-from backend.models.combat_log import DeathAnalysisRequest
-from backend.models.nemesis_state import NemesisState, AnalysisResult
-from backend.agents.death_analyst import analyze_death
-from backend.agents.adaptation_selector import select_adaptations
-from backend.agents.fairness_checker import check_fairness
-from backend.agents.taunt_generator import generate_taunt
-from backend.config import MAX_ACTIVE_ADAPTATIONS
+from fastapi.middleware.cors import CORSMiddleware
+from typing import Dict
+from models.combat_log import DeathAnalysisRequest
+from models.nemesis_state import NemesisState, AnalysisResult
+from agents.death_analyst import analyze_death
+from agents.adaptation_selector import select_adaptations
+from agents.fairness_checker import check_fairness
+from agents.taunt_generator import generate_taunt
+from config import MAX_ACTIVE_ADAPTATIONS
 
 app = FastAPI(title="Nemesis Brain API")
 
+# Add CORS middleware for Unity WebRequest
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # In production, restrict this
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # In-memory storage for demo purposes
-nemesis_states: dict[str, NemesisState] = {}
+nemesis_states: Dict[str, NemesisState] = {}
 
 @app.get("/health")
 async def health():
@@ -50,30 +61,41 @@ async def process_death(request: DeathAnalysisRequest):
         
     print(f"\n>>> PROCESSING DEATH FOR {device_id} (Attempt: {request.attempt_id}, Total Deaths: {state.total_deaths}) <<<")
 
-    # 1. Pipeline Step 1: Death Analyst Agent
-    analysis = await analyze_death(request.combat_log, request.death_cause)
-    patterns = analysis["patterns"]
-    reasoning_trace = analysis["reasoning_trace"]
-    
-    # 2. Pipeline Step 2: Adaptation Selector Agent
-    new_adaptations = await select_adaptations(
-        patterns, 
-        state.adaptations_active, 
-        state.total_deaths,
-        MAX_ACTIVE_ADAPTATIONS
-    )
-    
-    # 3. Pipeline Step 3: Fairness Checker Agent
-    fairness_result = await check_fairness(new_adaptations)
-    state.adaptations_active = fairness_result["adaptations"]
-    
-    # 4. Pipeline Step 4: Taunt Generator Agent
-    taunt = await generate_taunt(
-        patterns, 
-        state.total_deaths, 
-        state.personality_shift
-    )
-    
+    try:
+        # 1. Pipeline Step 1: Death Analyst Agent
+        analysis = await analyze_death(request.combat_log, request.death_cause)
+        patterns = analysis["patterns"]
+        reasoning_trace = analysis["reasoning_trace"]
+        
+        # 2. Pipeline Step 2: Adaptation Selector Agent
+        new_adaptations = await select_adaptations(
+            patterns, 
+            state.adaptations_active, 
+            state.total_deaths,
+            MAX_ACTIVE_ADAPTATIONS
+        )
+        
+        # 3. Pipeline Step 3: Fairness Checker Agent
+        fairness_result = await check_fairness(new_adaptations)
+        state.adaptations_active = fairness_result["adaptations"]
+        
+        # 4. Pipeline Step 4: Taunt Generator Agent
+        taunt = await generate_taunt(
+            patterns, 
+            state.total_deaths, 
+            state.personality_shift
+        )
+    except Exception as e:
+        print(f"Pipeline error: {e}")
+        # Fallback response so Unity doesn't hang
+        return AnalysisResult(
+            adaptations_applied=state.adaptations_active,
+            taunt="The forest claims another...",
+            total_deaths=state.total_deaths,
+            reasoning_trace=f"Pipeline failed: {str(e)}",
+            mercy_applied=state.mercy_mode
+        )
+        
     # 5. Update state
     state.taunt_queue.append(taunt)
     # Check for mercy mode flag (mirrors selector logic)

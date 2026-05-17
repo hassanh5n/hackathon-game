@@ -1,6 +1,6 @@
 import json
-from backend.models.combat_log import CombatLog
-from backend.services.gemini_service import generate
+from models.combat_log import CombatLog
+from services.ai_service import generate
 
 async def analyze_death(combat_log: CombatLog, death_cause: str) -> dict:
     """
@@ -27,8 +27,15 @@ async def analyze_death(combat_log: CombatLog, death_cause: str) -> dict:
     - Throwables used: {stats.throwables_used}
     - Total fight duration: {stats.total_fight_duration_seconds} seconds
     
-    Identify the 2-3 most exploitable behavioral patterns. 
-    For each pattern, name it and explain why it is exploitable.
+    Identify the 1-2 most exploitable behavioral patterns. 
+    IMPORTANT: For the 'name' field, you MUST use EXACTLY one of these valid keys, based on what fits best:
+    - PUNISH_RIGHT_DODGE
+    - PUNISH_LEFT_DODGE
+    - AGGRESS_AT_35PCT_HP
+    - CHAIN_PUNISH_LIGHT
+    - RANGE_PUNISH
+    - APPROACH_PUNISH
+    - THROWABLE_BAIT
     
     Respond ONLY in this JSON format:
     {{
@@ -46,19 +53,19 @@ async def analyze_death(combat_log: CombatLog, death_cause: str) -> dict:
     
     response_text = await generate(prompt)
     
-    # Try to parse JSON from response
+    # Robust JSON extraction for LLMs
     try:
-        # Simple cleanup in case Gemini wraps in ```json ... ```
-        clean_text = response_text.strip()
-        if clean_text.startswith("```json"):
-            clean_text = clean_text[7:]
-        if clean_text.endswith("```"):
-            clean_text = clean_text[:-3]
-        clean_text = clean_text.strip()
+        start_idx = response_text.find('{')
+        end_idx = response_text.rfind('}')
         
+        if start_idx != -1 and end_idx != -1:
+            clean_text = response_text[start_idx:end_idx+1]
+        else:
+            clean_text = response_text
+            
         data = json.loads(clean_text)
         patterns = data.get("patterns", [])
-        reasoning_trace = data.get("reasoning_trace", "No reasoning trace provided by Gemini.")
+        reasoning_trace = data.get("reasoning_trace", "No reasoning trace provided by AI.")
         
         print("\n=== DEATH ANALYST REASONING TRACE ===")
         print(reasoning_trace)

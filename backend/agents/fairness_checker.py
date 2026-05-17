@@ -1,5 +1,5 @@
 from typing import List
-from backend.config import MAX_DIFFICULTY_SCORE
+from config import MAX_DIFFICULTY_SCORE
 
 DIFFICULTY_WEIGHTS = {
     "PUNISH_RIGHT_DODGE": 1.5,

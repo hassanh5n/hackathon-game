@@ -6,6 +6,7 @@ public class GameConfig : ScriptableObject
     [Header("Player Stats")]
     public float playerMaxHp = 100f;
     public float playerStamina = 100f;
+    public float playerMaxPosture = 100f;
     public float staminaRegenRate = 15f;
     public float playerMoveSpeed = 5f;
     public float playerDodgeForce = 8f;
@@ -15,6 +16,9 @@ public class GameConfig : ScriptableObject
     public int flaskCount = 3;
     public int tabletCount = 2;
     public int spearCount = 3;
+
+    [Header("Boss Stats")]
+    public float bossMaxHP = 500f;
 
     [Header("Boss Adaptations")]
     public float bossStage2Threshold = 0.6f;
