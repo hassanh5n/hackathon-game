@@ -26,12 +26,14 @@ async def generate(prompt: str, system: str = "") -> str:
     data = {
         "model": "llama-3.3-70b-versatile",
         "messages": messages,
-        "temperature": 0.85
+        "temperature": 0.75
     }
     
     try:
         async with httpx.AsyncClient() as client:
             response = await client.post(url, headers=headers, json=data, timeout=10.0)
+            if response.status_code != 200:
+                print(f"Groq API Error {response.status_code}: {response.text}")
             response.raise_for_status()
             result = response.json()
             if "choices" in result and len(result["choices"]) > 0:

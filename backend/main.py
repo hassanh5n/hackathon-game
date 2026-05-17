@@ -1,13 +1,49 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict
-from models.combat_log import DeathAnalysisRequest
+from models.combat_log import DeathAnalysisRequest, CombatStats
 from models.nemesis_state import NemesisState, AnalysisResult
 from agents.death_analyst import analyze_death
 from agents.adaptation_selector import select_adaptations
 from agents.fairness_checker import check_fairness
 from agents.taunt_generator import generate_taunt
 from config import MAX_ACTIVE_ADAPTATIONS
+
+def update_boss_memory(state: NemesisState, patterns: list, combat_stats: CombatStats) -> None:
+    """
+    Deterministic update of boss emotional memory after each death.
+    No LLM involved — pure game logic.
+    - confidence rises as Humbaba keeps winning
+    - annoyance rises when the player repeats the same mistake
+    - respect rises slightly if the player fought long before dying
+    - dominant_weakness is set to whichever pattern has been seen most
+    """
+    mem = state.boss_memory
+
+    # Track pattern repetition
+    for p in patterns:
+        key = p.get("name", "UNKNOWN")
+        mem.pattern_counts[key] = mem.pattern_counts.get(key, 0) + 1
+
+    # Dominant weakness = most repeated pattern key
+    if mem.pattern_counts:
+        mem.dominant_weakness = max(mem.pattern_counts, key=mem.pattern_counts.get)
+
+    # Confidence: climbs with deaths, caps at 0.97
+    mem.confidence = min(0.97, 0.5 + state.total_deaths * 0.04)
+
+    # Annoyance: climbs when the same mistake is repeated (dominant count > 2)
+    dominant_count = mem.pattern_counts.get(mem.dominant_weakness, 0)
+    if dominant_count >= 3:
+        mem.annoyance = min(1.0, mem.annoyance + 0.15)
+    elif dominant_count >= 2:
+        mem.annoyance = min(1.0, mem.annoyance + 0.07)
+
+    # Respect: player gets credit for fighting long before dying
+    if combat_stats.total_fight_duration_seconds > 90:
+        mem.respect = min(1.0, mem.respect + 0.10)
+    elif combat_stats.total_fight_duration_seconds > 45:
+        mem.respect = min(1.0, mem.respect + 0.05)
 
 app = FastAPI(title="Nemesis Brain API")
 
@@ -79,11 +115,15 @@ async def process_death(request: DeathAnalysisRequest):
         fairness_result = await check_fairness(new_adaptations)
         state.adaptations_active = fairness_result["adaptations"]
         
-        # 4. Pipeline Step 4: Taunt Generator Agent
+        # 4. Update boss emotional memory (deterministic, before taunt)
+        update_boss_memory(state, patterns, request.combat_log.stats)
+
+        # 5. Pipeline Step 4: Taunt Generator Agent
         taunt = await generate_taunt(
-            patterns, 
-            state.total_deaths, 
-            state.personality_shift
+            patterns,
+            state.total_deaths,
+            state.personality_shift,
+            state.boss_memory
         )
     except Exception as e:
         print(f"Pipeline error: {e}")
