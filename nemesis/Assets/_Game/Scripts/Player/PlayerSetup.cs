@@ -21,8 +21,8 @@ namespace Nemesis.Player
 
             // Rigidbody: mass=80, drag=5, angularDrag=10, freezeRotation=true on X and Z axes
             rb.mass = 80f;
-            rb.drag = 5f;
-            rb.angularDrag = 10f;
+            rb.linearDamping = 5f;
+            rb.angularDamping = 10f;
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
             // Creates an empty AnimatorController asset
