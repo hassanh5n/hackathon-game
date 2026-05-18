@@ -61,6 +61,14 @@ public class BossController : MonoBehaviour
         bossStats.OnPhaseChanged.AddListener(HandlePhaseChanged);
         bossStats.OnBossDeath.AddListener(HandleBossDeath);
 
+        // Ensure boss has a Rigidbody so child triggers forward to this script
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.isKinematic = true; // Make it kinematic so it doesn't fall over
+        }
+
         // Find hitboxes
         foreach (Transform child in transform)
         {
@@ -73,6 +81,48 @@ public class BossController : MonoBehaviour
         }
 
         behaviorCoroutine = StartCoroutine(BehaviorLoop());
+    }
+
+    private void Update()
+    {
+        if (currentState == BossState.Dead || currentState == BossState.Staggered || player == null) return;
+
+        // Rotate towards player
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0; // Keep rotation horizontal
+        
+        if (direction.sqrMagnitude > 0.01f)
+        {
+            // Only rotate during Idle or Windup
+            if (currentState == BossState.Idle || currentState == BossState.Windup)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * Time.deltaTime);
+            }
+        }
+
+        // Basic approach logic during Idle state
+        if (currentState == BossState.Idle)
+        {
+            float distance = Vector3.Distance(transform.position, player.position);
+            // If player is far, move towards them
+            if (distance > 3.0f)
+            {
+                transform.position += direction * 3f * Time.deltaTime; // Move at 3 units per second
+                if (animator != null)
+                {
+                    animator.SetFloat("Speed", 1f); // Assuming a Speed parameter for walk animation
+                }
+            }
+            else if (animator != null)
+            {
+                animator.SetFloat("Speed", 0f);
+            }
+        }
+        else if (animator != null)
+        {
+            animator.SetFloat("Speed", 0f);
+        }
     }
 
     private List<BossAttackData> CloneAttacks(List<BossAttackData> original)
