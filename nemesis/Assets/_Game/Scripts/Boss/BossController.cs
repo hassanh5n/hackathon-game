@@ -51,11 +51,15 @@ public class BossController : MonoBehaviour
 
     private void Start()
     {
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
+        PlayerStats pStats = FindObjectOfType<PlayerStats>();
+        if (pStats != null)
         {
-            player = playerObj.transform;
-            playerStats = playerObj.GetComponent<PlayerStats>();
+            player = pStats.transform;
+            playerStats = pStats;
+        }
+        else
+        {
+            Debug.LogError("[BossController] Could not find PlayerStats in the scene! Boss will not move or attack player.");
         }
 
         bossStats.OnPhaseChanged.AddListener(HandlePhaseChanged);
@@ -295,26 +299,25 @@ public class BossController : MonoBehaviour
     {
         if (currentState == BossState.Attacking && currentAttack != null)
         {
-            if (other.CompareTag("Player") && !hitTargets.Contains(other))
+            PlayerStats pStats = other.GetComponent<PlayerStats>();
+            if (pStats == null) pStats = other.GetComponentInParent<PlayerStats>();
+
+            if (pStats != null && !hitTargets.Contains(other))
             {
                 hitTargets.Add(other);
-                PlayerStats pStats = other.GetComponent<PlayerStats>();
-                if (pStats != null)
+                PlayerCombat pCombat = pStats.GetComponent<PlayerCombat>();
+                if (pCombat != null && pCombat.isParrying)
                 {
-                    PlayerCombat pCombat = other.GetComponent<PlayerCombat>();
-                    if (pCombat != null && pCombat.isParrying)
+                    pCombat.HandleIncomingHit(); // Parry success
+                }
+                else
+                {
+                    pStats.TakeDamage(currentAttack.baseDamage);
+                    pStats.TakePostureDamage(currentAttack.postureDamage);
+                    
+                    if (debugMode)
                     {
-                        pCombat.HandleIncomingHit(); // Parry success
-                    }
-                    else
-                    {
-                        pStats.TakeDamage(currentAttack.baseDamage);
-                        pStats.TakePostureDamage(currentAttack.postureDamage);
-                        
-                        if (debugMode)
-                        {
-                            Debug.Log($"[BossController] Landed {currentAttack.attackId} on Player! Damage: {currentAttack.baseDamage}, Posture: {currentAttack.postureDamage}");
-                        }
+                        Debug.Log($"[BossController] Landed {currentAttack.attackId} on Player! Damage: {currentAttack.baseDamage}, Posture: {currentAttack.postureDamage}");
                     }
                 }
             }
