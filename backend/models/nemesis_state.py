@@ -17,6 +17,7 @@ class NemesisState(BaseModel):
     adaptations_active: List[str] = []
     taunt_queue: List[str] = []
     personality_shift: str = "methodical"
+    #helo
     mercy_mode: bool = False
     boss_memory: BossMemory = Field(default_factory=BossMemory)
 
