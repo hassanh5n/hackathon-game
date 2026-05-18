@@ -210,7 +210,7 @@ namespace Nemesis.Editor
             {
                 GameObject es = new GameObject("EventSystem");
                 es.AddComponent<EventSystem>();
-                es.AddComponent<StandaloneInputModule>();
+                es.AddComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>();
             }
         }
 
