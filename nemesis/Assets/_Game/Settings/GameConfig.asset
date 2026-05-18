@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b57c7e6bc7baa408f7eb0beea8cfc2, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: Assembly-CSharp::GameConfig
+  playerMaxHp: 100
+  playerStamina: 100
+  playerMaxPosture: 100
+  staminaRegenRate: 15
+  playerMoveSpeed: 5
+  playerDodgeForce: 8
+  dodgeCooldown: 0.8
+  flaskCount: 3
+  tabletCount: 2
+  spearCount: 3
+  bossMaxHP: 500
+  bossStage2Threshold: 0.6
+  bossStage3Threshold: 0.3
+  mercyTriggerDeathCount: 8
+  maxActiveAdaptations: 4
+  backendBaseUrl: http://localhost:8000

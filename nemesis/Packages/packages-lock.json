@@ -93,6 +93,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.render-pipelines.core": {
       "version": "17.4.0",
       "depth": 1,
@@ -190,6 +197,15 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "org.christowm.unity.mcp": {
+      "version": "https://github.com/mitchchristow/unity-mcp.git?path=/Packages/org.christowm.unity.mcp",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+      },
+      "hash": "c2e3879197c179cf156948873aaee911a2caa1b7"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

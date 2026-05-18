@@ -125,11 +125,17 @@ Assets/
 │   │   ├── BossStage2_Mat.mat
 │   │   ├── BossStage3_Mat.mat          # Translucent shader
 │   │   └── ArenaGround_Mat.mat
-│   └── UI/
-│       ├── HUD.uxml
-│       ├── MainMenu.uxml
-│       ├── DeathScreen.uxml
-│       └── Settings.uxml
+│   ├── UI/
+│   │   ├── HUD.uxml
+│   │   ├── MainMenu.uxml
+│   │   ├── DeathScreen.uxml
+│   │   └── Settings.uxml
+│   ├── Models/
+│   │   ├── Player/                     # Rigged 3D model of Zilar (.fbx)
+│   │   └── Boss/                       # Rigged 3D model of Humbaba (.fbx)
+│   └── Prefabs/
+│       ├── Player/                     # Pre-wired Zilar Player GameObject
+│       └── Boss/                       # Pre-wired Humbaba Boss GameObject
 ├── Plugins/
 │   └── Firebase/                       # Firebase Unity SDK
 └── StreamingAssets/

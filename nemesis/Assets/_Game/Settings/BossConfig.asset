@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc1675f4ddca4d5084fbc02bc569c83, type: 3}
+  m_Name: BossConfig
+  m_EditorClassIdentifier: Assembly-CSharp::BossConfig
+  phase1Attacks:
+  - attackId: HeavySwing
+    baseDamage: 20
+    postureDamage: 15
+    windupTime: 0.8
+    cooldown: 2
+    weight: 0.5
+  - attackId: Stomp
+    baseDamage: 15
+    postureDamage: 25
+    windupTime: 0.6
+    cooldown: 1.5
+    weight: 0.3
+  - attackId: Roar
+    baseDamage: 10
+    postureDamage: 30
+    windupTime: 1
+    cooldown: 3
+    weight: 0.2
+  phase2Attacks:
+  - attackId: HeavySwing
+    baseDamage: 25
+    postureDamage: 20
+    windupTime: 0.7
+    cooldown: 1.8
+    weight: 0.3
+  - attackId: Stomp
+    baseDamage: 20
+    postureDamage: 30
+    windupTime: 0.5
+    cooldown: 1.2
+    weight: 0.2
+  - attackId: AoESlam
+    baseDamage: 35
+    postureDamage: 40
+    windupTime: 1.2
+    cooldown: 4
+    weight: 0.3
+  - attackId: Grapple
+    baseDamage: 40
+    postureDamage: 10
+    windupTime: 0.9
+    cooldown: 3.5
+    weight: 0.2
+  phase3Attacks:
+  - attackId: AoESlam
+    baseDamage: 40
+    postureDamage: 45
+    windupTime: 1
+    cooldown: 3.5
+    weight: 0.3
+  - attackId: Grapple
+    baseDamage: 50
+    postureDamage: 15
+    windupTime: 0.8
+    cooldown: 3
+    weight: 0.2
+  - attackId: CedarFireball
+    baseDamage: 30
+    postureDamage: 20
+    windupTime: 1.5
+    cooldown: 2.5
+    weight: 0.3
+  - attackId: HeavySwing
+    baseDamage: 30
+    postureDamage: 25
+    windupTime: 0.6
+    cooldown: 1.5
+    weight: 0.2
