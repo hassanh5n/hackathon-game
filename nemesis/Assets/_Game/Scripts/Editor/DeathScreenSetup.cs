@@ -59,7 +59,7 @@ namespace Nemesis.Editor
             tauntText.fontSize = 40;
             tauntText.color = Color.white;
             tauntText.alignment = TextAlignmentOptions.Center;
-            tauntText.enableWordWrapping = true;
+            tauntText.textWrappingMode = TextWrappingModes.Normal;
             RectTransform tauntRect = tauntTextObj.GetComponent<RectTransform>();
             tauntRect.anchorMin = new Vector2(0.5f, 0.5f);
             tauntRect.anchorMax = new Vector2(0.5f, 0.5f);

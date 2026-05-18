@@ -107,6 +107,8 @@ namespace Nemesis.Editor
                 boss.transform.position = new Vector3(0, 1.5f, 5);
                 boss.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             }
+            // Ensure Boss tag exists
+            AddTag("Boss");
             boss.tag = "Boss";
             boss.layer = LayerMask.NameToLayer("Default");
 
@@ -233,6 +235,24 @@ namespace Nemesis.Editor
                 
                 var pStatsField = typeof(PlayerStatsUI).GetField("playerStats", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
                 if (pStatsField != null) pStatsField.SetValue(statsUI, playerStats);
+            }
+        }
+        private static void AddTag(string tag)
+        {
+            UnityEngine.Object[] asset = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
+            if (asset != null && asset.length > 0)
+            {
+                SerializedObject so = new SerializedObject(asset[0]);
+                SerializedProperty tags = so.FindProperty("tags");
+                for (int i = 0; i < tags.arraySize; ++i)
+                {
+                    if (tags.GetArrayElementAtIndex(i).stringValue == tag)
+                        return;     // Tag already present
+                }
+                tags.InsertArrayElementAtIndex(tags.arraySize);
+                tags.GetArrayElementAtIndex(tags.arraySize - 1).stringValue = tag;
+                so.ApplyModifiedProperties();
+                so.Update();
             }
         }
     }
