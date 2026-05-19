@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -10,259 +9,59 @@ namespace Nemesis.Editor
 {
     public class BossFightSetup : EditorWindow
     {
+        private const string ScenePath = "Assets/_Game/Scenes/BossFight.unity";
+        private const string PlaceholderMaterialPath = "Assets/_Game/Materials/BossPlaceholder.mat";
+
         [MenuItem("Nemesis/Setup/1. Build BossFight Scene")]
         public static void BuildScene()
         {
-            // Ensure we are working in a scene
-            Scene scene = EditorSceneManager.GetActiveScene();
-            
-            // 1. Setup Folders
+            // Open or create the scene
+            var scene = AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath);
+            if (scene == null)
+            {
+                var newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+                EditorSceneManager.SaveScene(newScene, ScenePath);
+                scene = AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath);
+            }
+            EditorSceneManager.OpenScene(ScenePath);
+
+            // Ensure tags exist
+            AddTag("Player");
+            AddTag("Boss");
+
+            // Create folders needed for config assets
             CreateFolders();
 
-            // 2. Create Configs
-            GameConfig gameConfig = GetOrCreateConfig<GameConfig>("Assets/_Game/Settings/GameConfig.asset");
-            BossConfig bossConfig = GetOrCreateConfig<BossConfig>("Assets/_Game/Settings/BossConfig.asset");
+            // Create or load config assets
+            var gameConfig = GetOrCreateConfig<GameConfig>("Assets/_Game/Settings/GameConfig.asset");
+            var bossConfig = GetOrCreateConfig<BossConfig>("Assets/_Game/Settings/BossConfig.asset");
 
-            // 3. Create Lighting and Camera
+            // Setup lighting, camera, and floor
             SetupEnvironment();
 
-            // 4. Create GameManager
-            GameObject gmObj = GameObject.Find("GameManager");
-            if (gmObj == null) gmObj = new GameObject("GameManager");
-            GameManager gm = gmObj.GetComponent<GameManager>();
-            if (gm == null) gm = gmObj.AddComponent<GameManager>();
-            var gmConfigField = typeof(GameManager).GetField("config", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if (gmConfigField != null) gmConfigField.SetValue(gm, gameConfig);
+            // Create GameManager and AudioManager objects
+            CreateGameManager(gameConfig);
+            CreateAudioManager();
 
-            // 5. Create Zilar (Player)
-            GameObject player = GameObject.Find("Zilar");
-            if (player == null)
-            {
-                GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Game/Models/Player/Prefab/Skin_1.prefab");
-                if (playerPrefab != null)
-                {
-                    player = (GameObject)PrefabUtility.InstantiatePrefab(playerPrefab);
-                    player.name = "Zilar";
-                }
-                else
-                {
-                    player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                    player.name = "Zilar";
-                }
-                player.transform.position = new Vector3(0, 1, -5);
-            }
-            player.tag = "Player";
-            player.layer = LayerMask.NameToLayer("Default");
+            // Create player (Zilar) and attach required components
+            var player = CreatePlayer(gameConfig);
 
-            CapsuleCollider pCollider = player.GetComponent<CapsuleCollider>();
-            if (pCollider == null)
-            {
-                pCollider = player.AddComponent<CapsuleCollider>();
-                pCollider.center = new Vector3(0f, 1f, 0f);
-                pCollider.height = 2f;
-                pCollider.radius = 0.5f;
-            }
+            // Create boss (Humbaba) with placeholder or model
+            var boss = CreateBoss(bossConfig);
 
-            Rigidbody pRb = player.GetComponent<Rigidbody>();
-            if (pRb == null) pRb = player.AddComponent<Rigidbody>();
-            pRb.mass = 80f;
-            pRb.linearDamping = 5f;
-            pRb.angularDamping = 10f;
-            pRb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            // Create Nemesis manager (API manager + state cache)
+            CreateNemesisManager();
 
-            Animator pAnim = player.GetComponent<Animator>();
-            if (pAnim == null) pAnim = player.GetComponentInChildren<Animator>();
-            if (pAnim == null) pAnim = player.AddComponent<Animator>();
-            
-            RuntimeAnimatorController pController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/_Game/Animations/Player/PlayerAnimator.controller");
-            if (pController != null)
-            {
-                pAnim.runtimeAnimatorController = pController;
-            }
+            // Wire inspector references based on the linking table
+            LinkReferences(player, boss);
 
-            PlayerController pCtrl = player.GetComponent<PlayerController>();
-            if (pCtrl == null) pCtrl = player.AddComponent<PlayerController>();
-            var pCtrlConfigField = typeof(PlayerController).GetField("config", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if (pCtrlConfigField != null) pCtrlConfigField.SetValue(pCtrl, gameConfig);
+            // Setup UI canvas and HUD/DeathScreen UI Documents
+            SetupUI();
 
-            PlayerStats pStats = player.GetComponent<PlayerStats>();
-            if (pStats == null) pStats = player.AddComponent<PlayerStats>();
-            var pStatsConfigField = typeof(PlayerStats).GetField("config", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if (pStatsConfigField != null) pStatsConfigField.SetValue(pStats, gameConfig);
-
-            PlayerCombat pCombat = player.GetComponent<PlayerCombat>();
-            if (pCombat == null) pCombat = player.AddComponent<PlayerCombat>();
-            var hitboxField = typeof(PlayerCombat).GetField("hitboxObject", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            
-            // Player Hitbox
-            Transform pHitboxTrans = player.transform.Find("PlayerHitbox");
-            GameObject pHitbox = pHitboxTrans != null ? pHitboxTrans.gameObject : null;
-            if (pHitbox == null)
-            {
-                pHitbox = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                pHitbox.name = "PlayerHitbox";
-                pHitbox.transform.SetParent(player.transform);
-                pHitbox.transform.localPosition = new Vector3(0, 0, 1);
-                pHitbox.transform.localScale = new Vector3(1, 1, 1.5f);
-                DestroyImmediate(pHitbox.GetComponent<MeshRenderer>());
-                pHitbox.GetComponent<BoxCollider>().isTrigger = true;
-                pHitbox.SetActive(false);
-            }
-            if (hitboxField != null) hitboxField.SetValue(pCombat, pHitbox);
-
-            if (player.GetComponent<CombatLogger>() == null) player.AddComponent<CombatLogger>();
-            var pInput = player.GetComponent<UnityEngine.InputSystem.PlayerInput>();
-            if (pInput == null) pInput = player.AddComponent<UnityEngine.InputSystem.PlayerInput>();
-            
-            var inputAsset = AssetDatabase.LoadAssetAtPath<UnityEngine.InputSystem.InputActionAsset>("Assets/_Game/Scripts/Player/NemesisInputActions.inputactions");
-            if (inputAsset != null)
-            {
-                pInput.actions = inputAsset;
-                pInput.defaultControlScheme = "Gamepad"; // Or KeyboardMouse based on your setup
-                pInput.defaultActionMap = "Player";
-            }
-            else
-            {
-                Debug.LogWarning("NemesisInputActions not found at Assets/_Game/Scripts/Player/NemesisInputActions.inputactions");
-            }
-
-            // 6. Create Humbaba (Boss)
-            GameObject boss = GameObject.Find("Humbaba");
-            bool isNewBoss = false;
-            if (boss == null)
-            {
-                boss = new GameObject("Humbaba");
-                boss.transform.position = new Vector3(0, 0, 5);
-                boss.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-                isNewBoss = true;
-            }
-
-            // Ensure we clean up any root primitive rendering if upgrading from an older setup
-            MeshFilter rootMF = boss.GetComponent<MeshFilter>();
-            if (rootMF != null) DestroyImmediate(rootMF);
-            MeshRenderer rootMR = boss.GetComponent<MeshRenderer>();
-            if (rootMR != null) DestroyImmediate(rootMR);
-
-            // Add standard CapsuleCollider on parent for hit detection
-            CapsuleCollider bCollider = boss.GetComponent<CapsuleCollider>();
-            if (bCollider == null)
-            {
-                bCollider = boss.AddComponent<CapsuleCollider>();
-                bCollider.center = new Vector3(0f, 1f, 0f);
-                bCollider.height = 2f;
-                bCollider.radius = 0.8f;
-            }
-
-            // Instantiation of stage meshes as child GameObjects
-            string[] stagePaths = {
-                "Assets/_Game/Models/Boss/stage_1.fbx",
-                "Assets/_Game/Models/Boss/stage_2.fbx",
-                "Assets/_Game/Models/Boss/stage_3.fbx"
-            };
-
-            for (int i = 0; i < 3; ++i)
-            {
-                string childName = $"Stage_{i + 1}";
-                Transform childTrans = boss.transform.Find(childName);
-                if (childTrans == null)
-                {
-                    GameObject stageAsset = AssetDatabase.LoadAssetAtPath<GameObject>(stagePaths[i]);
-                    if (stageAsset != null)
-                    {
-                        GameObject stageObj = (GameObject)PrefabUtility.InstantiatePrefab(stageAsset);
-                        stageObj.name = childName;
-                        stageObj.transform.SetParent(boss.transform);
-                        stageObj.transform.localPosition = Vector3.zero;
-                        stageObj.transform.localRotation = Quaternion.identity;
-                        stageObj.transform.localScale = Vector3.one;
-
-                        // By default, set Stage_1 active and others inactive
-                        stageObj.SetActive(i == 0);
-                    }
-                    else if (isNewBoss && i == 0)
-                    {
-                        // Fallback capsule visual if no stage FBX meshes are found
-                        GameObject fallback = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                        fallback.name = "PlaceholderVisual";
-                        fallback.transform.SetParent(boss.transform);
-                        fallback.transform.localPosition = new Vector3(0f, 1f, 0f);
-                        DestroyImmediate(fallback.GetComponent<Collider>());
-                    }
-                }
-            }
-
-            // Ensure Boss tag exists
-            AddTag("Boss");
-            boss.tag = "Boss";
-            boss.layer = LayerMask.NameToLayer("Default");
-
-            Rigidbody bRb = boss.GetComponent<Rigidbody>();
-            if (bRb == null) bRb = boss.AddComponent<Rigidbody>();
-            bRb.isKinematic = true;
-
-            BossStats bStats = boss.GetComponent<BossStats>();
-            if (bStats == null) bStats = boss.AddComponent<BossStats>();
-            
-            BossController bCtrl = boss.GetComponent<BossController>();
-            if (bCtrl == null) bCtrl = boss.AddComponent<BossController>();
-            var bCtrlStatsField = typeof(BossController).GetField("bossStats", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var bCtrlConfigField = typeof(BossController).GetField("bossConfig", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if (bCtrlStatsField != null) bCtrlStatsField.SetValue(bCtrl, bStats);
-            if (bCtrlConfigField != null) bCtrlConfigField.SetValue(bCtrl, bossConfig);
-
-            // Explicitly bind the stage models in the Inspector using reflection
-            var stage1Field = typeof(BossController).GetField("stage1Model", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var stage2Field = typeof(BossController).GetField("stage2Model", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            var stage3Field = typeof(BossController).GetField("stage3Model", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-
-            Transform t1 = boss.transform.Find("Stage_1");
-            Transform t2 = boss.transform.Find("Stage_2");
-            Transform t3 = boss.transform.Find("Stage_3");
-
-            if (stage1Field != null && t1 != null) stage1Field.SetValue(bCtrl, t1.gameObject);
-            if (stage2Field != null && t2 != null) stage2Field.SetValue(bCtrl, t2.gameObject);
-            if (stage3Field != null && t3 != null) stage3Field.SetValue(bCtrl, t3.gameObject);
-
-            RuntimeAnimatorController bController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/_Game/Animations/Boss/BossAnimator.controller");
-            if (bController != null)
-            {
-                for (int i = 0; i < 3; ++i)
-                {
-                    Transform childTrans = boss.transform.Find($"Stage_{i + 1}");
-                    if (childTrans != null)
-                    {
-                        Animator bAnimator = childTrans.GetComponent<Animator>();
-                        if (bAnimator == null) bAnimator = childTrans.gameObject.AddComponent<Animator>();
-                        bAnimator.runtimeAnimatorController = bController;
-                    }
-                }
-            }
-
-            if (boss.GetComponent<NemesisWeightReceiver>() == null) boss.AddComponent<NemesisWeightReceiver>();
-
-            // Boss Hitbox
-            Transform bHitboxTrans = boss.transform.Find("Hitbox_PUNISH_RIGHT_DODGE");
-            GameObject bHitbox = bHitboxTrans != null ? bHitboxTrans.gameObject : null;
-            if (bHitbox == null)
-            {
-                bHitbox = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                bHitbox.name = "Hitbox_PUNISH_RIGHT_DODGE";
-                bHitbox.transform.SetParent(boss.transform);
-                bHitbox.transform.localPosition = new Vector3(0, 0, 1.5f);
-                bHitbox.transform.localScale = new Vector3(2, 2, 2);
-                DestroyImmediate(bHitbox.GetComponent<MeshRenderer>());
-                bHitbox.GetComponent<BoxCollider>().isTrigger = true;
-                bHitbox.SetActive(false);
-            }
-
-            // Wire lock-on
-            pCtrl.SetLockOnTarget(boss.transform);
-
-            // 7. UI Setup
-            SetupUI(pStats);
-
-            EditorSceneManager.MarkSceneDirty(scene);
-            Debug.Log("✅ BossFight Scene successfully populated! Open Unity to view.");
+            // Mark scene dirty and save
+            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+            EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
+            Debug.Log("✅ BossFight scene successfully populated – ready for manual Play testing.");
         }
 
         private static void CreateFolders()
@@ -272,8 +71,8 @@ namespace Nemesis.Editor
             {
                 if (!AssetDatabase.IsValidFolder(f))
                 {
-                    string parent = f.Substring(0, f.LastIndexOf('/'));
-                    string newFolder = f.Substring(f.LastIndexOf('/') + 1);
+                    var parent = System.IO.Path.GetDirectoryName(f);
+                    var newFolder = System.IO.Path.GetFileName(f);
                     AssetDatabase.CreateFolder(parent, newFolder);
                 }
             }
@@ -281,7 +80,7 @@ namespace Nemesis.Editor
 
         private static T GetOrCreateConfig<T>(string path) where T : ScriptableObject
         {
-            T config = AssetDatabase.LoadAssetAtPath<T>(path);
+            var config = AssetDatabase.LoadAssetAtPath<T>(path);
             if (config == null)
             {
                 config = ScriptableObject.CreateInstance<T>();
@@ -293,80 +92,339 @@ namespace Nemesis.Editor
 
         private static void SetupEnvironment()
         {
+            // Main Camera
             if (GameObject.Find("Main Camera") == null && Camera.main == null)
             {
-                GameObject camObj = new GameObject("Main Camera");
+                var camObj = new GameObject("Main Camera");
                 camObj.tag = "MainCamera";
-                Camera cam = camObj.AddComponent<Camera>();
+                var cam = camObj.AddComponent<Camera>();
                 camObj.AddComponent<AudioListener>();
                 camObj.transform.position = new Vector3(0, 5, -12);
                 camObj.transform.rotation = Quaternion.Euler(15, 0, 0);
             }
 
-            if (GameObject.Find("Directional Light") == null && FindAnyObjectByType<Light>() == null)
+            // Directional Light
+            if (GameObject.Find("Directional Light") == null && Object.FindFirstObjectByType<Light>() == null)
             {
-                GameObject lightObj = new GameObject("Directional Light");
-                Light light = lightObj.AddComponent<Light>();
+                var lightObj = new GameObject("Directional Light");
+                var light = lightObj.AddComponent<Light>();
                 light.type = LightType.Directional;
                 lightObj.transform.rotation = Quaternion.Euler(50, -30, 0);
             }
 
+            // Floor
             if (GameObject.Find("Floor") == null)
             {
-                GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                var floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 floor.name = "Floor";
                 floor.transform.localScale = new Vector3(10, 1, 10);
             }
-            
-            if (FindAnyObjectByType<EventSystem>() == null)
+
+            // EventSystem
+            if (Object.FindFirstObjectByType<EventSystem>() == null)
             {
-                GameObject es = new GameObject("EventSystem");
+                var es = new GameObject("EventSystem");
                 es.AddComponent<EventSystem>();
                 es.AddComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>();
             }
         }
 
-        private static void SetupUI(PlayerStats playerStats)
+        private static void CreateGameManager(GameConfig config)
         {
-            GameObject canvasObj = GameObject.Find("Canvas");
+            var gmObj = GameObject.Find("GameManager");
+            if (gmObj == null) gmObj = new GameObject("GameManager");
+            var gm = gmObj.GetComponent<GameManager>();
+            if (gm == null) gm = gmObj.AddComponent<GameManager>();
+            // Assuming GameManager has a private field called "config"
+            var field = typeof(GameManager).GetField("config", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (field != null) field.SetValue(gm, config);
+        }
+
+        private static void CreateAudioManager()
+        {
+            var amObj = GameObject.Find("AudioManager");
+            if (amObj == null) amObj = new GameObject("AudioManager");
+            if (amObj.GetComponent<AudioManager>() == null) amObj.AddComponent<AudioManager>();
+        }
+
+        private static GameObject CreatePlayer(GameConfig config)
+        {
+            var player = GameObject.Find("Zilar");
+            if (player == null)
+            {
+                // Try to load a prefab, otherwise create a capsule placeholder
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Game/Models/Player/Prefab/Skin_1.prefab");
+                if (prefab != null)
+                {
+                    player = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+                }
+                else
+                {
+                    player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                }
+                player.name = "Zilar";
+                player.transform.position = new Vector3(0, 1, -5);
+            }
+            player.tag = "Player";
+            player.layer = LayerMask.NameToLayer("Default");
+
+            // Add required components (if missing)
+            var pc = player.GetComponent<PlayerController>();
+            if (pc == null) pc = player.AddComponent<PlayerController>();
+            var ps = player.GetComponent<PlayerStats>();
+            if (ps == null) ps = player.AddComponent<PlayerStats>();
+            var pcmb = player.GetComponent<PlayerCombat>();
+            if (pcmb == null) pcmb = player.AddComponent<PlayerCombat>();
+            var logger = player.GetComponent<CombatLogger>();
+            if (logger == null) logger = player.AddComponent<CombatLogger>();
+            var coll = player.GetComponent<CapsuleCollider>();
+            if (coll == null) coll = player.AddComponent<CapsuleCollider>();
+            coll.center = new Vector3(0f, 1f, 0f);
+            coll.height = 2f;
+            coll.radius = 0.4f;
+            var rb = player.GetComponent<Rigidbody>();
+            if (rb == null) rb = player.AddComponent<Rigidbody>();
+            rb.mass = 80f;
+            rb.linearDamping = 5f;
+            rb.angularDamping = 10f;
+            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+            // Hook up config fields via reflection (if they exist)
+            var ctrlField = typeof(PlayerController).GetField("config", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (ctrlField != null) ctrlField.SetValue(pc, config);
+            var statsField = typeof(PlayerStats).GetField("config", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (statsField != null) statsField.SetValue(ps, config);
+
+            // Setup PlayerInput actions (optional)
+            var input = player.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+            if (input == null) input = player.AddComponent<UnityEngine.InputSystem.PlayerInput>();
+            var actions = AssetDatabase.LoadAssetAtPath<UnityEngine.InputSystem.InputActionAsset>("Assets/_Game/Scripts/Player/NemesisInputActions.inputactions");
+            if (actions != null)
+            {
+                input.actions = actions;
+                input.defaultActionMap = "Player";
+                input.notificationBehavior = UnityEngine.InputSystem.PlayerNotifications.SendMessages;
+            }
+
+            // UI Document for player (optional, can be added later)
+            return player;
+        }
+
+        private static GameObject CreateBoss(BossConfig config)
+        {
+            var boss = GameObject.Find("Humbaba");
+            if (boss == null)
+            {
+                boss = new GameObject("Humbaba");
+                boss.transform.position = new Vector3(0, 0, 5);
+                boss.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            }
+            boss.tag = "Boss";
+            boss.layer = LayerMask.NameToLayer("Default");
+
+            // Clean up any primitive renderers if switching from placeholder
+            var mf = boss.GetComponent<MeshFilter>();
+            if (mf != null) Object.DestroyImmediate(mf);
+            var mr = boss.GetComponent<MeshRenderer>();
+            if (mr != null) Object.DestroyImmediate(mr);
+
+            // Add collider and rigidbody
+            var col = boss.GetComponent<CapsuleCollider>();
+            if (col == null) col = boss.AddComponent<CapsuleCollider>();
+            col.height = 3f;
+            col.radius = 0.8f;
+            var rb = boss.GetComponent<Rigidbody>();
+            if (rb == null) rb = boss.AddComponent<Rigidbody>();
+            rb.isKinematic = true;
+
+            // Add core boss components
+            var stats = boss.GetComponent<BossStats>();
+            if (stats == null) stats = boss.AddComponent<BossStats>();
+            var ctrl = boss.GetComponent<BossController>();
+            if (ctrl == null) ctrl = boss.AddComponent<BossController>();
+            var adapt = boss.GetComponent<BossAdaptation>();
+            if (adapt == null) adapt = boss.AddComponent<BossAdaptation>();
+
+            // Reflectively assign config references
+            var statsField = typeof(BossController).GetField("bossStats", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (statsField != null) statsField.SetValue(ctrl, stats);
+            var configField = typeof(BossController).GetField("bossConfig", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (configField != null) configField.SetValue(ctrl, config);
+
+            // Load FBX stage models if they exist, otherwise use placeholder capsule
+            string[] stagePaths = { "Assets/_Game/Models/Boss/stage_1.fbx", "Assets/_Game/Models/Boss/stage_2.fbx", "Assets/_Game/Models/Boss/stage_3.fbx" };
+            for (int i = 0; i < stagePaths.Length; i++)
+            {
+                var childName = $"Stage_{i + 1}";
+                var existing = boss.transform.Find(childName);
+                if (existing == null)
+                {
+                    var asset = AssetDatabase.LoadAssetAtPath<GameObject>(stagePaths[i]);
+                    if (asset != null)
+                    {
+                        var instance = (GameObject)PrefabUtility.InstantiatePrefab(asset);
+                        instance.name = childName;
+                        instance.transform.SetParent(boss.transform);
+                        instance.transform.localPosition = Vector3.zero;
+                        instance.SetActive(i == 0);
+                    }
+                    else if (i == 0)
+                    {
+                        // Fallback placeholder visual for stage 1
+                        var placeholder = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                        placeholder.name = "PlaceholderVisual";
+                        placeholder.transform.SetParent(boss.transform);
+                        placeholder.transform.localPosition = new Vector3(0, 1, 0);
+                        Object.DestroyImmediate(placeholder.GetComponent<Collider>());
+                    }
+                }
+            }
+
+            // Create placeholder material if it doesn't exist
+            if (AssetDatabase.LoadAssetAtPath<Material>(PlaceholderMaterialPath) == null)
+            {
+                var mat = new Material(Shader.Find("Standard"));
+                mat.color = new Color(130f/255f, 25f/255f, 25f/255f);
+                AssetDatabase.CreateAsset(mat, PlaceholderMaterialPath);
+                AssetDatabase.SaveAssets();
+            }
+
+            // Apply placeholder material to any primitive renders
+            var renderers = boss.GetComponentsInChildren<Renderer>();
+            var placeholderMat = AssetDatabase.LoadAssetAtPath<Material>(PlaceholderMaterialPath);
+            foreach (var r in renderers)
+            {
+                if (r.sharedMaterial == null)
+                    r.sharedMaterial = placeholderMat;
+            }
+
+            return boss;
+        }
+
+        private static void CreateNemesisManager()
+        {
+            var nemesisObj = new GameObject("NemesisManager");
+            nemesisObj.AddComponent<NemesisAPIManager>();
+            nemesisObj.AddComponent<NemesisStateCache>();
+            // Set fields per specification
+            var apiMgr = nemesisObj.GetComponent<NemesisAPIManager>();
+            var urlField = typeof(NemesisAPIManager).GetField("baseUrl", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            if (urlField != null) urlField.SetValue(apiMgr, "http://127.0.0.1:8000");
+            var deviceField = typeof(NemesisAPIManager).GetField("deviceId", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            if (deviceField != null) deviceField.SetValue(apiMgr, "DEMO_DEVICE_01");
+        }
+
+        private static void LinkReferences(GameObject player, GameObject boss)
+        {
+            // Player -> PlayerController: Boss Reference
+            var pc = player.GetComponent<PlayerController>();
+            if (pc != null) pc.SetLockOnTarget(boss.transform);
+
+            // Player -> CombatLogger: Boss Controller & NemesisAPIManager
+            var logger = player.GetComponent<CombatLogger>();
+            var bcField = typeof(CombatLogger).GetField("bossController", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            var apiField = typeof(CombatLogger).GetField("nemesisAPIManager", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            var bossCtrl = boss.GetComponent<BossController>();
+            var apiMgr = GameObject.FindObjectOfType<NemesisAPIManager>();
+            if (bcField != null) bcField.SetValue(logger, bossCtrl);
+            if (apiField != null) apiField.SetValue(logger, apiMgr);
+
+            // Player -> PlayerCombat: PlayerStats reference
+            var combat = player.GetComponent<PlayerCombat>();
+            var statsField = typeof(PlayerCombat).GetField("stats", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var pStats = player.GetComponent<PlayerStats>();
+            if (statsField != null) statsField.SetValue(combat, pStats);
+
+            // Boss -> BossController: Player reference
+            var bCtrl = boss.GetComponent<BossController>();
+            var playerRefField = typeof(BossController).GetField("playerReference", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            if (playerRefField != null) playerRefField.SetValue(bCtrl, player.transform);
+
+            // Boss -> BossAdaptation: BossController reference
+            var adapt = boss.GetComponent<BossAdaptation>();
+            var adaptCtrlField = typeof(BossAdaptation).GetField("bossController", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (adaptCtrlField != null) adaptCtrlField.SetValue(adapt, bCtrl);
+
+            // GameManager references
+            var gmObj = GameObject.Find("GameManager");
+            var gm = gmObj != null ? gmObj.GetComponent<GameManager>() : null;
+            if (gm != null)
+            {
+                var playerField = typeof(GameManager).GetField("player", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                var bossField = typeof(GameManager).GetField("boss", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                if (playerField != null) playerField.SetValue(gm, player.transform);
+                if (bossField != null) bossField.SetValue(gm, boss.transform);
+            }
+        }
+
+        private static void SetupUI()
+        {
+            // Canvas
+            var canvasObj = GameObject.Find("Canvas");
             if (canvasObj == null)
             {
                 canvasObj = new GameObject("Canvas");
-                Canvas canvas = canvasObj.AddComponent<Canvas>();
+                var canvas = canvasObj.AddComponent<Canvas>();
                 canvas.renderMode = RenderMode.ScreenSpaceOverlay;
                 canvasObj.AddComponent<CanvasScaler>();
                 canvasObj.AddComponent<GraphicRaycaster>();
             }
 
-            GameObject statsUIObj = GameObject.Find("PlayerStatsUI");
-            if (statsUIObj == null)
+            // PlayerStats UI (optional)
+            var statsUI = GameObject.Find("PlayerStatsUI");
+            if (statsUI == null)
             {
-                statsUIObj = new GameObject("PlayerStatsUI");
-                statsUIObj.transform.SetParent(canvasObj.transform, false);
-                PlayerStatsUI statsUI = statsUIObj.AddComponent<PlayerStatsUI>();
-                
-                var pStatsField = typeof(PlayerStatsUI).GetField("playerStats", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                if (pStatsField != null) pStatsField.SetValue(statsUI, playerStats);
+                statsUI = new GameObject("PlayerStatsUI");
+                statsUI.transform.SetParent(canvasObj.transform, false);
+                statsUI.AddComponent<PlayerStatsUI>();
+            }
+
+            // HUD UI Document
+            var hudPath = "Assets/_Game/UI/HUD.uxml";
+            var hudAsset = AssetDatabase.LoadAssetAtPath<UnityEngine.UIElements.VisualTreeAsset>(hudPath);
+            if (hudAsset != null)
+            {
+                var hudObj = new GameObject("HUD");
+                var hudDoc = hudObj.AddComponent<UnityEngine.UIElements.UIDocument>();
+                hudDoc.visualTreeAsset = hudAsset;
+                hudObj.transform.SetParent(canvasObj.transform, false);
+            }
+
+            // DeathScreen UI Document
+            var deathPath = "Assets/_Game/UI/DeathScreen.uxml";
+            var deathAsset = AssetDatabase.LoadAssetAtPath<UnityEngine.UIElements.VisualTreeAsset>(deathPath);
+            if (deathAsset != null)
+            {
+                var deathObj = new GameObject("DeathScreen");
+                var deathDoc = deathObj.AddComponent<UnityEngine.UIElements.UIDocument>();
+                deathDoc.visualTreeAsset = deathAsset;
+                deathObj.transform.SetParent(canvasObj.transform, false);
+
+                // Attach to GameManager's DeathScreenUI component (if exists)
+                var gmObj = GameObject.Find("GameManager");
+                if (gmObj != null)
+                {
+                    var deathUI = gmObj.GetComponent<DeathScreenUI>();
+                    if (deathUI == null) deathUI = gmObj.AddComponent<DeathScreenUI>();
+                    var panelField = typeof(DeathScreenUI).GetField("panel", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                    if (panelField != null) panelField.SetValue(deathUI, deathDoc);
+                }
             }
         }
+
         private static void AddTag(string tag)
         {
-            UnityEngine.Object[] asset = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
-            if (asset != null && asset.Length > 0)
+            var tagManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
+            if (tagManager == null || tagManager.Length == 0) return;
+            var so = new UnityEditor.SerializedObject(tagManager[0]);
+            var tagsProp = so.FindProperty("tags");
+            for (int i = 0; i < tagsProp.arraySize; i++)
             {
-                SerializedObject so = new SerializedObject(asset[0]);
-                SerializedProperty tags = so.FindProperty("tags");
-                for (int i = 0; i < tags.arraySize; ++i)
-                {
-                    if (tags.GetArrayElementAtIndex(i).stringValue == tag)
-                        return;     // Tag already present
-                }
-                tags.InsertArrayElementAtIndex(tags.arraySize);
-                tags.GetArrayElementAtIndex(tags.arraySize - 1).stringValue = tag;
-                so.ApplyModifiedProperties();
-                so.Update();
+                if (tagsProp.GetArrayElementAtIndex(i).stringValue == tag) return; // Already exists
             }
+            tagsProp.InsertArrayElementAtIndex(tagsProp.arraySize);
+            tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 1).stringValue = tag;
+            so.ApplyModifiedProperties();
         }
     }
 }
-#endif

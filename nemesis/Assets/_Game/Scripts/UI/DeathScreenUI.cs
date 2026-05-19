@@ -32,7 +32,7 @@ public class DeathScreenUI : MonoBehaviour
             }
         }
 
-        CombatLogger.OnNemesisResponse += HandleNemesisResponse;
+        NemesisAPIManager.OnNemesisResponse += HandleNemesisResponse;
 
         if (riseAgainButton != null) riseAgainButton.onClick.AddListener(OnRiseAgainClicked);
         if (returnToSanctumButton != null) returnToSanctumButton.onClick.AddListener(OnReturnToSanctumClicked);
@@ -44,7 +44,7 @@ public class DeathScreenUI : MonoBehaviour
         {
             playerStats.OnPlayerDeath.RemoveListener(ShowDeathScreen);
         }
-        CombatLogger.OnNemesisResponse -= HandleNemesisResponse;
+        NemesisAPIManager.OnNemesisResponse -= HandleNemesisResponse;
     }
 
     private void ShowDeathScreen()
