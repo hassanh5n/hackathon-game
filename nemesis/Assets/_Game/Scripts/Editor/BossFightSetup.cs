@@ -70,6 +70,16 @@ namespace Nemesis.Editor
             pRb.angularDamping = 10f;
             pRb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
+            Animator pAnim = player.GetComponent<Animator>();
+            if (pAnim == null) pAnim = player.GetComponentInChildren<Animator>();
+            if (pAnim == null) pAnim = player.AddComponent<Animator>();
+            
+            RuntimeAnimatorController pController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/_Game/Animations/Player/PlayerAnimator.controller");
+            if (pController != null)
+            {
+                pAnim.runtimeAnimatorController = pController;
+            }
+
             PlayerController pCtrl = player.GetComponent<PlayerController>();
             if (pCtrl == null) pCtrl = player.AddComponent<PlayerController>();
             var pCtrlConfigField = typeof(PlayerController).GetField("config", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
@@ -212,6 +222,21 @@ namespace Nemesis.Editor
             if (stage1Field != null && t1 != null) stage1Field.SetValue(bCtrl, t1.gameObject);
             if (stage2Field != null && t2 != null) stage2Field.SetValue(bCtrl, t2.gameObject);
             if (stage3Field != null && t3 != null) stage3Field.SetValue(bCtrl, t3.gameObject);
+
+            RuntimeAnimatorController bController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/_Game/Animations/Boss/BossAnimator.controller");
+            if (bController != null)
+            {
+                for (int i = 0; i < 3; ++i)
+                {
+                    Transform childTrans = boss.transform.Find($"Stage_{i + 1}");
+                    if (childTrans != null)
+                    {
+                        Animator bAnimator = childTrans.GetComponent<Animator>();
+                        if (bAnimator == null) bAnimator = childTrans.gameObject.AddComponent<Animator>();
+                        bAnimator.runtimeAnimatorController = bController;
+                    }
+                }
+            }
 
             if (boss.GetComponent<NemesisWeightReceiver>() == null) boss.AddComponent<NemesisWeightReceiver>();
 
