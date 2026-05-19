@@ -93,6 +93,10 @@ public class CombatLogger : MonoBehaviour
     private float runStartTime;
     private string lastBossAttackId = "unknown";
 
+    private BossAdaptation _bossAdaptation;
+    private NemesisAPIManager _nemesisAPIManager;
+    private string _lastBossAttackName = "UNKNOWN";
+
     // Stat counters
     private int dodgeRight, dodgeLeft, dodgeForward, dodgeBack;
     private int lightAttacks, heavyAttacks;
@@ -108,6 +112,18 @@ public class CombatLogger : MonoBehaviour
         {
             Destroy(gameObject);
             return;
+        }
+
+        _bossAdaptation = FindObjectOfType<BossAdaptation>();
+        if (_bossAdaptation == null)
+        {
+            Debug.LogWarning("[CombatLogger] BossAdaptation not found in scene!");
+        }
+
+        _nemesisAPIManager = FindObjectOfType<NemesisAPIManager>();
+        if (_nemesisAPIManager == null)
+        {
+            Debug.LogWarning("[CombatLogger] NemesisAPIManager not found in scene!");
         }
     }
 
@@ -198,6 +214,11 @@ public class CombatLogger : MonoBehaviour
 
     #region Recording
 
+    public void SetCurrentBossAttack(string attackName)
+    {
+        _lastBossAttackName = attackName;
+    }
+
     /// <summary>
     /// Called by PlayerCombat with (actionType, detail).
     /// actionType: "player_dodge", "player_attack", "player_parry", etc.
@@ -224,6 +245,8 @@ public class CombatLogger : MonoBehaviour
                 case "forward": dodgeForward++; break;
                 case "back": dodgeBack++; break;
             }
+            
+            _bossAdaptation?.RecordPlayerDodge(lastBossAttackId);
         }
         else if (actionType == "player_attack")
         {
@@ -264,6 +287,8 @@ public class CombatLogger : MonoBehaviour
 
     private void HandlePlayerDeath()
     {
+        _bossAdaptation?.RecordKillingBlow(lastBossAttackId);
+
         float duration = Time.time - runStartTime;
         int totalAttacks = lightAttacks + heavyAttacks;
 
@@ -299,6 +324,8 @@ public class CombatLogger : MonoBehaviour
             death_cause = lastBossAttackId,
             combat_log = combatLog
         };
+
+        _nemesisAPIManager?.AnalyzeDeath(request);
 
         string backendUrl = "http://localhost:8000";
         if (config != null)

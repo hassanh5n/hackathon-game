@@ -15,6 +15,14 @@ public class BossController : MonoBehaviour
         Dead
     }
 
+    // Adding BossStage enum as required by the BossAdaptation script integration logic
+    public enum BossStage
+    {
+        STAGE_ONE = 1,
+        STAGE_TWO = 2,
+        STAGE_THREE = 3
+    }
+
     [Header("References")]
     [SerializeField] private BossStats bossStats;
     [SerializeField] private BossConfig bossConfig;
@@ -38,10 +46,35 @@ public class BossController : MonoBehaviour
     private Dictionary<string, GameObject> hitboxes = new Dictionary<string, GameObject>();
     private HashSet<Collider> hitTargets = new HashSet<Collider>();
 
+    private CombatLogger _combatLogger;
+
     // Runtime clones of attack lists so we don't mutate ScriptableObject
     public List<BossAttackData> RuntimePhase1 { get; private set; }
     public List<BossAttackData> RuntimePhase2 { get; private set; }
     public List<BossAttackData> RuntimePhase3 { get; private set; }
+
+    // Public properties required by BossAdaptation
+    public float AttackCooldown { get; set; } = 3.0f;
+    public float MovementSpeed { get; set; } = 4.0f;
+    
+    public BossStage CurrentStage
+    {
+        get
+        {
+            if (bossStats != null)
+            {
+                switch(bossStats.CurrentPhase)
+                {
+                    case 1: return BossStage.STAGE_ONE;
+                    case 2: return BossStage.STAGE_TWO;
+                    case 3: return BossStage.STAGE_THREE;
+                }
+            }
+            return BossStage.STAGE_ONE;
+        }
+    }
+
+    public event System.Action<BossStage> OnStageChanged;
 
     private void Awake()
     {
@@ -52,6 +85,12 @@ public class BossController : MonoBehaviour
         RuntimePhase1 = CloneAttacks(bossConfig.phase1Attacks);
         RuntimePhase2 = CloneAttacks(bossConfig.phase2Attacks);
         RuntimePhase3 = CloneAttacks(bossConfig.phase3Attacks);
+
+        _combatLogger = FindObjectOfType<CombatLogger>();
+        if (_combatLogger == null)
+        {
+            Debug.LogWarning("[BossController] CombatLogger not found in scene!");
+        }
     }
 
     private void Start()
@@ -133,6 +172,46 @@ public class BossController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adjusts the selection weight of a specific attack within the current phase pool.
+    /// Used by BossAdaptation to change AI behavior.
+    /// </summary>
+    public void SetAttackWeightOverride(string attackName, float weight)
+    {
+        List<BossAttackData> currentPool = GetCurrentRuntimeAttacks();
+        foreach (var attack in currentPool)
+        {
+            if (attack.attackId == attackName)
+            {
+                attack.weight = weight;
+                if (debugMode) Debug.Log($"[BossController] Set override weight for {attackName} to {weight}");
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Forces the boss to immediately execute a specific attack if possible.
+    /// Used by specific AI adaptation triggers.
+    /// </summary>
+    public void ForceAttack(string attackName)
+    {
+        List<BossAttackData> currentPool = GetCurrentRuntimeAttacks();
+        foreach (var attack in currentPool)
+        {
+            if (attack.attackId == attackName)
+            {
+                if (currentState == BossState.Idle || currentState == BossState.Cooldown)
+                {
+                    if (behaviorCoroutine != null) StopCoroutine(behaviorCoroutine);
+                    currentAttack = attack;
+                    behaviorCoroutine = StartCoroutine(ExecuteAttackRoutine());
+                }
+                return;
+            }
+        }
+    }
+
     private void ChangeState(BossState newState)
     {
         if (debugMode && currentState != newState)
@@ -153,7 +232,9 @@ public class BossController : MonoBehaviour
             }
 
             ChangeState(BossState.Idle);
-            yield return new WaitForSeconds(1.5f);
+            
+            // Use the public property AttackCooldown to allow the AI to speed up/slow down the loop
+            yield return new WaitForSeconds(AttackCooldown);
 
             if (currentState == BossState.Dead) break;
 
@@ -162,50 +243,58 @@ public class BossController : MonoBehaviour
 
             if (currentAttack != null)
             {
-                // Notify CombatLogger that boss started an attack
-                if (CombatLogger.Instance != null)
-                {
-                    CombatLogger.Instance.RecordBossAttack(currentAttack.attackId);
-                }
-
-                // Windup
-                ChangeState(BossState.Windup);
-                if (animator != null)
-                {
-                    animator.SetTrigger($"Windup_{currentAttack.attackId}");
-                }
-                yield return new WaitForSeconds(currentAttack.windupTime);
-
-                if (currentState == BossState.Dead) break;
-
-                // Attacking
-                ChangeState(BossState.Attacking);
-                hitTargets.Clear();
-                
-                GameObject activeHitbox = null;
-                if (hitboxes.TryGetValue(currentAttack.attackId, out activeHitbox))
-                {
-                    activeHitbox.SetActive(true);
-                }
-                
-                yield return new WaitForSeconds(0.4f);
-
-                if (activeHitbox != null)
-                {
-                    activeHitbox.SetActive(false);
-                }
-
-                if (currentState == BossState.Dead) break;
-
-                // Cooldown
-                ChangeState(BossState.Cooldown);
-                yield return new WaitForSeconds(currentAttack.cooldown);
+                yield return StartCoroutine(ExecuteAttackRoutine());
             }
             else
             {
                 yield return null;
             }
         }
+    }
+
+    private IEnumerator ExecuteAttackRoutine()
+    {
+        // Tell CombatLogger which attack we are starting
+        _combatLogger?.SetCurrentBossAttack(currentAttack.attackId);
+
+        // Notify CombatLogger that boss started an attack
+        if (CombatLogger.Instance != null)
+        {
+            CombatLogger.Instance.RecordBossAttack(currentAttack.attackId);
+        }
+
+        // Windup
+        ChangeState(BossState.Windup);
+        if (animator != null)
+        {
+            animator.SetTrigger($"Windup_{currentAttack.attackId}");
+        }
+        yield return new WaitForSeconds(currentAttack.windupTime);
+
+        if (currentState == BossState.Dead) yield break;
+
+        // Attacking
+        ChangeState(BossState.Attacking);
+        hitTargets.Clear();
+        
+        GameObject activeHitbox = null;
+        if (hitboxes.TryGetValue(currentAttack.attackId, out activeHitbox))
+        {
+            activeHitbox.SetActive(true);
+        }
+        
+        yield return new WaitForSeconds(0.4f);
+
+        if (activeHitbox != null)
+        {
+            activeHitbox.SetActive(false);
+        }
+
+        if (currentState == BossState.Dead) yield break;
+
+        // Cooldown
+        ChangeState(BossState.Cooldown);
+        yield return new WaitForSeconds(currentAttack.cooldown);
     }
 
     private BossAttackData PickAttack(List<BossAttackData> attacks)
@@ -274,6 +363,9 @@ public class BossController : MonoBehaviour
         {
             animator.SetTrigger("PhaseTransition");
         }
+
+        // Fire public event for BossAdaptation
+        OnStageChanged?.Invoke(CurrentStage);
     }
 
     private void HandleBossDeath()
