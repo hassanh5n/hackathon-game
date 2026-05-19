@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameConfig config;
     [SerializeField] private Transform lockOnTarget;
 
+    [SerializeField] private Animator animator;
+
     private Rigidbody _rb;
     private Vector2 _moveInput;
 
@@ -16,6 +18,12 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -31,6 +39,15 @@ public class PlayerController : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
             }
+        }
+
+        // Update animation parameters
+        if (animator != null)
+        {
+            // Speed between 0 and 1 for movement blend trees
+            float speedValue = _moveInput.magnitude;
+            animator.SetFloat("Speed", speedValue);
+            animator.SetBool("IsDodging", IsDodging);
         }
     }
 
@@ -48,6 +65,12 @@ public class PlayerController : MonoBehaviour
         if (IsDodging) return;
         IsDodging = true;
 
+        if (animator != null)
+        {
+            animator.SetTrigger("Dodge");
+            animator.SetBool("IsDodging", true);
+        }
+
         if (_rb != null)
         {
             Vector3 dodgeDir = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized;
@@ -63,6 +86,10 @@ public class PlayerController : MonoBehaviour
     private void EndDodge()
     {
         IsDodging = false;
+        if (animator != null)
+        {
+            animator.SetBool("IsDodging", false);
+        }
     }
 
     public void OnMove(InputValue value)

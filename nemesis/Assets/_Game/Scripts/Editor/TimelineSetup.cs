@@ -57,7 +57,7 @@ namespace Nemesis.Editor
             // Track 1: Activation track — controls Player visibility/activation
             ActivationTrack playerActivation = timeline.CreateTrack<ActivationTrack>(null, "Player Activation");
             // Clip: Player hidden for first 2 seconds, then visible
-            TimelineClip hideClip = playerActivation.CreateClip<ActivationPlayableAsset>();
+            TimelineClip hideClip = playerActivation.CreateDefaultClip();
             hideClip.displayName = "Player Hidden";
             hideClip.start = 0;
             hideClip.duration = 2;
@@ -69,14 +69,14 @@ namespace Nemesis.Editor
             // Track 3: Activation track — controls subtitle/title objects
             ActivationTrack subtitleTrack = timeline.CreateTrack<ActivationTrack>(null, "Subtitle Display");
             // Clip: Show subtitle from 6s to 9.5s
-            TimelineClip subtitleClip = subtitleTrack.CreateClip<ActivationPlayableAsset>();
+            TimelineClip subtitleClip = subtitleTrack.CreateDefaultClip();
             subtitleClip.displayName = "Story Subtitle";
             subtitleClip.start = 6;
             subtitleClip.duration = 3.5;
 
             // Track 4: Activation track — Title card
             ActivationTrack titleTrack = timeline.CreateTrack<ActivationTrack>(null, "Title Card");
-            TimelineClip titleClip = titleTrack.CreateClip<ActivationPlayableAsset>();
+            TimelineClip titleClip = titleTrack.CreateDefaultClip();
             titleClip.displayName = "NEMESIS Title";
             titleClip.start = 9.5;
             titleClip.duration = 3;
@@ -107,7 +107,7 @@ namespace Nemesis.Editor
 
             // Track 1: Boss activation (ensure boss is visible)
             ActivationTrack bossActivation = timeline.CreateTrack<ActivationTrack>(null, "Boss Activation");
-            TimelineClip bossClip = bossActivation.CreateClip<ActivationPlayableAsset>();
+            TimelineClip bossClip = bossActivation.CreateDefaultClip();
             bossClip.displayName = "Boss Visible";
             bossClip.start = 0;
             bossClip.duration = 8;
@@ -118,14 +118,14 @@ namespace Nemesis.Editor
 
             // Track 3: Boss name title
             ActivationTrack nameTrack = timeline.CreateTrack<ActivationTrack>(null, "Boss Name Title");
-            TimelineClip nameClip = nameTrack.CreateClip<ActivationPlayableAsset>();
+            TimelineClip nameClip = nameTrack.CreateDefaultClip();
             nameClip.displayName = "HUMBABA Title";
             nameClip.start = 1.5;
             nameClip.duration = 5;
 
             // Track 4: Taunt display (used on retries)
             ActivationTrack tauntTrack = timeline.CreateTrack<ActivationTrack>(null, "Taunt Display");
-            TimelineClip tauntClip = tauntTrack.CreateClip<ActivationPlayableAsset>();
+            TimelineClip tauntClip = tauntTrack.CreateDefaultClip();
             tauntClip.displayName = "Taunt Subtitle";
             tauntClip.start = 0.8;
             tauntClip.duration = 3;
@@ -155,7 +155,7 @@ namespace Nemesis.Editor
 
             // Track 1: Boss activation (stays visible then deactivates at dissolve)
             ActivationTrack bossTrack = timeline.CreateTrack<ActivationTrack>(null, "Boss Dissolve");
-            TimelineClip bossClip = bossTrack.CreateClip<ActivationPlayableAsset>();
+            TimelineClip bossClip = bossTrack.CreateDefaultClip();
             bossClip.displayName = "Boss Visible Then Dissolve";
             bossClip.start = 0;
             bossClip.duration = 10; // Boss disappears at ~10s
@@ -165,28 +165,28 @@ namespace Nemesis.Editor
 
             // Track 3: Humbaba dialogue subtitle
             ActivationTrack dialogueTrack = timeline.CreateTrack<ActivationTrack>(null, "Boss Dialogue");
-            TimelineClip dialogueClip = dialogueTrack.CreateClip<ActivationPlayableAsset>();
+            TimelineClip dialogueClip = dialogueTrack.CreateDefaultClip();
             dialogueClip.displayName = "Final Words";
             dialogueClip.start = 4;
             dialogueClip.duration = 4;
 
             // Track 4: Forest parts text
             ActivationTrack forestTrack = timeline.CreateTrack<ActivationTrack>(null, "Forest Path Text");
-            TimelineClip forestClip = forestTrack.CreateClip<ActivationPlayableAsset>();
+            TimelineClip forestClip = forestTrack.CreateDefaultClip();
             forestClip.displayName = "Golden Path";
             forestClip.start = 10;
             forestClip.duration = 3;
 
             // Track 5: Reunion text
             ActivationTrack reunionTrack = timeline.CreateTrack<ActivationTrack>(null, "Reunion");
-            TimelineClip reunionClip = reunionTrack.CreateClip<ActivationPlayableAsset>();
+            TimelineClip reunionClip = reunionTrack.CreateDefaultClip();
             reunionClip.displayName = "Daughter Reunion";
             reunionClip.start = 13;
             reunionClip.duration = 3.5;
 
             // Track 6: Credits title
             ActivationTrack creditsTrack = timeline.CreateTrack<ActivationTrack>(null, "Credits Title");
-            TimelineClip creditsClip = creditsTrack.CreateClip<ActivationPlayableAsset>();
+            TimelineClip creditsClip = creditsTrack.CreateDefaultClip();
             creditsClip.displayName = "NEMESIS Credits";
             creditsClip.start = 17;
             creditsClip.duration = 3;

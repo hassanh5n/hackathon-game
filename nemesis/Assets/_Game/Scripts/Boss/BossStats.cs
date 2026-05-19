@@ -19,7 +19,7 @@ public class BossStats : MonoBehaviour
     public UnityEvent OnBossDeath;
 
     public float CurrentHP { get; private set; }
-    public int CurrentPhase { get; private set; }
+    public int CurrentPhase { get; private set; } = 1;
     public float HPPercent => maxHP > 0 ? CurrentHP / maxHP : 0f;
 
     private float stage2Threshold = 0.6f;
