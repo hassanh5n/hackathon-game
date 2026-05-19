@@ -15,15 +15,21 @@ namespace Nemesis.Editor
         [MenuItem("Nemesis/Setup/1. Build BossFight Scene")]
         public static void BuildScene()
         {
-            // Open or create the scene
-            var scene = AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath);
-            if (scene == null)
+            // Open or create the scene only if it's not already the active open scene
+            var activeScene = SceneManager.GetActiveScene();
+            if (activeScene.path != ScenePath)
             {
-                var newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-                EditorSceneManager.SaveScene(newScene, ScenePath);
-                scene = AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath);
+                var scene = AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath);
+                if (scene == null)
+                {
+                    var newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+                    EditorSceneManager.SaveScene(newScene, ScenePath);
+                }
+                EditorSceneManager.OpenScene(ScenePath);
             }
-            EditorSceneManager.OpenScene(ScenePath);
+
+            // Force global illumination / skybox / environment lighting to update
+            DynamicGI.UpdateEnvironment();
 
             // Ensure tags exist
             AddTag("Player");
@@ -61,7 +67,10 @@ namespace Nemesis.Editor
             // Mark scene dirty and save
             EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
             EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
-            Debug.Log("✅ BossFight scene successfully populated – ready for manual Play testing.");
+            Debug.Log("✅ BossFight scene successfully populated – starting Play Mode.");
+
+            // Start playing the scene immediately
+            EditorApplication.isPlaying = true;
         }
 
         private static void CreateFolders()
@@ -103,14 +112,22 @@ namespace Nemesis.Editor
                 camObj.transform.rotation = Quaternion.Euler(15, 0, 0);
             }
 
-            // Directional Light
-            if (GameObject.Find("Directional Light") == null && Object.FindFirstObjectByType<Light>() == null)
+            // Directional Light & Shadows
+            var lightObj = GameObject.Find("Directional Light");
+            Light light = null;
+            if (lightObj != null) light = lightObj.GetComponent<Light>();
+            if (light == null) light = Object.FindFirstObjectByType<Light>();
+            if (light == null)
             {
-                var lightObj = new GameObject("Directional Light");
-                var light = lightObj.AddComponent<Light>();
+                lightObj = new GameObject("Directional Light");
+                light = lightObj.AddComponent<Light>();
                 light.type = LightType.Directional;
                 lightObj.transform.rotation = Quaternion.Euler(50, -30, 0);
             }
+            
+            // Explicitly enable soft shadows on the directional light
+            light.shadows = LightShadows.Soft;
+            light.shadowStrength = 1.0f;
 
             // Floor
             if (GameObject.Find("Floor") == null)
