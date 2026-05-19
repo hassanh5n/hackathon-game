@@ -41,11 +41,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // Direct keyboard polling fallback for movement blend speed
+        Vector2 inputDir = _moveInput;
+        if (inputDir.sqrMagnitude < 0.001f)
+        {
+            var keyboard = UnityEngine.InputSystem.Keyboard.current;
+            if (keyboard != null)
+            {
+                float x = 0f;
+                float y = 0f;
+                if (keyboard.wKey.isPressed) y += 1f;
+                if (keyboard.sKey.isPressed) y -= 1f;
+                if (keyboard.aKey.isPressed) x -= 1f;
+                if (keyboard.dKey.isPressed) x += 1f;
+                inputDir = new Vector2(x, y);
+            }
+        }
+
         // Update animation parameters
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             // Speed between 0 and 1 for movement blend trees
-            float speedValue = _moveInput.magnitude;
+            float speedValue = inputDir.magnitude;
             animator.SetFloat("Speed", speedValue);
             animator.SetBool("IsDodging", IsDodging);
         }
@@ -55,8 +72,25 @@ public class PlayerController : MonoBehaviour
     {
         if (_rb == null || IsDodging) return;
 
+        // Direct keyboard polling fallback for WASD movement force
+        Vector2 inputDir = _moveInput;
+        if (inputDir.sqrMagnitude < 0.001f)
+        {
+            var keyboard = UnityEngine.InputSystem.Keyboard.current;
+            if (keyboard != null)
+            {
+                float x = 0f;
+                float y = 0f;
+                if (keyboard.wKey.isPressed) y += 1f;
+                if (keyboard.sKey.isPressed) y -= 1f;
+                if (keyboard.aKey.isPressed) x -= 1f;
+                if (keyboard.dKey.isPressed) x += 1f;
+                inputDir = new Vector2(x, y);
+            }
+        }
+
         float speed = config != null ? config.playerMoveSpeed : 5f;
-        Vector3 movement = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized * speed * Time.fixedDeltaTime;
+        Vector3 movement = new Vector3(inputDir.x, 0f, inputDir.y).normalized * speed * Time.fixedDeltaTime;
         _rb.MovePosition(_rb.position + movement);
     }
 
@@ -65,7 +99,7 @@ public class PlayerController : MonoBehaviour
         if (IsDodging) return;
         IsDodging = true;
 
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetTrigger("Dodge");
             animator.SetBool("IsDodging", true);
@@ -86,7 +120,7 @@ public class PlayerController : MonoBehaviour
     private void EndDodge()
     {
         IsDodging = false;
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetBool("IsDodging", false);
         }

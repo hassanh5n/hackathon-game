@@ -1,23 +1,50 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class DeathScreenUI : MonoBehaviour
 {
-    [SerializeField] private GameObject deathPanel;
-    [SerializeField] private TMP_Text tauntText;
-    [SerializeField] private Button riseAgainButton;
-    [SerializeField] private Button returnToSanctumButton;
+    // Keeping 'panel' field for compatibility with Editor's BossFightSetup reflection link
+    public UIDocument panel;
+
+    private VisualElement rootElement;
+    private Label tauntTextLabel;
+    private Label deathCountLabel;
+    private Label adaptationHintLabel;
+    private Button respawnButton;
+    private Button quitButton;
 
     private PlayerStats playerStats;
     private PlayerController playerController;
     private PlayerCombat playerCombat;
 
+    private bool isScreenActive = false;
+
     private void Start()
     {
-        if (deathPanel != null) deathPanel.SetActive(false);
+        // Try to get UIDocument on this object if not set via reflection
+        if (panel == null)
+        {
+            panel = GetComponent<UIDocument>();
+        }
+
+        if (panel != null && panel.rootVisualElement != null)
+        {
+            var root = panel.rootVisualElement;
+            rootElement = root.Q<VisualElement>("DeathScreen-Root");
+            tauntTextLabel = root.Q<Label>("TauntText");
+            deathCountLabel = root.Q<Label>("DeathCountLabel");
+            adaptationHintLabel = root.Q<Label>("AdaptationHint");
+            respawnButton = root.Q<Button>("RespawnButton");
+            quitButton = root.Q<Button>("QuitButton");
+
+            if (respawnButton != null) respawnButton.clicked += OnRiseAgainClicked;
+            if (quitButton != null) quitButton.clicked += OnReturnToSanctumClicked;
+        }
+
+        // Hide screen at start
+        HideDeathScreen();
         
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -33,9 +60,22 @@ public class DeathScreenUI : MonoBehaviour
         }
 
         NemesisAPIManager.OnNemesisResponse += HandleNemesisResponse;
+    }
 
-        if (riseAgainButton != null) riseAgainButton.onClick.AddListener(OnRiseAgainClicked);
-        if (returnToSanctumButton != null) returnToSanctumButton.onClick.AddListener(OnReturnToSanctumClicked);
+    private void Update()
+    {
+        // Add keyboard shortcut listeners as shown in KeyHint
+        if (isScreenActive)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                OnRiseAgainClicked();
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                OnReturnToSanctumClicked();
+            }
+        }
     }
 
     private void OnDestroy()
@@ -45,19 +85,45 @@ public class DeathScreenUI : MonoBehaviour
             playerStats.OnPlayerDeath.RemoveListener(ShowDeathScreen);
         }
         NemesisAPIManager.OnNemesisResponse -= HandleNemesisResponse;
+
+        if (respawnButton != null) respawnButton.clicked -= OnRiseAgainClicked;
+        if (quitButton != null) quitButton.clicked -= OnReturnToSanctumClicked;
     }
 
     private void ShowDeathScreen()
     {
-        if (deathPanel != null) deathPanel.SetActive(true);
-        if (tauntText != null) tauntText.text = "The forest is analyzing your failure...";
+        isScreenActive = true;
+        if (rootElement != null)
+        {
+            rootElement.style.display = DisplayStyle.Flex;
+        }
+        
+        if (tauntTextLabel != null)
+        {
+            tauntTextLabel.text = "\"The forest is analyzing your failure...\"";
+        }
+
+        if (deathCountLabel != null && GameManager.Instance != null)
+        {
+            // Convert death count to Roman numerals or standard counter
+            deathCountLabel.text = $"DEATH  {GetRomanNumeral(GameManager.Instance.DeathCount + 1)}";
+        }
 
         // Block player input while dead
         if (playerController != null) playerController.enabled = false;
         if (playerCombat != null) playerCombat.enabled = false;
 
-        // Optionally, do a slow motion effect on death
+        // Start a slow motion effect on death
         StartCoroutine(SlowMotionDeath());
+    }
+
+    private void HideDeathScreen()
+    {
+        isScreenActive = false;
+        if (rootElement != null)
+        {
+            rootElement.style.display = DisplayStyle.None;
+        }
     }
 
     private IEnumerator SlowMotionDeath()
@@ -69,15 +135,21 @@ public class DeathScreenUI : MonoBehaviour
 
     private void HandleNemesisResponse(NemesisResponse response)
     {
-        if (tauntText == null) return;
+        if (tauntTextLabel == null) return;
 
         if (response != null && !string.IsNullOrEmpty(response.taunt))
         {
-            tauntText.text = "\"" + response.taunt + "\"";
+            tauntTextLabel.text = "\"" + response.taunt + "\"";
         }
         else
         {
-            tauntText.text = "\"The forest claims another...\""; // Fallback
+            tauntTextLabel.text = "\"The forest claims another...\""; // Fallback
+        }
+
+        if (adaptationHintLabel != null && response != null && response.adaptations_applied != null && response.adaptations_applied.Count > 0)
+        {
+            string primaryAdaptation = response.adaptations_applied[0].Replace("_", " ");
+            adaptationHintLabel.text = $"▲  {primaryAdaptation.ToUpper()}  |  PATTERN RECORDED";
         }
     }
 
@@ -107,5 +179,13 @@ public class DeathScreenUI : MonoBehaviour
         {
             SceneManager.LoadScene("MainMenu");
         }
+    }
+
+    private string GetRomanNumeral(int number)
+    {
+        if (number <= 0) return "0";
+        string[] romans = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" };
+        if (number <= 10) return romans[number - 1];
+        return number.ToString(); // Fallback for high numbers
     }
 }

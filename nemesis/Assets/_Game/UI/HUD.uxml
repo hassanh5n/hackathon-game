@@ -1,0 +1,236 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
+    engine:noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd">
+
+    <!-- ═══════════════════════════════════════════════════════════
+         NEMESIS HUD — In-Fight Overlay
+         Attach to: Assets/_Game/UI/HUD.uxml
+         USS: Assets/_Game/UI/HUD.uss  (optional, inline styles used as fallback)
+    ════════════════════════════════════════════════════════════ -->
+
+    <ui:VisualElement name="HUD-Root" style="
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px;
+    ">
+
+        <!-- ══════════ TOP BAR — Boss Info ══════════ -->
+        <ui:VisualElement name="BossBar-Container" style="
+            width: 100%;
+            align-items: center;
+            flex-direction: column;
+        ">
+            <!-- Boss Name + Stage -->
+            <ui:Label name="BossNameLabel" text="HUMBABA" style="
+                color: rgba(220, 170, 80, 1);
+                font-size: 22px;
+                -unity-font-style: bold;
+                letter-spacing: 6px;
+                margin-bottom: 4px;
+                -unity-text-align: middle-center;
+            "/>
+
+            <ui:Label name="BossStageLabel" text="THE ETERNAL GUARDIAN" style="
+                color: rgba(180, 120, 50, 1);
+                font-size: 11px;
+                letter-spacing: 4px;
+                margin-bottom: 8px;
+                -unity-text-align: middle-center;
+            "/>
+
+            <!-- Boss Health Bar Track -->
+            <ui:VisualElement name="BossHealthTrack" style="
+                width: 60%;
+                height: 14px;
+                background-color: rgba(20, 10, 5, 0.85);
+                border-width: 1px;
+                border-color: rgba(220, 170, 80, 0.6);
+                border-radius: 2px;
+                overflow: hidden;
+            ">
+                <ui:VisualElement name="BossHealthFill" style="
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(180, 40, 20, 1);
+                    transition-property: width;
+                    transition-duration: 0.3s;
+                    transition-timing-function: ease-out;
+                "/>
+                <!-- Damage flash overlay -->
+                <ui:VisualElement name="BossHealthFlash" style="
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(255, 255, 255, 0);
+                "/>
+            </ui:VisualElement>
+
+            <!-- Boss Stage Pips -->
+            <ui:VisualElement name="StagePips" style="
+                flex-direction: row;
+                margin-top: 6px;
+                justify-content: center;
+            ">
+                <ui:VisualElement name="Pip1" style="
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 5px;
+                    background-color: rgba(220, 170, 80, 1);
+                    margin-left: 5px;
+                    margin-right: 5px;
+                "/>
+                <ui:VisualElement name="Pip2" style="
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 5px;
+                    background-color: rgba(60, 40, 20, 1);
+                    border-width: 1px;
+                    border-color: rgba(220, 170, 80, 0.5);
+                    margin-left: 5px;
+                    margin-right: 5px;
+                "/>
+                <ui:VisualElement name="Pip3" style="
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 5px;
+                    background-color: rgba(60, 40, 20, 1);
+                    border-width: 1px;
+                    border-color: rgba(220, 170, 80, 0.5);
+                    margin-left: 5px;
+                    margin-right: 5px;
+                "/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ══════════ CENTER — Taunt Text (Nemesis AI) ══════════ -->
+        <ui:VisualElement name="TauntArea" style="
+            align-items: center;
+            justify-content: center;
+        ">
+            <ui:Label name="TauntLabel" text="" style="
+                color: rgba(220, 170, 80, 0.9);
+                font-size: 16px;
+                -unity-font-style: italic;
+                -unity-text-align: middle-center;
+                max-width: 500px;
+                white-space: normal;
+                opacity: 0;
+                transition-property: opacity;
+                transition-duration: 0.5s;
+            "/>
+        </ui:VisualElement>
+
+        <!-- ══════════ BOTTOM — Player Info ══════════ -->
+        <ui:VisualElement name="PlayerBar-Container" style="
+            width: 100%;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+        ">
+
+            <!-- Player Health + Stamina -->
+            <ui:VisualElement name="PlayerStats" style="
+                flex-direction: column;
+                min-width: 260px;
+            ">
+                <!-- Player Name -->
+                <ui:Label name="PlayerNameLabel" text="ZILAR" style="
+                    color: rgba(200, 200, 200, 0.8);
+                    font-size: 12px;
+                    letter-spacing: 3px;
+                    margin-bottom: 5px;
+                "/>
+
+                <!-- Health -->
+                <ui:VisualElement name="PlayerHealthRow" style="
+                    flex-direction: row;
+                    align-items: center;
+                    margin-bottom: 5px;
+                ">
+                    <ui:Label text="HP" style="
+                        color: rgba(200, 80, 80, 0.9);
+                        font-size: 10px;
+                        letter-spacing: 2px;
+                        width: 24px;
+                        margin-right: 6px;
+                    "/>
+                    <ui:VisualElement name="PlayerHealthTrack" style="
+                        flex-grow: 1;
+                        height: 10px;
+                        background-color: rgba(20, 10, 5, 0.85);
+                        border-width: 1px;
+                        border-color: rgba(200, 80, 80, 0.4);
+                        border-radius: 2px;
+                        overflow: hidden;
+                    ">
+                        <ui:VisualElement name="PlayerHealthFill" style="
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(180, 50, 50, 1);
+                            transition-property: width;
+                            transition-duration: 0.2s;
+                            transition-timing-function: ease-out;
+                        "/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <!-- Stamina -->
+                <ui:VisualElement name="PlayerStaminaRow" style="
+                    flex-direction: row;
+                    align-items: center;
+                ">
+                    <ui:Label text="ST" style="
+                        color: rgba(80, 180, 100, 0.9);
+                        font-size: 10px;
+                        letter-spacing: 2px;
+                        width: 24px;
+                        margin-right: 6px;
+                    "/>
+                    <ui:VisualElement name="PlayerStaminaTrack" style="
+                        flex-grow: 1;
+                        height: 6px;
+                        background-color: rgba(20, 10, 5, 0.85);
+                        border-width: 1px;
+                        border-color: rgba(80, 180, 100, 0.4);
+                        border-radius: 2px;
+                        overflow: hidden;
+                    ">
+                        <ui:VisualElement name="PlayerStaminaFill" style="
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(60, 160, 80, 1);
+                            transition-property: width;
+                            transition-duration: 0.1s;
+                            transition-timing-function: ease-out;
+                        "/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- Combat Hints -->
+            <ui:VisualElement name="CombatHints" style="
+                flex-direction: column;
+                align-items: flex-end;
+            ">
+                <ui:Label name="ParryHint" text="[L] PARRY" style="
+                    color: rgba(180, 180, 180, 0.5);
+                    font-size: 10px;
+                    letter-spacing: 2px;
+                    margin-bottom: 3px;
+                "/>
+                <ui:Label name="DodgeHint" text="[Space] DODGE" style="
+                    color: rgba(180, 180, 180, 0.5);
+                    font-size: 10px;
+                    letter-spacing: 2px;
+                "/>
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>

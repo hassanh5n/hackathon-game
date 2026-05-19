@@ -110,9 +110,12 @@ namespace Nemesis.Editor
 
             // Add Parameters
             controller.AddParameter("Speed", AnimatorControllerParameterType.Float);
-            controller.AddParameter("Windup_SaplingSummon", AnimatorControllerParameterType.Trigger);
-            controller.AddParameter("Windup_TreeSlam", AnimatorControllerParameterType.Trigger);
-            controller.AddParameter("Windup_RootBurst", AnimatorControllerParameterType.Trigger);
+            controller.AddParameter("Windup_HeavySwing", AnimatorControllerParameterType.Trigger);
+            controller.AddParameter("Windup_Stomp", AnimatorControllerParameterType.Trigger);
+            controller.AddParameter("Windup_Roar", AnimatorControllerParameterType.Trigger);
+            controller.AddParameter("Windup_AoESlam", AnimatorControllerParameterType.Trigger);
+            controller.AddParameter("Windup_Grapple", AnimatorControllerParameterType.Trigger);
+            controller.AddParameter("Windup_CedarFireball", AnimatorControllerParameterType.Trigger);
             controller.AddParameter("PhaseTransition", AnimatorControllerParameterType.Trigger);
             controller.AddParameter("Death", AnimatorControllerParameterType.Trigger);
 
@@ -120,31 +123,36 @@ namespace Nemesis.Editor
 
             // Create States
             var locomotion = rootStateMachine.AddState("Locomotion");
-            var saplingSummon = rootStateMachine.AddState("Attack_SaplingSummon");
-            var treeSlam = rootStateMachine.AddState("Attack_TreeSlam");
-            var rootBurst = rootStateMachine.AddState("Attack_RootBurst");
+            var heavySwing = rootStateMachine.AddState("Attack_HeavySwing");
+            var stomp = rootStateMachine.AddState("Attack_Stomp");
+            var roar = rootStateMachine.AddState("Attack_Roar");
+            var aoeSlam = rootStateMachine.AddState("Attack_AoESlam");
+            var grapple = rootStateMachine.AddState("Attack_Grapple");
+            var cedarFireball = rootStateMachine.AddState("Attack_CedarFireball");
             var phaseTransition = rootStateMachine.AddState("PhaseTransition");
             var death = rootStateMachine.AddState("Death");
 
             rootStateMachine.defaultState = locomotion;
 
             // Transitions to Attacks
-            var toSapling = locomotion.AddTransition(saplingSummon);
-            toSapling.AddCondition(AnimatorConditionMode.If, 0, "Windup_SaplingSummon");
-            toSapling.hasExitTime = false;
+            var attacks = new[]
+            {
+                new { name = "HeavySwing", state = heavySwing },
+                new { name = "Stomp", state = stomp },
+                new { name = "Roar", state = roar },
+                new { name = "AoESlam", state = aoeSlam },
+                new { name = "Grapple", state = grapple },
+                new { name = "CedarFireball", state = cedarFireball }
+            };
 
-            var toSlam = locomotion.AddTransition(treeSlam);
-            toSlam.AddCondition(AnimatorConditionMode.If, 0, "Windup_TreeSlam");
-            toSlam.hasExitTime = false;
+            foreach (var atk in attacks)
+            {
+                var toAtk = locomotion.AddTransition(atk.state);
+                toAtk.AddCondition(AnimatorConditionMode.If, 0, $"Windup_{atk.name}");
+                toAtk.hasExitTime = false;
 
-            var toBurst = locomotion.AddTransition(rootBurst);
-            toBurst.AddCondition(AnimatorConditionMode.If, 0, "Windup_RootBurst");
-            toBurst.hasExitTime = false;
-
-            // Returns to Locomotion
-            saplingSummon.AddTransition(locomotion).hasExitTime = true;
-            treeSlam.AddTransition(locomotion).hasExitTime = true;
-            rootBurst.AddTransition(locomotion).hasExitTime = true;
+                atk.state.AddTransition(locomotion).hasExitTime = true;
+            }
 
             // Phase transition & Death from Any State
             var toPhase = rootStateMachine.AddAnyStateTransition(phaseTransition);

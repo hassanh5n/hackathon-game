@@ -43,6 +43,60 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (stats != null && stats.IsDead) return;
+
+        // Direct mouse polling fallback for attacks
+        var mouse = UnityEngine.InputSystem.Mouse.current;
+        if (mouse != null)
+        {
+            if (mouse.leftButton.wasPressedThisFrame)
+            {
+                LightAttack();
+            }
+            if (mouse.rightButton.wasPressedThisFrame)
+            {
+                HeavyAttack();
+            }
+        }
+
+        // Direct keyboard polling fallback for parry and dodge
+        var keyboard = UnityEngine.InputSystem.Keyboard.current;
+        if (keyboard != null)
+        {
+            if (keyboard.lKey.wasPressedThisFrame)
+            {
+                Parry();
+            }
+            if (keyboard.spaceKey.wasPressedThisFrame)
+            {
+                if (controller != null) controller.Dodge();
+            }
+        }
+    }
+
+    // Input System SendMessages action maps
+    public void OnLightAttack()
+    {
+        LightAttack();
+    }
+
+    public void OnHeavyAttack()
+    {
+        HeavyAttack();
+    }
+
+    public void OnDodge()
+    {
+        Dodge();
+    }
+
+    public void OnParry()
+    {
+        Parry();
+    }
+
     private void OnDestroy()
     {
         if (stats != null)
@@ -57,7 +111,7 @@ public class PlayerCombat : MonoBehaviour
         isStaggered = true;
         
         // Trigger staggered animation
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetTrigger("Staggered");
         }
@@ -76,7 +130,7 @@ public class PlayerCombat : MonoBehaviour
     private void HandlePlayerDeath()
     {
         // Trigger death animation
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetTrigger("Death");
         }
@@ -110,7 +164,7 @@ public class PlayerCombat : MonoBehaviour
         isAttacking = true;
         currentAttackDamage = 12f;
         
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetTrigger("LightAttack");
         }
@@ -139,7 +193,7 @@ public class PlayerCombat : MonoBehaviour
         isAttacking = true;
         currentAttackDamage = 28f;
         
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetTrigger("HeavyAttack");
         }
@@ -169,14 +223,14 @@ public class PlayerCombat : MonoBehaviour
     private IEnumerator ParryRoutine()
     {
         isParrying = true;
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetTrigger("Parry");
             animator.SetBool("IsParrying", true);
         }
         yield return new WaitForSeconds(0.4f);
         isParrying = false;
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetBool("IsParrying", false);
         }

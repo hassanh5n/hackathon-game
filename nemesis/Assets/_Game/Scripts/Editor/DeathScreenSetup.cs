@@ -13,6 +13,12 @@ namespace Nemesis.Editor
         [MenuItem("Nemesis/Setup/2. Build Death Screen UI")]
         public static void BuildDeathScreen()
         {
+            if (EditorApplication.isPlaying)
+            {
+                Debug.LogWarning("⚠️ Build Death Screen UI cannot be run during Play Mode. Please exit Play Mode first.");
+                return;
+            }
+
             Scene scene = EditorSceneManager.GetActiveScene();
 
             GameObject canvasObj = GameObject.Find("Canvas");

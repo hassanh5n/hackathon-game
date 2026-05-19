@@ -15,6 +15,12 @@ namespace Nemesis.Editor
         [MenuItem("Nemesis/Setup/1. Build BossFight Scene")]
         public static void BuildScene()
         {
+            if (EditorApplication.isPlaying)
+            {
+                Debug.LogWarning("⚠️ Build BossFight Scene cannot be run during Play Mode. Please exit Play Mode first.");
+                return;
+            }
+
             // Open or create the scene only if it's not already the active open scene
             var activeScene = SceneManager.GetActiveScene();
             if (activeScene.path != ScenePath)
@@ -27,6 +33,16 @@ namespace Nemesis.Editor
                 }
                 EditorSceneManager.OpenScene(ScenePath);
             }
+
+            // Clean up existing duplicates before populating
+            Debug.Log("[BossFightSetup] Cleaning up existing scene duplicates...");
+            DestroyExisting("GameManager");
+            DestroyExisting("AudioManager");
+            DestroyExisting("NemesisManager");
+            DestroyExisting("Canvas");
+            DestroyExisting("HUD");
+            DestroyExisting("DeathScreen");
+            DestroyExisting("PlayerStatsUI");
 
             // Force global illumination / skybox / environment lighting to update
             DynamicGI.UpdateEnvironment();
@@ -43,25 +59,32 @@ namespace Nemesis.Editor
             var bossConfig = GetOrCreateConfig<BossConfig>("Assets/_Game/Settings/BossConfig.asset");
 
             // Setup lighting, camera, and floor
+            Debug.Log("[BossFightSetup] 1. Setting up environment...");
             SetupEnvironment();
 
             // Create GameManager and AudioManager objects
+            Debug.Log("[BossFightSetup] 2. Creating managers...");
             CreateGameManager(gameConfig);
             CreateAudioManager();
 
             // Create player (Zilar) and attach required components
+            Debug.Log("[BossFightSetup] 3. Creating Zilar...");
             var player = CreatePlayer(gameConfig);
 
             // Create boss (Humbaba) with placeholder or model
+            Debug.Log("[BossFightSetup] 4. Creating Humbaba...");
             var boss = CreateBoss(bossConfig);
 
             // Create Nemesis manager (API manager + state cache)
+            Debug.Log("[BossFightSetup] 5. Creating NemesisManager...");
             CreateNemesisManager();
 
             // Wire inspector references based on the linking table
+            Debug.Log("[BossFightSetup] 6. Linking references...");
             LinkReferences(player, boss);
 
             // Setup UI canvas and HUD/DeathScreen UI Documents
+            Debug.Log("[BossFightSetup] 7. Setting up UI Canvas and Documents...");
             SetupUI();
 
             // Mark scene dirty and save
@@ -169,6 +192,7 @@ namespace Nemesis.Editor
             var player = GameObject.Find("Zilar");
             if (player == null)
             {
+                Debug.Log("[BossFightSetup] Zilar not found in scene. Creating fresh...");
                 // Try to load a prefab, otherwise create a capsule placeholder
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Game/Models/Player/Prefab/Skin_1.prefab");
                 if (prefab != null)
@@ -182,29 +206,73 @@ namespace Nemesis.Editor
                 player.name = "Zilar";
                 player.transform.position = new Vector3(0, 1, -5);
             }
+            else
+            {
+                Debug.Log("[BossFightSetup] Zilar found in scene: " + player.name);
+            }
             player.tag = "Player";
             player.layer = LayerMask.NameToLayer("Default");
 
             // Add required components (if missing)
             var pc = player.GetComponent<PlayerController>();
-            if (pc == null) pc = player.AddComponent<PlayerController>();
+            if (pc == null)
+            {
+                Debug.Log("[BossFightSetup] Adding PlayerController to Zilar...");
+                pc = player.AddComponent<PlayerController>();
+            }
             var ps = player.GetComponent<PlayerStats>();
-            if (ps == null) ps = player.AddComponent<PlayerStats>();
+            if (ps == null)
+            {
+                Debug.Log("[BossFightSetup] Adding PlayerStats to Zilar...");
+                ps = player.AddComponent<PlayerStats>();
+            }
             var pcmb = player.GetComponent<PlayerCombat>();
-            if (pcmb == null) pcmb = player.AddComponent<PlayerCombat>();
+            if (pcmb == null)
+            {
+                Debug.Log("[BossFightSetup] Adding PlayerCombat to Zilar...");
+                pcmb = player.AddComponent<PlayerCombat>();
+            }
             var logger = player.GetComponent<CombatLogger>();
-            if (logger == null) logger = player.AddComponent<CombatLogger>();
+            if (logger == null)
+            {
+                Debug.Log("[BossFightSetup] Adding CombatLogger to Zilar...");
+                logger = player.AddComponent<CombatLogger>();
+            }
             var coll = player.GetComponent<CapsuleCollider>();
-            if (coll == null) coll = player.AddComponent<CapsuleCollider>();
+            if (coll == null)
+            {
+                Debug.Log("[BossFightSetup] Adding CapsuleCollider to Zilar...");
+                coll = player.AddComponent<CapsuleCollider>();
+            }
             coll.center = new Vector3(0f, 1f, 0f);
             coll.height = 2f;
             coll.radius = 0.4f;
             var rb = player.GetComponent<Rigidbody>();
-            if (rb == null) rb = player.AddComponent<Rigidbody>();
+            if (rb == null)
+            {
+                Debug.Log("[BossFightSetup] Adding Rigidbody to Zilar...");
+                rb = player.AddComponent<Rigidbody>();
+            }
             rb.mass = 80f;
             rb.linearDamping = 5f;
             rb.angularDamping = 10f;
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+            // Find and assign Player Animator Controller
+            var animator = player.GetComponent<Animator>();
+            if (animator == null) animator = player.GetComponentInChildren<Animator>();
+            if (animator != null)
+            {
+                var controller = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/_Game/Animations/Player/PlayerAnimator.controller");
+                if (controller != null)
+                {
+                    animator.runtimeAnimatorController = controller;
+                    Debug.Log("[BossFightSetup] Assigned PlayerAnimator to Zilar's Animator component.");
+                }
+                
+                var animField = typeof(PlayerController).GetField("animator", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (animField != null) animField.SetValue(pc, animator);
+            }
 
             // Hook up config fields via reflection (if they exist)
             var ctrlField = typeof(PlayerController).GetField("config", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
@@ -268,6 +336,9 @@ namespace Nemesis.Editor
             var configField = typeof(BossController).GetField("bossConfig", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             if (configField != null) configField.SetValue(ctrl, config);
 
+            // Load and cache Boss Animator Controller
+            var bossControllerAsset = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/_Game/Animations/Boss/BossAnimator.controller");
+
             // Load FBX stage models if they exist, otherwise use placeholder capsule
             string[] stagePaths = { "Assets/_Game/Models/Boss/stage_1.fbx", "Assets/_Game/Models/Boss/stage_2.fbx", "Assets/_Game/Models/Boss/stage_3.fbx" };
             for (int i = 0; i < stagePaths.Length; i++)
@@ -293,6 +364,21 @@ namespace Nemesis.Editor
                         placeholder.transform.SetParent(boss.transform);
                         placeholder.transform.localPosition = new Vector3(0, 1, 0);
                         Object.DestroyImmediate(placeholder.GetComponent<Collider>());
+                    }
+                }
+            }
+
+            // Assign Humbaba stage animators
+            if (bossControllerAsset != null)
+            {
+                foreach (Transform child in boss.transform)
+                {
+                    var anim = child.GetComponent<Animator>();
+                    if (anim == null) anim = child.GetComponentInChildren<Animator>();
+                    if (anim != null)
+                    {
+                        anim.runtimeAnimatorController = bossControllerAsset;
+                        Debug.Log($"[BossFightSetup] Assigned BossAnimator to Humbaba child {child.name}'s Animator.");
                     }
                 }
             }
@@ -380,17 +466,46 @@ namespace Nemesis.Editor
             var canvasObj = GameObject.Find("Canvas");
             if (canvasObj == null)
             {
+                Debug.Log("[BossFightSetup] Canvas not found, creating a new one...");
                 canvasObj = new GameObject("Canvas");
                 var canvas = canvasObj.AddComponent<Canvas>();
                 canvas.renderMode = RenderMode.ScreenSpaceOverlay;
                 canvasObj.AddComponent<CanvasScaler>();
                 canvasObj.AddComponent<GraphicRaycaster>();
             }
+            else
+            {
+                Debug.Log("[BossFightSetup] Canvas found in scene: " + canvasObj.name);
+            }
+
+            // Find PanelSettings asset dynamically in project
+            var settingsGuids = AssetDatabase.FindAssets("t:PanelSettings");
+            UnityEngine.UIElements.PanelSettings panelSettings = null;
+            if (settingsGuids.Length > 0)
+            {
+                var settingsPath = AssetDatabase.GUIDToAssetPath(settingsGuids[0]);
+                panelSettings = AssetDatabase.LoadAssetAtPath<UnityEngine.UIElements.PanelSettings>(settingsPath);
+                Debug.Log("[BossFightSetup] Resolved PanelSettings asset: " + settingsPath);
+            }
+            else
+            {
+                Debug.LogWarning("[BossFightSetup] No PanelSettings asset found in workspace. Creating default PanelSettings asset automatically...");
+                panelSettings = ScriptableObject.CreateInstance<UnityEngine.UIElements.PanelSettings>();
+                // Make sure UI folder exists
+                if (!AssetDatabase.IsValidFolder("Assets/_Game/UI"))
+                {
+                    AssetDatabase.CreateFolder("Assets/_Game", "UI");
+                }
+                AssetDatabase.CreateAsset(panelSettings, "Assets/_Game/UI/PanelSettings.panelSettings");
+                AssetDatabase.SaveAssets();
+                Debug.Log("[BossFightSetup] Created and saved new PanelSettings asset successfully at: Assets/_Game/UI/PanelSettings.panelSettings");
+            }
 
             // PlayerStats UI (optional)
             var statsUI = GameObject.Find("PlayerStatsUI");
             if (statsUI == null)
             {
+                Debug.Log("[BossFightSetup] PlayerStatsUI not found, creating...");
                 statsUI = new GameObject("PlayerStatsUI");
                 statsUI.transform.SetParent(canvasObj.transform, false);
                 statsUI.AddComponent<PlayerStatsUI>();
@@ -401,10 +516,18 @@ namespace Nemesis.Editor
             var hudAsset = AssetDatabase.LoadAssetAtPath<UnityEngine.UIElements.VisualTreeAsset>(hudPath);
             if (hudAsset != null)
             {
+                Debug.Log("[BossFightSetup] HUD UXML loaded successfully! Creating HUD GameObject...");
                 var hudObj = new GameObject("HUD");
                 var hudDoc = hudObj.AddComponent<UnityEngine.UIElements.UIDocument>();
                 hudDoc.visualTreeAsset = hudAsset;
+                if (panelSettings != null) hudDoc.panelSettings = panelSettings;
                 hudObj.transform.SetParent(canvasObj.transform, false);
+                hudObj.AddComponent<HudUI>();
+                Debug.Log("[BossFightSetup] HUD GameObject created and HudUI attached!");
+            }
+            else
+            {
+                Debug.LogError("[BossFightSetup] FAILED to load HUD UXML at: " + hudPath);
             }
 
             // DeathScreen UI Document
@@ -412,20 +535,28 @@ namespace Nemesis.Editor
             var deathAsset = AssetDatabase.LoadAssetAtPath<UnityEngine.UIElements.VisualTreeAsset>(deathPath);
             if (deathAsset != null)
             {
+                Debug.Log("[BossFightSetup] DeathScreen UXML loaded successfully! Creating DeathScreen GameObject...");
                 var deathObj = new GameObject("DeathScreen");
                 var deathDoc = deathObj.AddComponent<UnityEngine.UIElements.UIDocument>();
                 deathDoc.visualTreeAsset = deathAsset;
+                if (panelSettings != null) deathDoc.panelSettings = panelSettings;
                 deathObj.transform.SetParent(canvasObj.transform, false);
 
                 // Attach to GameManager's DeathScreenUI component (if exists)
                 var gmObj = GameObject.Find("GameManager");
                 if (gmObj != null)
                 {
+                    Debug.Log("[BossFightSetup] GameManager found. Attaching DeathScreenUI controller...");
                     var deathUI = gmObj.GetComponent<DeathScreenUI>();
                     if (deathUI == null) deathUI = gmObj.AddComponent<DeathScreenUI>();
                     var panelField = typeof(DeathScreenUI).GetField("panel", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
                     if (panelField != null) panelField.SetValue(deathUI, deathDoc);
                 }
+                Debug.Log("[BossFightSetup] DeathScreen GameObject created!");
+            }
+            else
+            {
+                Debug.LogError("[BossFightSetup] FAILED to load DeathScreen UXML at: " + deathPath);
             }
         }
 
@@ -442,6 +573,25 @@ namespace Nemesis.Editor
             tagsProp.InsertArrayElementAtIndex(tagsProp.arraySize);
             tagsProp.GetArrayElementAtIndex(tagsProp.arraySize - 1).stringValue = tag;
             so.ApplyModifiedProperties();
+        }
+
+        private static void DestroyExisting(string name)
+        {
+            var obj = GameObject.Find(name);
+            if (obj != null)
+            {
+                Object.DestroyImmediate(obj);
+            }
+            
+            // Re-query scene for any remaining objects to fully clean duplicates
+            GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+            foreach (var o in allObjects)
+            {
+                if (o.name == name)
+                {
+                    Object.DestroyImmediate(o);
+                }
+            }
         }
     }
 }

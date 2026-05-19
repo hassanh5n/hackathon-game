@@ -266,7 +266,7 @@ public class BossController : MonoBehaviour
 
         // Windup
         ChangeState(BossState.Windup);
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetTrigger($"Windup_{currentAttack.attackId}");
         }
@@ -360,7 +360,7 @@ public class BossController : MonoBehaviour
         
         UpdateActiveModel(newPhase);
 
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetTrigger("PhaseTransition");
         }
@@ -376,7 +376,7 @@ public class BossController : MonoBehaviour
         {
             StopCoroutine(behaviorCoroutine);
         }
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             animator.SetTrigger("Death");
         }
