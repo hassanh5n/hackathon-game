@@ -19,6 +19,11 @@ public class BossController : MonoBehaviour
     [SerializeField] private BossStats bossStats;
     [SerializeField] private BossConfig bossConfig;
     [SerializeField] private Animator animator;
+
+    [Header("Stage Models (Autowired)")]
+    [SerializeField] private GameObject stage1Model;
+    [SerializeField] private GameObject stage2Model;
+    [SerializeField] private GameObject stage3Model;
     
     [Header("Settings")]
     public bool debugMode = true;
@@ -61,6 +66,26 @@ public class BossController : MonoBehaviour
         {
             Debug.LogError("[BossController] Could not find PlayerStats in the scene! Boss will not move or attack player.");
         }
+
+        // Find stage models if not explicitly assigned
+        if (stage1Model == null)
+        {
+            Transform t = transform.Find("Stage_1");
+            if (t != null) stage1Model = t.gameObject;
+        }
+        if (stage2Model == null)
+        {
+            Transform t = transform.Find("Stage_2");
+            if (t != null) stage2Model = t.gameObject;
+        }
+        if (stage3Model == null)
+        {
+            Transform t = transform.Find("Stage_3");
+            if (t != null) stage3Model = t.gameObject;
+        }
+
+        // Initialize active model based on current stats phase
+        UpdateActiveModel(bossStats.CurrentPhase);
 
         bossStats.OnPhaseChanged.AddListener(HandlePhaseChanged);
         bossStats.OnBossDeath.AddListener(HandleBossDeath);
@@ -214,12 +239,37 @@ public class BossController : MonoBehaviour
         return attacks[attacks.Count - 1]; // Fallback
     }
 
+    private void UpdateActiveModel(int phase)
+    {
+        if (stage1Model != null) stage1Model.SetActive(phase == 1);
+        if (stage2Model != null) stage2Model.SetActive(phase == 2);
+        if (stage3Model != null) stage3Model.SetActive(phase == 3);
+
+        // Update active animator reference to the active model's animator
+        GameObject activeModel = null;
+        if (phase == 1) activeModel = stage1Model;
+        else if (phase == 2) activeModel = stage2Model;
+        else if (phase == 3) activeModel = stage3Model;
+
+        if (activeModel != null)
+        {
+            animator = activeModel.GetComponent<Animator>();
+            if (animator == null)
+            {
+                animator = activeModel.GetComponentInChildren<Animator>();
+            }
+        }
+    }
+
     private void HandlePhaseChanged(int newPhase)
     {
         if (debugMode)
         {
             Debug.Log($"[BossController] Phase changed to: {newPhase}");
         }
+        
+        UpdateActiveModel(newPhase);
+
         if (animator != null)
         {
             animator.SetTrigger("PhaseTransition");

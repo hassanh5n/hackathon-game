@@ -7,18 +7,9 @@ Darwin version:          25.2.0
 Architecture:            arm64
 Running under Rosetta:   NO
 Available memory:        8192 MB
-Date:                    2026-05-19T09:14:04Z
+Date:                    2026-05-19T09:24:02Z
 [Licensing::Module] Trying to connect to existing licensing client channel...
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-suhaib" at "2026-05-19T09:14:04.668836Z"
-[Licensing::Client] Handshaking with LicensingClient:
-  Version:                 1.18.1+9fbee8e
-  Session Id:              8554d0c3b9c94d17a055d3e3dc76c722
-  Correlation Id:          461b9d7f07bf3760c639194e446b57c8
-  External correlation Id: 3486878185216598172
-  Machine Id:              DtFnC6Ux7sCMBtFknaNK71OujoI=
-[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-suhaib" (connect: 0.00s, validation: 0.01s, handshake: 0.84s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-suhaib-notifications" at "2026-05-19T09:14:05.517845Z"
-[Licensing::Module] Licensing Background thread has ended after 0.85s
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-suhaib" at "2026-05-19T09:24:02.447362Z"
 
 COMMAND LINE ARGUMENTS:
 /Applications/Unity/Hub/Editor/6000.4.7f1/Unity.app/Contents/MacOS/Unity
@@ -32,7 +23,7 @@ AssetImportWorker0
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-52910
+53087
 -force-metal
 -job-worker-count
 3
@@ -80,7 +71,7 @@ Successfully changed project path to: /Users/suhaib/Desktop/hackathon-game/nemes
     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
 Player connection [8767548480]  Target information:
 
-Player connection [8767548480]  * "[IP] 192.168.0.155 [Port] 0 [Flags] 2 [Guid] 1025572941 [EditorId] 1025572941 [Version] 1048832 [Id] OSXEditor(0,Mac) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+Player connection [8767548480]  * "[IP] 192.168.0.155 [Port] 0 [Flags] 2 [Guid] 2488495471 [EditorId] 2488495471 [Version] 1048832 [Id] OSXEditor(0,Mac) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
 
 Player connection [8767548480] Host joined multi-casting on [225.0.0.222:54997]...
 Player connection [8767548480] Host joined alternative multi-casting on [225.0.0.222:34997]...
@@ -95,7 +86,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 8.30 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 6.50 ms, found 2 plugins.
 Initialize engine version: 6000.4.7f1 (f3c3c4248748)
 [Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.4.7f1/Unity.app/Contents/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path /Users/suhaib/Desktop/hackathon-game/nemesis/Assets
@@ -112,17 +103,26 @@ MSL Version: 3.0
 Has Float MSAA: 1
 Has Float Filtering: 1
 ReadWrite Texture Tier: 2
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              985433528de34c0db45fb38c31968366
+  Correlation Id:          461b9d7f07bf3760c639194e446b57c8
+  External correlation Id: 7426448593540530247
+  Machine Id:              DtFnC6Ux7sCMBtFknaNK71OujoI=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-suhaib" (connect: 0.00s, validation: 0.02s, handshake: 0.61s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-suhaib-notifications" at "2026-05-19T09:24:03.079555Z"
+[Licensing::Module] Licensing Background thread has ended after 0.63s
 Initialize mono
 Mono path[0] = '/Applications/Unity/Hub/Editor/6000.4.7f1/Unity.app/Contents/Resources/Scripting/Managed'
 Mono path[1] = '/Applications/Unity/Hub/Editor/6000.4.7f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
 Mono config path = '/Applications/Unity/Hub/Editor/6000.4.7f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56782
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56886
 CodeReloadManager initialized
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: /Applications/Unity/Hub/Editor/6000.4.7f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: /Applications/Unity/Hub/Editor/6000.4.7f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
-Registered in 0.001564 seconds.
+Registered in 0.002896 seconds.
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
 Package Manager log level set to [2]
@@ -131,23 +131,23 @@ Package Manager log level set to [2]
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.450 seconds
-Domain Reload Profiling: 966ms
-	BeginReloadAssembly (121ms)
-	RebuildCommonClasses (47ms)
-	RebuildNativeTypeToScriptingClass (20ms)
-	initialDomainReloadingComplete (65ms)
-	LoadAllAssembliesAndSetupDomain (263ms)
-		LoadAssemblies (121ms)
-		AnalyzeDomain (251ms)
-			TypeCache.Refresh (249ms)
-				TypeCache.ScanAssembly (229ms)
-	FinalizeReload (451ms)
+- Finished resetting the current domain, in  0.411 seconds
+Domain Reload Profiling: 869ms
+	BeginReloadAssembly (115ms)
+	RebuildCommonClasses (40ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (59ms)
+	LoadAllAssembliesAndSetupDomain (225ms)
+		LoadAssemblies (114ms)
+		AnalyzeDomain (215ms)
+			TypeCache.Refresh (213ms)
+				TypeCache.ScanAssembly (192ms)
+	FinalizeReload (412ms)
 		SetupLoadedEditorAssemblies (0ms)
-			InitializePlatformSupportModulesInManaged (48ms)
-			BeforeProcessingInitializeOnLoad (101ms)
-			ProcessInitializeOnLoadAttributes (126ms)
-			ProcessInitializeOnLoadMethodAttributes (85ms)
+			InitializePlatformSupportModulesInManaged (42ms)
+			BeforeProcessingInitializeOnLoad (91ms)
+			ProcessInitializeOnLoadAttributes (116ms)
+			ProcessInitializeOnLoadMethodAttributes (83ms)
 Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
 Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
 [CoreBusinessMetrics] Unexpected thread when updating session info.
@@ -166,7 +166,6 @@ Begin MonoManager ReloadAssembly
   Type: Assigned
   Expiration: Unlimited
 Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
-Assembly Assembly-CSharp-Editor.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor.dll not valid. Loading of assembly skipped.
 Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
 Assembly DocCodeExamples.dll at Library/ScriptAssemblies/DocCodeExamples.dll not valid. Loading of assembly skipped.
 Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
@@ -199,7 +198,6 @@ Assembly UnityMcp.Tests.Editor.dll at Library/ScriptAssemblies/UnityMcp.Tests.Ed
 Symbol file LoadedFromMemory is not a mono symbol file
 Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
 Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
-Refreshing native plugins compatible for Editor in 2.69 ms, found 2 plugins.
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
 Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
@@ -212,27 +210,26 @@ Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will n
 [Package Manager] Cannot connect to Unity Package Manager local server
 ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.089 seconds
-Domain Reload Profiling: 2695ms
-	BeginReloadAssembly (349ms)
-		DisableScriptedObjects (11ms)
-		CreateAndSetChildDomain (69ms)
-	RebuildCommonClasses (87ms)
-	RebuildNativeTypeToScriptingClass (29ms)
-	initialDomainReloadingComplete (135ms)
-	LoadAllAssembliesAndSetupDomain (1005ms)
-		LoadAssemblies (720ms)
-		AnalyzeDomain (450ms)
-			TypeCache.Refresh (352ms)
-				TypeCache.ScanAssembly (303ms)
-			BuildScriptInfoCaches (81ms)
-			ResolveRequiredComponents (12ms)
-	FinalizeReload (1090ms)
+- Finished resetting the current domain, in  0.735 seconds
+Domain Reload Profiling: 1516ms
+	BeginReloadAssembly (122ms)
+		DisableScriptedObjects (4ms)
+		CreateAndSetChildDomain (20ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (72ms)
+	LoadAllAssembliesAndSetupDomain (531ms)
+		LoadAssemblies (302ms)
+		AnalyzeDomain (281ms)
+			TypeCache.Refresh (204ms)
+				TypeCache.ScanAssembly (178ms)
+			BuildScriptInfoCaches (65ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (735ms)
 		SetupLoadedEditorAssemblies (0ms)
-			InitializePlatformSupportModulesInManaged (3ms)
-			BeforeProcessingInitializeOnLoad (189ms)
-			ProcessInitializeOnLoadAttributes (407ms)
-			ProcessInitializeOnLoadMethodAttributes (67ms)
+			BeforeProcessingInitializeOnLoad (140ms)
+			ProcessInitializeOnLoadAttributes (312ms)
+			ProcessInitializeOnLoadMethodAttributes (58ms)
 		AwakeInstancesAfterBackupRestoration (3ms)
 WARNING: Shader Unsupported: 'Universal Render Pipeline/VR/SpatialMapping/Wireframe' - All subshaders removed
 WARNING: Shader Did you use #pragma only_renderers and omit this platform?
@@ -240,1246 +237,289 @@ WARNING: Shader If subshaders removal was intentional, you may have forgotten tu
 Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
 Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
 Launching external process: /Applications/Unity/Hub/Editor/6000.4.7f1/Unity.app/Contents/Helpers/UnityShaderCompiler
-Launched and connected shader compiler UnityShaderCompiler after 0.10 seconds
-Refreshing native plugins compatible for Editor in 2.03 ms, found 2 plugins.
+Launched and connected shader compiler UnityShaderCompiler after 0.08 seconds
 Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6607 unused Assets / (6.1 MB). Loaded Objects now: 7422.
-Memory consumption went from 156.1 MB to 150.0 MB.
-Total: 35.920917 ms (FindLiveObjects: 5.560375 ms CreateObjectMapping: 0.570584 ms MarkObjects: 25.736500 ms  DeleteObjects: 4.050500 ms)
+Unloading 6607 unused Assets / (5.8 MB). Loaded Objects now: 7423.
+Memory consumption went from 156.2 MB to 150.4 MB.
+Total: 10.092083 ms (FindLiveObjects: 0.983000 ms CreateObjectMapping: 0.349083 ms MarkObjects: 6.876250 ms  DeleteObjects: 1.883042 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 94787.463491 seconds.
-  path: Assets/_Game/Models/Player/Zilar.fbx
-  importAddress: Guid(e151f61be1db44710b38b101a59385fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_Game/Models/Player/Zilar.fbx using Guid(e151f61be1db44710b38b101a59385fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: 'a5836fbac0741eaa61ae01d51ff9caa9') in 0.792063416 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f76db977702319cc6d72a7ac167e6604 DependenciesID=3294fc0194a7bde752dbdcd2b5b0e901 StaticDependenciesID=96d40431d61e8ba3a38c0004a0b6bf76 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
-
-========================================================================
-Received Import Request.
-  Time since last request: 214.351749 seconds.
-  path: Assets/Fantasy knight/Texture/Mace/T_Mace_Normal.tga
-  importAddress: Guid(369f8b338ff145b46a19d846142b9583) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Mace/T_Mace_Normal.tga using Guid(369f8b338ff145b46a19d846142b9583) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a9c7ef8bdbad4600a508451162dadd6f') in 0.175503292 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=27dbd3f35811b1c409bc1cf51c8a5c97 DependenciesID=709b3e7430f12e3ab52571c3e9b9e4dc StaticDependenciesID=e29ff526c656d1b0fcc51453bee6f12f 
+  Time since last request: 95389.159383 seconds.
+  path: Assets/test.unity
+  importAddress: Guid(2d4bb8e369dd242e79eec842e6228683) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/test.unity using Guid(2d4bb8e369dd242e79eec842e6228683) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '2329b6a81073e0bdf31fd9ea269bc2d1') in 0.047656333 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4788b6ed08114f8959043a3231b651b3 DependenciesID=a2c3e375b36125670ae6d3ffd9797cc6 StaticDependenciesID=dc522dd8e12f1d793f104d7a01f9282d 
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 10.089006 seconds.
-  path: Assets/Fantasy knight/Prefab/Shield.prefab
-  importAddress: Guid(6abeed541f2193941b3b38435de85b3d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Shield.prefab using Guid(6abeed541f2193941b3b38435de85b3d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '60eed7cc8617f96ec32ba84b4773e3ab') in 0.070389167 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=bbd8629a6d8f6d30001cd07dfb321843 DependenciesID=eb8a70b2ebb16b51014ac8caa2a3786f StaticDependenciesID=8ce3d83dee2e1e6a3cfa781f270e5a68 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000179 seconds.
-  path: Assets/Fantasy knight/Texture/Body/T_Body_MetallicSmoothness.tga
-  importAddress: Guid(835b76a9f90fea44aae2b2e6c2a346ce) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Body/T_Body_MetallicSmoothness.tga using Guid(835b76a9f90fea44aae2b2e6c2a346ce) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'ca55d9edfb8daab9ddd3b6dadd77f1c3') in 0.013428458 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5079daf6afb951d3b3110da620e0d69b DependenciesID=ce4f2211591bfcc871665c0f9300d716 StaticDependenciesID=9c963043d912e43b131fc007cf287be0 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Body_02.prefab
-  importAddress: Guid(a74a61f5d92c94d419d873d55c3c7265) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Body_02.prefab using Guid(a74a61f5d92c94d419d873d55c3c7265) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '56f46bc7999e18071db2aac633c2b6f1') in 0.008807458 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d9596a1e128823673a738ce2df756f7d DependenciesID=8239fe772f3f4e42bb1e520a63fecada StaticDependenciesID=9f79c043a13b318e5464da56ca28aaf9 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Body_01.fbx
-  importAddress: Guid(f3cbb9c2b4248aa4aac44577525b443c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Body_01.fbx using Guid(f3cbb9c2b4248aa4aac44577525b443c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '7a29e581293297fd9dba75e04f37ea97') in 0.024429458 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1c27552b3bc4ad91b5a85939b517127d DependenciesID=4170818d52d5242559417ef9a301c307 StaticDependenciesID=0e1a7b53b2dfe8aec505b5fe56c80ae2 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/Fantasy knight/Prefab/Skin_1_2.prefab
-  importAddress: Guid(b37dcde3d0ea4934da36f610f07c0513) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Skin_1_2.prefab using Guid(b37dcde3d0ea4934da36f610f07c0513) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '64125d85c2f733b2735cc25d2ff088a9') in 0.009728875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=65c28c7efd6e04f9b5a843340c714c60 DependenciesID=c15e11c2b57c77f996daa7adeaed1b7a StaticDependenciesID=3b94425c2af79f25ed0499b2b9ce49c6 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 164
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000059 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Boots.prefab
-  importAddress: Guid(db130e61ba8610b40b668f4dc2699fca) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Boots.prefab using Guid(db130e61ba8610b40b668f4dc2699fca) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'ceb86cf90dc13b45ce658c5f8d1be2a3') in 0.005664417 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=bea2909235c8cdf51d50d56146d3b405 DependenciesID=b96c1acd021523ccc65c832e069a15bd StaticDependenciesID=4d7320bcf4c6e85721da43ea21905cea 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/Fantasy knight/Texture/Armor/T_Armor_AO.tga
-  importAddress: Guid(3cd9add9c8200ac46867c7a760727d42) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Armor/T_Armor_AO.tga using Guid(3cd9add9c8200ac46867c7a760727d42) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'eb3622e37d1d9757de6faa6067989d60') in 0.008139583 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0c6223855e9615f78a4a424b81e9a25b DependenciesID=0b7efbc7445e6d410035f74e92692045 StaticDependenciesID=1db507a7ca6ba64bbe0262384d376c8c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000039 seconds.
-  path: Assets/Fantasy knight/Prefab/Skin_1_3.prefab
-  importAddress: Guid(e08c48e04adf93f4298853b30582cf63) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Skin_1_3.prefab using Guid(e08c48e04adf93f4298853b30582cf63) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a832ca3d8a01d2c60b09896d872b2d6c') in 0.005457208 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=369f329800fefca4d6af133eedb918da DependenciesID=fa675c68ce87e51f7cdc8876b0af6657 StaticDependenciesID=ba433653edadd6507ca52bf6babb844e 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 164
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Fantasy knight/Prefab/Skin_1_4.prefab
-  importAddress: Guid(d795ecf62053eb745964b087aeb03184) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Skin_1_4.prefab using Guid(d795ecf62053eb745964b087aeb03184) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '432de4099113c8c1c8139c57410837f2') in 0.005733167 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=78d699ef8b7c2108920f1c8f73b53f63 DependenciesID=e1b5ebb3fe55164df78ce143294ab012 StaticDependenciesID=3c97381f5225cf5a0c01ba2cc8464714 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 164
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000038 seconds.
-  path: Assets/Fantasy knight/Prefab/Mace.prefab
-  importAddress: Guid(aa8522de51c0a8d4eab62f3656e008d0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Mace.prefab using Guid(aa8522de51c0a8d4eab62f3656e008d0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a6d6b508e1713bc05eac37bba859b0af') in 0.007397875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=616b560e6bfb6f0afe2fea4446d456f1 DependenciesID=c4ca8ea6ce00c902a018c357dd550946 StaticDependenciesID=f505712f526c5f9d19c26dfc2a0a2c61 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000064 seconds.
-  path: Assets/Fantasy knight/Texture/Armor/T_Armor_MetallicSmoothness.tga
-  importAddress: Guid(db3ecc10b70a7ae4583d94de0f320118) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Armor/T_Armor_MetallicSmoothness.tga using Guid(db3ecc10b70a7ae4583d94de0f320118) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a84ed999f11c9e66c5e75deb3f3ef6f8') in 0.011429334 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d1cb36ecdf8b8badb0b19e66048d1565 DependenciesID=6c105b351c402d7246fda3bb4a2ac9a8 StaticDependenciesID=c5f3fa9a29fdb6c4fb72e4df99206025 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000080 seconds.
-  path: Assets/Fantasy knight/Texture/Body/T_Body_Normal.tga
-  importAddress: Guid(5994d0cfd80a97c40aa5c412fa3ac7b3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Body/T_Body_Normal.tga using Guid(5994d0cfd80a97c40aa5c412fa3ac7b3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '686188880b277de1197debdff7aaae44') in 0.009642416 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=9c443d4ca58becd709c9cbb9f0e8474e DependenciesID=837384493e40106702a514ffe127dcd2 StaticDependenciesID=bab00e3d01c6c371704611addb733cb7 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Torso.fbx
-  importAddress: Guid(72edf14672cce88499ed145b3507660b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Torso.fbx using Guid(72edf14672cce88499ed145b3507660b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '6cc971745c4d2308eb5c3aecccf3a7c4') in 0.006953 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4f3d23e2640611528273a30ac60daa51 DependenciesID=7d75d23b7ac0ee9ab30f9977cae07a8e StaticDependenciesID=55cea9415d7972819856fdfc509aebb4 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/Fantasy knight/Texture/Armor/T_Armor_Base_color_3.tga
-  importAddress: Guid(1888b76db0edabd43965f9ab20da881a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Armor/T_Armor_Base_color_3.tga using Guid(1888b76db0edabd43965f9ab20da881a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '00bba0ff55bdbf0663cedd48af9fcceb') in 0.008098125 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b9a8ec1ff2c331cd2dc2aa4c8e75e5cf DependenciesID=78f9e9512ae012cd13aed80490fb845b StaticDependenciesID=dce60762727ef0bcb6a70be9cc99619c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Gloves.prefab
-  importAddress: Guid(2984bc1f341b086499053add0df55913) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Gloves.prefab using Guid(2984bc1f341b086499053add0df55913) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '29027fa8b777fd7b867b8d2803aa430f') in 0.005134208 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=45459ba71445ca6006f8e4ff1c71ec60 DependenciesID=c7c8b65ec77146629a461adedfe2f9e6 StaticDependenciesID=62ac6350a4ca8a83f5c902ef082d4acf 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Pants.fbx
-  importAddress: Guid(4d137fc27c66ca3498e021580084eb38) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Pants.fbx using Guid(4d137fc27c66ca3498e021580084eb38) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3857ae6e770acd6fb18dcce821d7639d') in 0.00728625 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5e02aa0ec19a8fa2e61951dc37163c04 DependenciesID=5579de1796e909d363230bb28b0c411b StaticDependenciesID=5589d107fc5629e21e31cb326c1175be 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/shorts.fbx
-  importAddress: Guid(f323a59d94e37c24f907e91ccb4b0b59) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/shorts.fbx using Guid(f323a59d94e37c24f907e91ccb4b0b59) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '00a8c4112eae621dadd9432be1a4b44d') in 0.010498375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2124c178fac88b6ce30cbe4c4754c02a DependenciesID=5d3bda2cdba40cbe46a8b40f40a60469 StaticDependenciesID=47dfcaae2d93b231313bb62504f21195 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000053 seconds.
-  path: Assets/Fantasy knight/Texture/Body/T_Body_AO.tga
-  importAddress: Guid(7e7285ce246dbda4d897a059e275d6d9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Body/T_Body_AO.tga using Guid(7e7285ce246dbda4d897a059e275d6d9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1404958efd2b1b314f7e0d67c34651f8') in 0.007457959 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3cc8227199835736f278c6df748e17be DependenciesID=7e2d27d129340b4937126b6039dcedf2 StaticDependenciesID=784f29e2a1de28729c5addfcd86ed413 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000055 seconds.
-  path: Assets/Fantasy knight/Base mesh/Mace.fbx
-  importAddress: Guid(afbecd5bd7bdf5645939b6778b81260a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Mace.fbx using Guid(afbecd5bd7bdf5645939b6778b81260a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter)MaterialLocation.External is obsolete. External Material Location is no longer supported. (Assets/Fantasy knight/Base mesh/Mace.fbx)
- -> (Import Result ID: '4b79ab2dd845910303a620fe79a7da39') in 0.007465042 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f83dfe81561f27a831ec69c7042b881a DependenciesID=300dd6b3a0b0693ea49591c96f77c533 StaticDependenciesID=879369ebadfbbb94ffa4aef5f75306e3 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Body_01.prefab
-  importAddress: Guid(d3dc725b6d47d7248ae345beaa472ba5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Body_01.prefab using Guid(d3dc725b6d47d7248ae345beaa472ba5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1fb373e4a67e5c9bfd9a68538847691c') in 0.00477275 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7b6f90853a9794845b59d298d0871b1e DependenciesID=2d4091774fc6feaf086e062afeb57014 StaticDependenciesID=2ace94efe69f3d54ddaf7ca958160075 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/Fantasy knight/Materials/Mat_Shield.mat
-  importAddress: Guid(014f57e8f605c2449adc42ca805c0dbe) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Materials/Mat_Shield.mat using Guid(014f57e8f605c2449adc42ca805c0dbe) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'd857062290dde8b3cbbf3385dd0ee9b2') in 0.045146083 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=9715eeb5217058aac0453432d90aa3ea DependenciesID=b2006176183211e26bd32e04d4d1202f StaticDependenciesID=ac1f917a874b53c57a1bf329b308ecbd 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000052 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Head.fbx
-  importAddress: Guid(cdc474555f86e664dbecacb189418b69) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Head.fbx using Guid(cdc474555f86e664dbecacb189418b69) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3126a494befde9b1073582a4fee83ea8') in 0.006756792 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6e16789c1c43af4e5200df8398c792df DependenciesID=c3335d67fd3c80abf3f86fee7b0eae06 StaticDependenciesID=39d304d249463623d2a744971e645bbd 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Legs_Separate.fbx
-  importAddress: Guid(2efeb5f7d6d5fb947bfef9656e11ff03) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Legs_Separate.fbx using Guid(2efeb5f7d6d5fb947bfef9656e11ff03) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'cc5182a34e9caec9912f6fade6b5f15c') in 0.006168875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e8674e940fbe41055328305c863b4fb4 DependenciesID=c3a34280750c8b0ab819bef979810da4 StaticDependenciesID=e6f89140cd7168a077ddacafa515e187 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/Fantasy knight/Standard_Two_Sided.shader
-  importAddress: Guid(b81183c8b8a273c41b4eda33e86e0955) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Standard_Two_Sided.shader using Guid(b81183c8b8a273c41b4eda33e86e0955) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '9eab5247c52a973ae8dcfb4c33c3649f') in 0.012393916 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=eeb95fd1d17d6b91ff8d1826c251928b DependenciesID=855521cf04612b4d5ea24df300fd6d8e StaticDependenciesID=96b3ae6a6f9120b7f870cc75a2a19bfb 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Helmet.fbx
-  importAddress: Guid(084eec089e3461c459cd95f2a3281fc6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Helmet.fbx using Guid(084eec089e3461c459cd95f2a3281fc6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '65210b3a98ef98dc8577917c46a42f93') in 0.00764575 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b9bbcb98a8ee3f98ff053cce52d13e9e DependenciesID=39f6e3325e49b1ea49844da2596a3288 StaticDependenciesID=61532160494467678e3f33c309727a3f 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Fantasy knight/Texture/Mace/T_Mace_Base_color.tga
-  importAddress: Guid(b51ff9324b106bb4198855f57c257c3c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Mace/T_Mace_Base_color.tga using Guid(b51ff9324b106bb4198855f57c257c3c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '906c1890d9942f3e2b6e8b41f0c15e83') in 0.007855333 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e7cd798e822a5bb280951726f60ea046 DependenciesID=11dc64d77ad0a75dfc92d4cc3f1a7aea StaticDependenciesID=95dae63551c553ebfe9ac0edfe135cc8 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Bracers.fbx
-  importAddress: Guid(5dabcd0974f9098449183d2b966a1ec6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Bracers.fbx using Guid(5dabcd0974f9098449183d2b966a1ec6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '2e75b7322d6da5a327d4e1e13f239f92') in 0.006100375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0fc9b9662e8127e075c03be04414b594 DependenciesID=77335d7206e940f2bfce95f0a412d6c9 StaticDependenciesID=cbe89b1e200b932f68c602e0f0fa2bde 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000040 seconds.
-  path: Assets/Fantasy knight/Texture/Armor/T_Armor_MetallicSmoothness_2.tga
-  importAddress: Guid(32b2ec26b61709a4585ebf5075744868) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Armor/T_Armor_MetallicSmoothness_2.tga using Guid(32b2ec26b61709a4585ebf5075744868) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '9cce88f915d553250ae8f22897653844') in 0.009706333 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=26c8823a43ec5d2a76327e4c8fb99e0d DependenciesID=5f2b560ef424da74b2971f6cca83ff7a StaticDependenciesID=7257211be8eec021044e036560118903 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000058 seconds.
-  path: Assets/Fantasy knight/Materials/Mat_Armor_3.mat
-  importAddress: Guid(e65c3c47ac1fa9244b78ad87fb8f364d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Materials/Mat_Armor_3.mat using Guid(e65c3c47ac1fa9244b78ad87fb8f364d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'f8bebc1ad3cb5491b4cae324cbe094c6') in 0.047178792 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a1a2c0e99474efcba1dc9ffa185353cd DependenciesID=89ff1586cf401ce3200dd8e06f4e1867 StaticDependenciesID=b109c36389a1058949b55abc0900c41d 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000044 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Hair.prefab
-  importAddress: Guid(23b44b811d3e233498759da251fbb45d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Hair.prefab using Guid(23b44b811d3e233498759da251fbb45d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a0e3c1b70147c21c222bcb9e6db70eef') in 0.005629666 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=cb31b283776ded00f1cb431e4b05b766 DependenciesID=bfed267ecd05db3ca0da9cade2563880 StaticDependenciesID=697dfc4a33920d7fc9cc6201760c5934 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000043 seconds.
-  path: Assets/Fantasy knight/Materials/Mat_Armor_4.mat
-  importAddress: Guid(e2fa23d0a5433bd4f9cbb810cb26a984) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Materials/Mat_Armor_4.mat using Guid(e2fa23d0a5433bd4f9cbb810cb26a984) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c3d8919f5d46bd2674508803de42ea27') in 0.015580875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=94751173f99f30b1e92779dbc8a3b60d DependenciesID=365d509f6764636de3c33acbb919e724 StaticDependenciesID=18f4c478e721d0df459f90a5ba50f0a0 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000040 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Tunic.prefab
-  importAddress: Guid(cd901770c162f224fa0c7257fd69fa4d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Tunic.prefab using Guid(cd901770c162f224fa0c7257fd69fa4d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3d2ac1347e11707400810247889459b2') in 0.004899875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=da91e1389e6bd2ffacd32cb8de4aecdd DependenciesID=eb3567f11ec2350cc83f09d93e2d1cef StaticDependenciesID=c0a604df7b74b0b8b350eda0635ad0ac 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/Fantasy knight/Texture/Armor/T_Armor_Normal.tga
-  importAddress: Guid(e8d2a32d006350846ab566de0c32a814) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Armor/T_Armor_Normal.tga using Guid(e8d2a32d006350846ab566de0c32a814) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'da830de2e7aee00dd5a6b6397cc9c799') in 0.00711875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2f292024f3a57c3989282a6526bfba44 DependenciesID=8d80a5b5f024db6c3d0cc3aa8f657a20 StaticDependenciesID=960fed4afe1f295154146ec80d787cc6 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/Fantasy knight/Prefab/Skin_3.prefab
-  importAddress: Guid(0e2a52fc7d5047e4f8b326785cca41b8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Skin_3.prefab using Guid(0e2a52fc7d5047e4f8b326785cca41b8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '66a89faffb80e3b5396607eaf9a9bc63') in 0.006846041 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=51831f39a48667de1a5331e1afe20ccb DependenciesID=d46fe9971803eeced1cc5b9fbdccacd1 StaticDependenciesID=0148939f6e8d3f73b6a329f56d6b8054 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 140
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Bags.fbx
-  importAddress: Guid(59fbcce343a3abd468f5f2a8c5a6daa2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Bags.fbx using Guid(59fbcce343a3abd468f5f2a8c5a6daa2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '5fd2f2d89848d1c57faf1bcd33f0d12a') in 0.008781875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b8ee570ff05510f9c43b2cb7bff11c4f DependenciesID=3027e0b7cb961be48908ad0d1c8aa23e StaticDependenciesID=005956d31a28ae543adb810a53e5427a 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 136
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/Fantasy knight/Texture/Hair/T_Hair_Normals.png
-  importAddress: Guid(8f56103625c7ecb48ba2fc48fc6b51ae) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Hair/T_Hair_Normals.png using Guid(8f56103625c7ecb48ba2fc48fc6b51ae) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '2bd0604d4e6f0da723507e1d74a73115') in 0.010121292 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f729b51f412a557730a004975104eb1d DependenciesID=446aca249a9d1abf9e088a018d88ebcc StaticDependenciesID=37bd0b8a7813ce798f15ce9ecf67b79c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000039 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Bags.prefab
-  importAddress: Guid(9eb1ef6db1100cc4aabeb01a22292a27) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Bags.prefab using Guid(9eb1ef6db1100cc4aabeb01a22292a27) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '6ab6c25632a748ac627e1767ee70fdc1') in 0.004688375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b2139d93680771f6f5a0c13eab6dd826 DependenciesID=3b55772d0be849e9024752f47da6be15 StaticDependenciesID=9e967732e56cc81326bb56a1643c904e 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 136
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/shorts.prefab
-  importAddress: Guid(b4236c863efbd3c41924e8935b10f36e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/shorts.prefab using Guid(b4236c863efbd3c41924e8935b10f36e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'de1ee747bbcd6086a402f875d97f4539') in 0.004156208 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e0ff6c80957cad3677a73a7fdbada22a DependenciesID=46e2e58c234a72adc97ff960ccebc914 StaticDependenciesID=6fdb5d276314be696b78d044d40c0a48 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Tunic.fbx
-  importAddress: Guid(c7c9136a0b5d3e747a598daec68857e2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Tunic.fbx using Guid(c7c9136a0b5d3e747a598daec68857e2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b06e5f340663440dd124d56f81d88c09') in 0.00587775 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d6b9a45d4f6ea0aa85f9fd441677319c DependenciesID=dabdab29c07f9279ccd0393be4f4d5d3 StaticDependenciesID=51955ca2c396e8ad4fe29728fea2a646 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/Fantasy knight/Base mesh/Skin_1.fbx
-  importAddress: Guid(b549692f7f04c6c409ff3e2bf2f5e3a7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Skin_1.fbx using Guid(b549692f7f04c6c409ff3e2bf2f5e3a7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter)MaterialLocation.External is obsolete. External Material Location is no longer supported. (Assets/Fantasy knight/Base mesh/Skin_1.fbx)
- -> (Import Result ID: '50d608d980df473a8edef2bf02bf37b1') in 0.009694875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=20a0c47f5729f1dff3f6d02b4f5cfd61 DependenciesID=f72ddb1f4ee8d8f2270f43a16d8b5f5c StaticDependenciesID=88440e3b26fa41edf05dffcdad9a7da3 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 164
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/Fantasy knight/Materials/Mat_Armor_2.mat
-  importAddress: Guid(3cf77c1ee3532a34e95beffcd3225f2a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Materials/Mat_Armor_2.mat using Guid(3cf77c1ee3532a34e95beffcd3225f2a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '8e3b23d55f65b7423bee1ff65b68208c') in 0.014639375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=34c8ef677edfd8d560e43f81af629d4c DependenciesID=c4e38e2292ead1c76f91af80774bad6b StaticDependenciesID=1b05e6a18921ad20f8796c3f8dec8a05 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Body_02.fbx
-  importAddress: Guid(0f5da6fe2c601ad46a8c8703f3659174) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Body_02.fbx using Guid(0f5da6fe2c601ad46a8c8703f3659174) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'f4f278e3ab467cd155c4642c62f0e293') in 0.009402459 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fdda2f1d46308d55d8ae7b5dbaa66460 DependenciesID=5982b7c42b547e25269b4702a7645187 StaticDependenciesID=301c03bf420e03b951eb2560c6a806f5 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/Fantasy knight/Materials/Mat_Armor_1.mat
-  importAddress: Guid(008f5b7416cb3dc4a930c9414c3b6d4f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Materials/Mat_Armor_1.mat using Guid(008f5b7416cb3dc4a930c9414c3b6d4f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '86534bd2c6cdf405bab02d2cd8ecc71e') in 0.014016417 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=978fa21645ffe104225cea5e76421dda DependenciesID=e95add669f46e72e1d12043b3e618fe8 StaticDependenciesID=5cfa3179e32945c785d01fc64b96caa5 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Hair.fbx
-  importAddress: Guid(c4f05c1601a3e2440aee4732be752bcb) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Hair.fbx using Guid(c4f05c1601a3e2440aee4732be752bcb) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '29806043161682d1186bf48945aa2fdb') in 0.0086845 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=cd62bfcdf648a753a1446a85bb024596 DependenciesID=85eb2f962907082354123f580496fcd3 StaticDependenciesID=f4d9494e242956fb8ab41d18b7b5538c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Fantasy knight/Materials/Mat_Body.mat
-  importAddress: Guid(a21b7f48f10623c47977805e0d311de3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Materials/Mat_Body.mat using Guid(a21b7f48f10623c47977805e0d311de3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '2bdfdfac975cdc3e4184258bb3c7fc30') in 0.115098833 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0c986303e1c45dda43e3967aa6a676b1 DependenciesID=ad59448d897aed9d3eaba3664511fcdf StaticDependenciesID=4bf0bea817236f5e5c8d92b73bdfe6b8 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Fantasy knight/Texture/Mace/T_Mace_AO.tga
-  importAddress: Guid(a8b69a4e8f5449a4d8ead3ef13ed29e0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Mace/T_Mace_AO.tga using Guid(a8b69a4e8f5449a4d8ead3ef13ed29e0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '71cf1b5a62377f6e62f5106fd7fd9f12') in 0.007729542 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=68c5d5d0e0bd1d6f2a55c4a965fdaefd DependenciesID=db2821442cb0355bd238e351fd8e7c63 StaticDependenciesID=69764b0b790467764caa8671ae849849 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000052 seconds.
-  path: Assets/Fantasy knight/Texture/Body/T_Body_Base_color.tga
-  importAddress: Guid(726e91a451e1e3a459e1bb17aabaf1dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Body/T_Body_Base_color.tga using Guid(726e91a451e1e3a459e1bb17aabaf1dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '81fc3f00c4b74c07fb5ab82db54c9e2a') in 0.007048708 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b4af5055601351d8f00744e119e794e5 DependenciesID=30c0787c614cff9fdca0985731a6a636 StaticDependenciesID=ad1f16e18162d9bb4a75e0b71d14c891 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/Fantasy knight/Materials/Mat_Hair.mat
-  importAddress: Guid(63bfad934d03a944ca99bb3e1f60f6e5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Materials/Mat_Hair.mat using Guid(63bfad934d03a944ca99bb3e1f60f6e5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '13da921b351a2cc4f81255f04d7a17b0') in 0.086494792 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ce9e4d82d9f81004d84bfbe49e438983 DependenciesID=3f77bab90f8e9a71f98447a2948baf45 StaticDependenciesID=1011a548d046545fe772b9f6fabb2a15 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Helmet.prefab
-  importAddress: Guid(4fcd989eb9c41214794e007e09d863c3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Helmet.prefab using Guid(4fcd989eb9c41214794e007e09d863c3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3111732664fb1371b9dbecddcff9e6ed') in 0.004771458 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=280a23b14a3577612cf07dd276d0dad9 DependenciesID=27296823acbea30661582c6dae589fff StaticDependenciesID=7eaefd1d1a08d71aaefc2d0e7b57e58c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000040 seconds.
-  path: Assets/Fantasy knight/Base mesh/Skin_3.fbx
-  importAddress: Guid(ea9285ea89bfa1449acc379a399b49e7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Skin_3.fbx using Guid(ea9285ea89bfa1449acc379a399b49e7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '41b58be75e664c3de80f17d4e5b4fbfe') in 0.007447667 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fb3a4e92a891d11548c5813a97cdcf4b DependenciesID=080a0f80a3b9f099e7ddfbf5f28432d9 StaticDependenciesID=f33a3daf6c77289a5f95042b73da7f92 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 140
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Bracers.prefab
-  importAddress: Guid(805d6e74402c009408caaba344947d2b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Bracers.prefab using Guid(805d6e74402c009408caaba344947d2b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'ad078ff31eb394d25fb3dec231e48dcf') in 0.004294208 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6101e2ac622b947c68f99ad10dfd314a DependenciesID=1d555ae4775aa67b90bfd7164ec52ee9 StaticDependenciesID=a23df18ec167a895b0f5a0ae42e1a9df 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/Fantasy knight/Base mesh/Shield.fbx
-  importAddress: Guid(e2d15f7abb682274dad76653c3438fd7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Shield.fbx using Guid(e2d15f7abb682274dad76653c3438fd7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a801e708c5045c2a4867058aa8379326') in 0.006452125 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8f3f5be2936a40289b9332f4b449c95f DependenciesID=8d4e7ba2fed241ab2dfb7aafc27678af StaticDependenciesID=4ae9bc6590020cdf51086a1267de7990 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/Fantasy knight/Texture/Mace/T_Mace_MetallicSmoothness.tga
-  importAddress: Guid(ec4473e4bdc974244897b6b52e475b7e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Mace/T_Mace_MetallicSmoothness.tga using Guid(ec4473e4bdc974244897b6b52e475b7e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '0645a082e6be74e40d9b612a2962196e') in 0.011440583 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ff79bc8257dd8c444574d569a26bb39d DependenciesID=c80bbb40180f724a45885d3365821bae StaticDependenciesID=4dd3ef8c7157b3213acf51f2fedc8b89 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/Fantasy knight/Texture/Armor/T_Armor_Base_color_2.tga
-  importAddress: Guid(5345c934193b7f841a5d2ae0cc4379f6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Armor/T_Armor_Base_color_2.tga using Guid(5345c934193b7f841a5d2ae0cc4379f6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '79d9e657c382a0543568ead6673dde57') in 0.005834833 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5feef2755a8467cbc25014b7ffccee17 DependenciesID=59a795c928a7b58227fe6eaf21aae26f StaticDependenciesID=0cca31ac73acec6becf811e75e1d52f0 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Legs_Separate.prefab
-  importAddress: Guid(b9672c408f4fe204a8e640a81c71ff4b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Legs_Separate.prefab using Guid(b9672c408f4fe204a8e640a81c71ff4b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b2783b0946c6b9a145ac3da08cd23180') in 0.004410041 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7b20aa227de33231e3bb1f5651fb5b04 DependenciesID=2451f882df21d087acece2949c8bc8a0 StaticDependenciesID=d4ac78efefd60a5889e4ca45902b028f 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Boots.fbx
-  importAddress: Guid(0a5f5a0e1bc30764db73c789c1901acd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Boots.fbx using Guid(0a5f5a0e1bc30764db73c789c1901acd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '927b426ccdab5dafae89db4ae24156e1') in 0.00578325 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2c0f4afcdaa969956b74246aa373362f DependenciesID=d2ac2446143741b7b4485f5cd2f16376 StaticDependenciesID=e9457a92e6ea22e18aa5a684917219a3 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/Fantasy knight/Base mesh/Separated_mesh/Gloves.fbx
-  importAddress: Guid(deb22067e8e1fad47a68af5f892b15a8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Separated_mesh/Gloves.fbx using Guid(deb22067e8e1fad47a68af5f892b15a8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'bec60c7532b50eb2954eb8439d53afa7') in 0.0056215 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7fe2bdedc4088b0188396c9fbcef8341 DependenciesID=63012fa366baf6d05ac4261bee2aa7a7 StaticDependenciesID=14034a25b2ff8f99faaac5cad0c9f144 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000039 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Pants.prefab
-  importAddress: Guid(4f7c174899f2f0548b3276b6188823ad) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Pants.prefab using Guid(4f7c174899f2f0548b3276b6188823ad) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'e1d07b5ef4efefcc33e0b4bf4f870216') in 0.00406725 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f1ff84895083143ddee9889d9298e78b DependenciesID=9363594095199d3859cf5e9922504d06 StaticDependenciesID=03ad0a98359f47cc355ebf2fe379815d 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/Fantasy knight/Prefab/Skin_2.prefab
-  importAddress: Guid(d56a61b7b0540114392a813f8f54b499) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Skin_2.prefab using Guid(d56a61b7b0540114392a813f8f54b499) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '5480538c3c13142f6744db97e407f982') in 0.007119583 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8db58345b4c0b7c0ad2a2479d684b790 DependenciesID=ca6282a8b4f3dc19416b0374ef5ad844 StaticDependenciesID=d0acd29750ea8d7f2598db7eed070d03 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 144
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/Fantasy knight/Texture/Armor/T_Armor_Base_color_4.tga
-  importAddress: Guid(ae5d23a48d368d44ab67069d0f4f2a81) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Armor/T_Armor_Base_color_4.tga using Guid(ae5d23a48d368d44ab67069d0f4f2a81) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '5734d9adc68d92303fffb7a58e61a307') in 0.005778708 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e227880491bb18bb1f163af6627b5822 DependenciesID=e8175f094934b046b3e220cf04c4b3c1 StaticDependenciesID=fa8c29d9f9028e7d94c30d3c0427a2fc 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Head.prefab
-  importAddress: Guid(6e1b47e032278274ba1b95775daefe1e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Head.prefab using Guid(6e1b47e032278274ba1b95775daefe1e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '0052841beff9d95edc91798eef3e36c0') in 0.004415 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=17d2b29fc1e860373e7b6e849939cded DependenciesID=f67be1cec12fdb28ea63114e2d21796c StaticDependenciesID=83469c55b34ab5e5b290de6430bbd54d 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/Fantasy knight/Texture/Armor/T_Armor_Base_color_1.tga
-  importAddress: Guid(81360f9d5a6581242a2e34b10ee2bd0b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Armor/T_Armor_Base_color_1.tga using Guid(81360f9d5a6581242a2e34b10ee2bd0b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '2937a71f74edda663932af29375fd61e') in 0.00721425 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8e343bca762d2f9d08d0a870aa4b6ee4 DependenciesID=99ddac9bf1c0c39473eaf1cf4b9796df StaticDependenciesID=964b17533759133cd77dbd4c22155097 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/Fantasy knight/Materials/Mat_Mace.mat
-  importAddress: Guid(38c542998ffeb0145bfae4772d5940ef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Materials/Mat_Mace.mat using Guid(38c542998ffeb0145bfae4772d5940ef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '9eeb05ded23c91edd346fe1531e17f12') in 0.012893417 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6847e9c0f9d07bcff26b1ffebb520c4a DependenciesID=b62e1bd1b305a1d1b2c0996a24c125a3 StaticDependenciesID=dd8240c9a082232ddf9188f945b69e51 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/Fantasy knight/Fantasy knight.unity
-  importAddress: Guid(b7df2dffc58c10c49b960ee419ca07ee) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Fantasy knight.unity using Guid(b7df2dffc58c10c49b960ee419ca07ee) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c8aed762e817e6fe1c05f6f78a4cba46') in 0.004006209 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=bada752841af2ed83644462f0599bfda DependenciesID=2be243e77cdafee822b8688b77cb8afc StaticDependenciesID=53cbce2a7744db0bfb2fa6ca4acbe567 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/Fantasy knight/Prefab/Skin_1.prefab
-  importAddress: Guid(6aed7d5a7a495f94d8d55a61815701c6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Skin_1.prefab using Guid(6aed7d5a7a495f94d8d55a61815701c6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1936f7d605267441b33ca03ebd2906d2') in 0.006333625 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=08d815417313bb8a6ab3a44577439b54 DependenciesID=6ce0c41c447d7a861fadb9b6b95bc0fa StaticDependenciesID=c582fcfb48779c695f7b5132eef4c7dc 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 170
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000052 seconds.
-  path: Assets/Fantasy knight/Prefab/Separated_mesh/Torso.prefab
-  importAddress: Guid(09284ec64e8238c489c3481d58c10056) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Prefab/Separated_mesh/Torso.prefab using Guid(09284ec64e8238c489c3481d58c10056) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '5237b0c7788270c53c43629f1691a915') in 0.004498958 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5f57002957e92bd15db7ebe6d2f3d859 DependenciesID=e6a4809d90036d7df95a147fa311a42a StaticDependenciesID=e22e12983a39ca0c81677798ddbbba20 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/Fantasy knight/Base mesh/Materials/Mat_Armor.mat
-  importAddress: Guid(4ad238d9914894faf9876c883f622c54) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Materials/Mat_Armor.mat using Guid(4ad238d9914894faf9876c883f622c54) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '2ee1de4bde7b369bda22084204d2e00b') in 0.004243667 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b4b7f2edc7adc3539d3c21edaceb0a56 DependenciesID=db50a86e54cb1106d60cf04deee7e24b StaticDependenciesID=23644bc0b8f74a3d207ef909d46b22c8 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000040 seconds.
-  path: Assets/Fantasy knight/Texture/Hair/T_Hair_Alpha.png
-  importAddress: Guid(130a8911f67ac9548a5f370c0714d52d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Texture/Hair/T_Hair_Alpha.png using Guid(130a8911f67ac9548a5f370c0714d52d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a23596fab9d507998f3c51c65f2ef17c') in 0.006942666 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0fdcc232b83700d034da057110ebbcb7 DependenciesID=cd50847460a3207f54394b5dda546671 StaticDependenciesID=a53b48f7e1f88ffa0b9712bfb52ef134 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/Fantasy knight/Base mesh/Skin_2.fbx
-  importAddress: Guid(2fff0198cf015724e893d488bea85383) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/Fantasy knight/Base mesh/Skin_2.fbx using Guid(2fff0198cf015724e893d488bea85383) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '505d08196b5ac0202d02608f25371793') in 0.00783075 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=76a6ce20e700b223830c55c0f514d041 DependenciesID=5084d568e81434b6b9cb38e39a2391eb StaticDependenciesID=ee8b71d39aa512e24e20d60c2062800f 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 144
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.344720 seconds.
-  path: Assets/Fantasy knight/Fantasy knight.unity
-  importAddress: Guid(b7df2dffc58c10c49b960ee419ca07ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fantasy knight/Fantasy knight.unity using Guid(b7df2dffc58c10c49b960ee419ca07ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: 'e409f27392bdcea91f20aef93b69b8e6') in 0.001093083 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=04ab041126210a7ed3d2530979493142 DependenciesID=cd648909ed103344c0a2361664719f45 StaticDependenciesID=c5901340326ba14bd785ed00afb62e1d 
+  path: Assets/_Game/Scripts/Editor/BossFightSetup.cs
+  importAddress: Guid(09b72e925e2ec4b82bbf53423c4ddc38) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
+Start importing Assets/_Game/Scripts/Editor/BossFightSetup.cs using Guid(09b72e925e2ec4b82bbf53423c4ddc38) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '934d6e3bae748ba2c52fe2aa7e077fbe') in 0.016482041 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=af150e076cefaed3f1b102950513c4c9 DependenciesID=5189db5b8361da0af1a6904248c6a18a StaticDependenciesID=c3c2f5732fcc77c37d8ef1f96ceb077c 
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
 
 ========================================================================
-Received Import Request.
-  Time since last request: 4.064238 seconds.
-  path: Assets/Fantasy knight/Base mesh
-  importAddress: Guid(19b0559af8d15474baf864a90200a9d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fantasy knight/Base mesh using Guid(19b0559af8d15474baf864a90200a9d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (Import Result ID: '232ff7b5812772559124c2f1f746fbea') in 0.000413583 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=aee62a3e33e70a6b1d38089a4488c149 DependenciesID=3ff8f2b1c86e7ee603b1d26bf513fded StaticDependenciesID=638c857cb7141de5bd14c919ba967729 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 79.628052 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh
-  importAddress: Guid(16b6dfab23dd0cd4293d77332d8bb2d2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh using Guid(16b6dfab23dd0cd4293d77332d8bb2d2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '5c62c9a2902affdb70bba3fc6bfa8461') in 0.030476667 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1f95275503a69b70a390ead02a7564d0 DependenciesID=8b14922e346a1607a08c8c7c87c03623 StaticDependenciesID=2b1a0a0bc8b87541da514d67c95cca80 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000278 seconds.
-  path: Assets/_Game/Models/Player/Texture/Body/T_Body_MetallicSmoothness.tga
-  importAddress: Guid(835b76a9f90fea44aae2b2e6c2a346ce) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Body/T_Body_MetallicSmoothness.tga using Guid(835b76a9f90fea44aae2b2e6c2a346ce) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '16d21f87697ff61ab57d0dc0938c0baa') in 0.0234615 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=bf30badbc1eb3686c7057cad527cbacb DependenciesID=e8373c56137bc7b3e16f7fda31805c9e StaticDependenciesID=9c963043d912e43b131fc007cf287be0 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000036 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Body_01.fbx
-  importAddress: Guid(f3cbb9c2b4248aa4aac44577525b443c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Body_01.fbx using Guid(f3cbb9c2b4248aa4aac44577525b443c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '889902be6fb5e4ce19f3ef8601860660') in 0.014752959 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=de1a9d6f0566ae68a496f475b017470e DependenciesID=0f555721aaa1e4a846c647fcfc0200e3 StaticDependenciesID=0e1a7b53b2dfe8aec505b5fe56c80ae2 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Body_02.prefab
-  importAddress: Guid(a74a61f5d92c94d419d873d55c3c7265) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Body_02.prefab using Guid(a74a61f5d92c94d419d873d55c3c7265) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'bf30d975cd7d66fe1dbba0667d8d1089') in 0.009937917 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a395c164aeb390b4d3bff1cb71065435 DependenciesID=2acad34a783321167c1d119df68e364b StaticDependenciesID=9f79c043a13b318e5464da56ca28aaf9 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Materials
-  importAddress: Guid(22da642338669425fbd0642da8b43222) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Materials using Guid(22da642338669425fbd0642da8b43222) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c88de4c0bf687ebdfed5fead9f885bc6') in 0.002452416 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ecb91d0c852e265e9d223b72b72f89fe DependenciesID=7a4ad8853b48422300a47541ea4e7ef7 StaticDependenciesID=17e363af44026c48b1267d63b22d2bcf 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000055 seconds.
-  path: Assets/_Game/Models/Player/Texture/Mace/T_Mace_Normal.tga
-  importAddress: Guid(369f8b338ff145b46a19d846142b9583) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Mace/T_Mace_Normal.tga using Guid(369f8b338ff145b46a19d846142b9583) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'edba3ad3962786eadc240638c02b9451') in 0.010228042 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=eca002df5617a5761be21cd24d45c990 DependenciesID=38896e7093f804b4d2d5050ca6c35c7d StaticDependenciesID=e29ff526c656d1b0fcc51453bee6f12f 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Shield.prefab
-  importAddress: Guid(6abeed541f2193941b3b38435de85b3d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Shield.prefab using Guid(6abeed541f2193941b3b38435de85b3d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '8b8a9aa3e028203490dcece341d41756') in 0.007830167 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=bbba568bc3271140ec9de4ba4f3c4f9c DependenciesID=4214b39086bb65aa9add141fbd7f0fed StaticDependenciesID=8ce3d83dee2e1e6a3cfa781f270e5a68 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000040 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Skin_1_2.prefab
-  importAddress: Guid(b37dcde3d0ea4934da36f610f07c0513) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Skin_1_2.prefab using Guid(b37dcde3d0ea4934da36f610f07c0513) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'f74df74be1bc70e858e6c9befe63e630') in 0.007341917 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=436bb564645e898a8bd6dc7a207c80b2 DependenciesID=bd6345c02b8c5c2c2ff840fa2af1bcc8 StaticDependenciesID=3b94425c2af79f25ed0499b2b9ce49c6 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 164
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Boots.fbx
-  importAddress: Guid(0a5f5a0e1bc30764db73c789c1901acd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Boots.fbx using Guid(0a5f5a0e1bc30764db73c789c1901acd) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a36769ccec94e6b3fc2fbd32d275bbcf') in 0.006009833 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2d70c0224f09887cff8683109fce385c DependenciesID=3023fde7d7297d15fc75c9775a3ffaf3 StaticDependenciesID=e9457a92e6ea22e18aa5a684917219a3 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/_Game/Models/Player/Base mesh
-  importAddress: Guid(19b0559af8d15474baf864a90200a9d3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh using Guid(19b0559af8d15474baf864a90200a9d3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '073135fe6753c75b8e2fc5f61611b945') in 0.002294042 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=354992343c0d3c01c4b8e079898e6f84 DependenciesID=a4d72c059479e844a828f69bafcc8fd4 StaticDependenciesID=d1bb65f9b37406610b3a02670681b102 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Boots.prefab
-  importAddress: Guid(db130e61ba8610b40b668f4dc2699fca) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Boots.prefab using Guid(db130e61ba8610b40b668f4dc2699fca) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '9b1cafa609ba296d0ca4c4659993277a') in 0.00504925 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3357431ddec1d64acc3c3b548c76240f DependenciesID=50058bcc72be28f2de15a4b094ef4e84 StaticDependenciesID=4d7320bcf4c6e85721da43ea21905cea 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Pants.fbx
-  importAddress: Guid(4d137fc27c66ca3498e021580084eb38) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Pants.fbx using Guid(4d137fc27c66ca3498e021580084eb38) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3c9a4d92e140c1ef34cfe0f41cbebb52') in 0.005540833 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4b7ef187db9de4d3e661151ab14f03a4 DependenciesID=6222165edcb68f0e2ff4412b2bceb939 StaticDependenciesID=5589d107fc5629e21e31cb326c1175be 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Skin_1_3.prefab
-  importAddress: Guid(e08c48e04adf93f4298853b30582cf63) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Skin_1_3.prefab using Guid(e08c48e04adf93f4298853b30582cf63) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '56e0358953e390dbb059f33afff0598e') in 0.005674833 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=dc304595804d9721a90339cd84f59192 DependenciesID=7e980631cc077a7e36eb5965b2221c2c StaticDependenciesID=ba433653edadd6507ca52bf6babb844e 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 164
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Skin_1_4.prefab
-  importAddress: Guid(d795ecf62053eb745964b087aeb03184) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Skin_1_4.prefab using Guid(d795ecf62053eb745964b087aeb03184) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '59723547988f2b7a76112a9857a17a56') in 0.007120875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=78300f87390dadefc5eac9d4df98ebfa DependenciesID=37d6fe3f51c28470df4095cc3759b774 StaticDependenciesID=3c97381f5225cf5a0c01ba2cc8464714 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 164
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/_Game/Models/Player/Texture
-  importAddress: Guid(81feacd566ba81348bdb5acdfe6567d2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture using Guid(81feacd566ba81348bdb5acdfe6567d2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'f873f5d7906aa31ef5ff5d3444a740ab') in 0.002123875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=31089a360f96198212b0c165e8b903b9 DependenciesID=7dfda2fefb064f52b85217abd51b8d3b StaticDependenciesID=bfdccfaa0b21ada8de46035c0e42cf8c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Mace.prefab
-  importAddress: Guid(aa8522de51c0a8d4eab62f3656e008d0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Mace.prefab using Guid(aa8522de51c0a8d4eab62f3656e008d0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '513839cb9232e0d27530ac77eacebad9') in 0.005338583 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=70c1f892be0c34c2c02db35a4dd1b6f2 DependenciesID=d9409caacf6ac5a5878cab72d6b6317c StaticDependenciesID=f505712f526c5f9d19c26dfc2a0a2c61 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Texture/Armor/T_Armor_MetallicSmoothness.tga
-  importAddress: Guid(db3ecc10b70a7ae4583d94de0f320118) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Armor/T_Armor_MetallicSmoothness.tga using Guid(db3ecc10b70a7ae4583d94de0f320118) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c551603af1322d4155fac220b4bd856a') in 0.009999166 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f9b7f8c5ae586fcaa1524d91b726590d DependenciesID=fb78832e61230723e3ac17497bd6b072 StaticDependenciesID=c5f3fa9a29fdb6c4fb72e4df99206025 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/_Game/Models/Player/Texture/Body
-  importAddress: Guid(57df2fc851e1b58479f5b15b4c7cef6c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Body using Guid(57df2fc851e1b58479f5b15b4c7cef6c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c965116aa3d135d5e74f557ca7896f03') in 0.002411084 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fdeb9211c32ceb15c62e62131e0041b9 DependenciesID=03b355fa1716a437029d5b0a3b188d12 StaticDependenciesID=6c83ed18b85c2d92a17d0e37507770e1 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/_Game/Models/Player/Texture/Body/T_Body_Normal.tga
-  importAddress: Guid(5994d0cfd80a97c40aa5c412fa3ac7b3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Body/T_Body_Normal.tga using Guid(5994d0cfd80a97c40aa5c412fa3ac7b3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '6eff1a6ee544f3144acd6b371df342e4') in 0.00916975 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e212c5e84616e2b6a5035a43b41f3c2c DependenciesID=cb16e1ff1fa1575fe7f6b630b0cdcf6f StaticDependenciesID=bab00e3d01c6c371704611addb733cb7 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Torso.fbx
-  importAddress: Guid(72edf14672cce88499ed145b3507660b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Torso.fbx using Guid(72edf14672cce88499ed145b3507660b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '457794bd3def60999f072f231a095e94') in 0.006617958 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7a6c83c21d5321e3241ace8e94f1a60c DependenciesID=dafbab87f396f945880e1dc648e623c0 StaticDependenciesID=55cea9415d7972819856fdfc509aebb4 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/_Game/Models/Player/Texture/Armor/T_Armor_Base_color_3.tga
-  importAddress: Guid(1888b76db0edabd43965f9ab20da881a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Armor/T_Armor_Base_color_3.tga using Guid(1888b76db0edabd43965f9ab20da881a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b9ed91a9dad2cd242449ffd340323847') in 0.009100375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5ca6b560c23f6021eb5dc5a11e45c60f DependenciesID=258b90e696ca0f2b4a4909784151ca16 StaticDependenciesID=dce60762727ef0bcb6a70be9cc99619c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Gloves.prefab
-  importAddress: Guid(2984bc1f341b086499053add0df55913) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Gloves.prefab using Guid(2984bc1f341b086499053add0df55913) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c4bfeb4531b9baec3abd8895b0bddfd5') in 0.0051815 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=56438bf283d5472d916f439270eba515 DependenciesID=1a8e186a246642fad2a99eb3f8803261 StaticDependenciesID=62ac6350a4ca8a83f5c902ef082d4acf 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/_Game/Models/Player/Texture/Armor/T_Armor_AO.tga
-  importAddress: Guid(3cd9add9c8200ac46867c7a760727d42) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Armor/T_Armor_AO.tga using Guid(3cd9add9c8200ac46867c7a760727d42) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '9ecebab8dfac0ad3d774c157ac420c95') in 0.006938875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2dc35c9503182184a502eede7a513dd1 DependenciesID=481991e1eee64933651de2673ef4f972 StaticDependenciesID=1db507a7ca6ba64bbe0262384d376c8c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/shorts.fbx
-  importAddress: Guid(f323a59d94e37c24f907e91ccb4b0b59) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/shorts.fbx using Guid(f323a59d94e37c24f907e91ccb4b0b59) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'd4f9ce93d7d12f0ffbe194334d33ae2f') in 0.005445584 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=cfa9aaedac1c92e9a92b2556bab64de9 DependenciesID=798fb5106b80d380e2da15509568b45a StaticDependenciesID=47dfcaae2d93b231313bb62504f21195 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/_Game/Models/Player/Texture/Body/T_Body_AO.tga
-  importAddress: Guid(7e7285ce246dbda4d897a059e275d6d9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Body/T_Body_AO.tga using Guid(7e7285ce246dbda4d897a059e275d6d9) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'd6d0a37693cf68ca80c153fdc53bff19') in 0.007197375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a698b742a08fe4d4c1ac7d2253de218a DependenciesID=7ba5b100a1ed5b9986adb83da6d10dca StaticDependenciesID=784f29e2a1de28729c5addfcd86ed413 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Mace.fbx
-  importAddress: Guid(afbecd5bd7bdf5645939b6778b81260a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Mace.fbx using Guid(afbecd5bd7bdf5645939b6778b81260a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter)MaterialLocation.External is obsolete. External Material Location is no longer supported. (Assets/_Game/Models/Player/Base mesh/Mace.fbx)
- -> (Import Result ID: 'c52adc8d8fc95ce3cf689f64efc57357') in 0.005796958 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4079c6ce864d6281f48726b233d384d8 DependenciesID=71006c9d0e75d389b3d15fde0224fd3a StaticDependenciesID=879369ebadfbbb94ffa4aef5f75306e3 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Body_01.prefab
-  importAddress: Guid(d3dc725b6d47d7248ae345beaa472ba5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Body_01.prefab using Guid(d3dc725b6d47d7248ae345beaa472ba5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'cea333a2e1a521d6c7cc5e83a4b44fe5') in 0.004495291 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0e3ccc3d0e50f24151d8532611cc3d6e DependenciesID=61ca988fd3e8364e534f8bcc3b294505 StaticDependenciesID=2ace94efe69f3d54ddaf7ca958160075 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/_Game/Models/Player/Materials/Mat_Shield.mat
-  importAddress: Guid(014f57e8f605c2449adc42ca805c0dbe) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Materials/Mat_Shield.mat using Guid(014f57e8f605c2449adc42ca805c0dbe) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'de8debd9cb27dbc8330714620d921774') in 0.004775542 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=39b378686d011b7eaf24d2693f026fb0 DependenciesID=c611401ca03add1effd614a1ad840c3f StaticDependenciesID=ac1f917a874b53c57a1bf329b308ecbd 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Head.fbx
-  importAddress: Guid(cdc474555f86e664dbecacb189418b69) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Head.fbx using Guid(cdc474555f86e664dbecacb189418b69) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'd4a2b002e3283ddb9c60ee0a4fe0cd2c') in 0.005829958 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=48d6d9dd623358cb6a998a9c4ec6150a DependenciesID=5faa60bb99c8aead1e5a7ca7b6d12d78 StaticDependenciesID=39d304d249463623d2a744971e645bbd 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Legs_Separate.fbx
-  importAddress: Guid(2efeb5f7d6d5fb947bfef9656e11ff03) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Legs_Separate.fbx using Guid(2efeb5f7d6d5fb947bfef9656e11ff03) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1025e246a1ff24c078d2e0da50e55882') in 0.007623958 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8806cb60d7d0e8a6f01f68b0c3d2b3ea DependenciesID=32225a1991b84e4c11d0fe5af1b7517b StaticDependenciesID=e6f89140cd7168a077ddacafa515e187 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000058 seconds.
-  path: Assets/_Game/Models/Player/Standard_Two_Sided.shader
-  importAddress: Guid(b81183c8b8a273c41b4eda33e86e0955) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Standard_Two_Sided.shader using Guid(b81183c8b8a273c41b4eda33e86e0955) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'bf365298dde67aa96551fd3b435c0795') in 0.017431666 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=216960f44cf3430f33ca55cfc38fd9ed DependenciesID=c10eba3816585358c1562c68b8c470df StaticDependenciesID=96b3ae6a6f9120b7f870cc75a2a19bfb 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Helmet.fbx
-  importAddress: Guid(084eec089e3461c459cd95f2a3281fc6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Helmet.fbx using Guid(084eec089e3461c459cd95f2a3281fc6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '91e03b19cf5a1f6d45b1fa0feea5bf85') in 0.006807916 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e1a1df2eba37cd47a24fbe5a3837ca6e DependenciesID=1643756c7f4c92beb549d1069b9f382c StaticDependenciesID=61532160494467678e3f33c309727a3f 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Texture/Mace
-  importAddress: Guid(99b86eac97af9c64e95f376d7a16cba6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Mace using Guid(99b86eac97af9c64e95f376d7a16cba6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'cc8184b5197310e40797f7eeb0da7508') in 0.001893542 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c07692cc2a90faa349a0c8a66220d136 DependenciesID=0956bbdcfbcc847d927a7daf16e38635 StaticDependenciesID=dceeac17d942f2b731db7325e2da970e 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Hair.prefab
-  importAddress: Guid(23b44b811d3e233498759da251fbb45d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Hair.prefab using Guid(23b44b811d3e233498759da251fbb45d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'efd3b22da9c7f3a6eba76ab4c7d1b47d') in 0.005854125 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ea0f95c35c76b06a40b2b3dac08fe4b7 DependenciesID=ebb693a1443cf6cb08250aaf9e6ff765 StaticDependenciesID=697dfc4a33920d7fc9cc6201760c5934 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000059 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Bracers.fbx
-  importAddress: Guid(5dabcd0974f9098449183d2b966a1ec6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Bracers.fbx using Guid(5dabcd0974f9098449183d2b966a1ec6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a0380bd0bf23e5919fb38ba182d4cf24') in 0.005633166 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=07e9e7d4395554ac2a46c77f3e62e208 DependenciesID=6a084d13db0a2dc7d82790aff73fb727 StaticDependenciesID=cbe89b1e200b932f68c602e0f0fa2bde 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/_Game/Models/Player/Texture/Mace/T_Mace_Base_color.tga
-  importAddress: Guid(b51ff9324b106bb4198855f57c257c3c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Mace/T_Mace_Base_color.tga using Guid(b51ff9324b106bb4198855f57c257c3c) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '0b6b79a37bcb8a196c9c7e6d999216d8') in 0.007215291 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0c0b4762ce124689e650b6ecf24b8524 DependenciesID=0a8f46de1a385431df8c0a3a59ce5a86 StaticDependenciesID=95dae63551c553ebfe9ac0edfe135cc8 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/_Game/Models/Player/Materials/Mat_Armor_3.mat
-  importAddress: Guid(e65c3c47ac1fa9244b78ad87fb8f364d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Materials/Mat_Armor_3.mat using Guid(e65c3c47ac1fa9244b78ad87fb8f364d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '868307710028c78a30d3759537ecc453') in 0.03003675 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1f827126683cdd7c975b45f389984cf8 DependenciesID=a1005a865bcd444cc9f08e551d9a68dd StaticDependenciesID=b109c36389a1058949b55abc0900c41d 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/_Game/Models/Player/Texture/Armor/T_Armor_MetallicSmoothness_2.tga
-  importAddress: Guid(32b2ec26b61709a4585ebf5075744868) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Armor/T_Armor_MetallicSmoothness_2.tga using Guid(32b2ec26b61709a4585ebf5075744868) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '10937ca3e78d64dd04add104a5815d7f') in 0.009235208 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=0d42358899c9fa24e8f226e985d468c5 DependenciesID=8adaaabbca4516c050160a4dc9ef9a9b StaticDependenciesID=7257211be8eec021044e036560118903 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/_Game/Models/Player/Materials/Mat_Armor_4.mat
-  importAddress: Guid(e2fa23d0a5433bd4f9cbb810cb26a984) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Materials/Mat_Armor_4.mat using Guid(e2fa23d0a5433bd4f9cbb810cb26a984) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3d4b918c9b5f72f6a5aeabbb41f88f08') in 0.014349792 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=00b24f809b29581111b7ba289444318a DependenciesID=097a4297f383c3ed8912cb0fb1ba40c9 StaticDependenciesID=18f4c478e721d0df459f90a5ba50f0a0 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Tunic.prefab
-  importAddress: Guid(cd901770c162f224fa0c7257fd69fa4d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Tunic.prefab using Guid(cd901770c162f224fa0c7257fd69fa4d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '502e38dfccbc87b93ed55aed6d9479a4') in 0.004944 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a8f15f6cd148eb71fc3d881798b9aca5 DependenciesID=0df2ead8820db16646528e2c92c6f3b5 StaticDependenciesID=c0a604df7b74b0b8b350eda0635ad0ac 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000043 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Skin_3.prefab
-  importAddress: Guid(0e2a52fc7d5047e4f8b326785cca41b8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Skin_3.prefab using Guid(0e2a52fc7d5047e4f8b326785cca41b8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '994011a274f5b8ce3cde9f28e2127242') in 0.006674458 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b5d5ed7a2c3eab74a8f79fc8e5276374 DependenciesID=376826bb0a87669158c987f8feb89c96 StaticDependenciesID=0148939f6e8d3f73b6a329f56d6b8054 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 140
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/_Game/Models/Player/Texture/Armor/T_Armor_Normal.tga
-  importAddress: Guid(e8d2a32d006350846ab566de0c32a814) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Armor/T_Armor_Normal.tga using Guid(e8d2a32d006350846ab566de0c32a814) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c99066e14de9834299c3b3b7a19196e5') in 0.006097167 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c35cf932e422ab0fc26b67b373bcb5d8 DependenciesID=ab35fe53fb0793276b711cdb180cd119 StaticDependenciesID=960fed4afe1f295154146ec80d787cc6 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000050 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Bags.fbx
-  importAddress: Guid(59fbcce343a3abd468f5f2a8c5a6daa2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Bags.fbx using Guid(59fbcce343a3abd468f5f2a8c5a6daa2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'bf59f9d11012922d32e1b8f3dabec3dc') in 0.005787666 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=076a169abfebc55267775ec6cf52daee DependenciesID=f81bdfee1df9ead4aeeeaa30c8968c9a StaticDependenciesID=005956d31a28ae543adb810a53e5427a 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 136
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Texture/Hair/T_Hair_Normals.png
-  importAddress: Guid(8f56103625c7ecb48ba2fc48fc6b51ae) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Hair/T_Hair_Normals.png using Guid(8f56103625c7ecb48ba2fc48fc6b51ae) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'db6d57fa5d20d3465e5949dc61c4d199') in 0.008813459 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=85846251144e1977347f97fbfe1dce8a DependenciesID=466f1a1c1c914ddba0e594398ae8f124 StaticDependenciesID=37bd0b8a7813ce798f15ce9ecf67b79c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Bags.prefab
-  importAddress: Guid(9eb1ef6db1100cc4aabeb01a22292a27) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Bags.prefab using Guid(9eb1ef6db1100cc4aabeb01a22292a27) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '0ced0b64fb1ff410bd7370a6efe36ec7') in 0.004124042 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=de8052d842b9d8dcdde3d43555bfaa6f DependenciesID=53641bc47d3f165c6dbe89e2eb236a45 StaticDependenciesID=9e967732e56cc81326bb56a1643c904e 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 136
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000038 seconds.
-  path: Assets/_Game/Models/Player/Texture/Armor
-  importAddress: Guid(4a1beaf954b0ce847921ef1f70928b06) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Armor using Guid(4a1beaf954b0ce847921ef1f70928b06) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '58cab1ba35323b5dde73366061c0faed') in 0.001786625 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=56df77e7d7af5625c63fa42a011ef288 DependenciesID=32bbd956a6d270dfa1de83cf197ede8b StaticDependenciesID=34ea57a2dfbcf9c063a374a4ddb1e532 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/_Game/Models/Player/Materials
-  importAddress: Guid(6c94cf5378b4c4a40ae05707b373f920) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Materials using Guid(6c94cf5378b4c4a40ae05707b373f920) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'c274503ad4879f34e9192d3a756532d2') in 0.001902375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1b8e76a70b8952dda8a63a8ecef4865d DependenciesID=f58d9eab5ecbf25ef607f25df43eb303 StaticDependenciesID=46b6759c0e0debd58867ef00cca7fde5 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/shorts.prefab
-  importAddress: Guid(b4236c863efbd3c41924e8935b10f36e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/shorts.prefab using Guid(b4236c863efbd3c41924e8935b10f36e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '0b2642b1c45be8b3ce83af6557c05790') in 0.004421125 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4536c44f54dd88505562cbe8a15e224c DependenciesID=cec27aff1d0859399971a09b81d378ae StaticDependenciesID=6fdb5d276314be696b78d044d40c0a48 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000053 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Tunic.fbx
-  importAddress: Guid(c7c9136a0b5d3e747a598daec68857e2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Tunic.fbx using Guid(c7c9136a0b5d3e747a598daec68857e2) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '31f7f15b7fd9bd17154fa98ee12faf12') in 0.006626917 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2374ef00b0c14a2e01eab4e16795475f DependenciesID=fc10840dfafc1295eb06324210b75f46 StaticDependenciesID=51955ca2c396e8ad4fe29728fea2a646 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000056 seconds.
-  path: Assets/_Game/Models/Player/Materials/Mat_Hair.mat
-  importAddress: Guid(63bfad934d03a944ca99bb3e1f60f6e5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Materials/Mat_Hair.mat using Guid(63bfad934d03a944ca99bb3e1f60f6e5) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '763d366aa4328ab13a6e5373b54d555b') in 0.01424475 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b891fc788afdb046a4bc7c72ad7e7d9c DependenciesID=ad523e94befa80cd26c1f5707defbba8 StaticDependenciesID=1011a548d046545fe772b9f6fabb2a15 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/_Game/Models/Player/Materials/Mat_Armor_1.mat
-  importAddress: Guid(008f5b7416cb3dc4a930c9414c3b6d4f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Materials/Mat_Armor_1.mat using Guid(008f5b7416cb3dc4a930c9414c3b6d4f) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'a7a3be93f44c665cf530983639a2acd4') in 0.013667833 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c18aa9aaba65349cead3bec210abda6a DependenciesID=d2d5744e219566751f45ceee7ba5d8b9 StaticDependenciesID=5cfa3179e32945c785d01fc64b96caa5 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/_Game/Models/Player/Materials/Mat_Armor_2.mat
-  importAddress: Guid(3cf77c1ee3532a34e95beffcd3225f2a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Materials/Mat_Armor_2.mat using Guid(3cf77c1ee3532a34e95beffcd3225f2a) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'e0f270f16cc4efc4371b13d1f094e55a') in 0.013846708 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=05c34028a971d9311a45135ad816dfdf DependenciesID=1a8ccddf0893bf79ae856463a939ae04 StaticDependenciesID=1b05e6a18921ad20f8796c3f8dec8a05 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Body_02.fbx
-  importAddress: Guid(0f5da6fe2c601ad46a8c8703f3659174) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Body_02.fbx using Guid(0f5da6fe2c601ad46a8c8703f3659174) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '13588bcd1b91474bad1e5ad655fdabe9') in 0.00523175 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=89ccb3fe8fb27fbde276a2ef5048f693 DependenciesID=8421ba59f83fad4d7999f5af5392f1c9 StaticDependenciesID=301c03bf420e03b951eb2560c6a806f5 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Prefab
-  importAddress: Guid(2d65d81fe42d6ee478d991d1d5bbaa51) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab using Guid(2d65d81fe42d6ee478d991d1d5bbaa51) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'eab17636e8c28d27e1d80dc0599291b6') in 0.001983375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a73ac93fa92f0e39213e9e407be53061 DependenciesID=73e38613c1e1776f7c73c0ff9f5946bc StaticDependenciesID=b19b3cf97e2bd974ac9ba5ea8fff5b6c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000043 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Hair.fbx
-  importAddress: Guid(c4f05c1601a3e2440aee4732be752bcb) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Hair.fbx using Guid(c4f05c1601a3e2440aee4732be752bcb) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b47961c9166cfaefeba868c71d9b3335') in 0.005277625 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=671f56578e1f2dad4becd203bfade2e1 DependenciesID=50b3af2a76fc81d5320462895ef223c1 StaticDependenciesID=f4d9494e242956fb8ab41d18b7b5538c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/_Game/Models/Player/Materials/Mat_Body.mat
-  importAddress: Guid(a21b7f48f10623c47977805e0d311de3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Materials/Mat_Body.mat using Guid(a21b7f48f10623c47977805e0d311de3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'dae6a1563b08d725c9f231ad658d9ac0') in 0.01700775 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=21259d9096319df8b8af6de2334c4728 DependenciesID=dc32f97ee6c597756c4278133c411831 StaticDependenciesID=4bf0bea817236f5e5c8d92b73bdfe6b8 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000052 seconds.
-  path: Assets/_Game/Models/Player/Texture/Body/T_Body_Base_color.tga
-  importAddress: Guid(726e91a451e1e3a459e1bb17aabaf1dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Body/T_Body_Base_color.tga using Guid(726e91a451e1e3a459e1bb17aabaf1dc) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'dac671ed5be007402d5cc70dd44db701') in 0.006339875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=ec7aa5045710ab3f2205ff4076b166e1 DependenciesID=85f083c5b2db00650ba04a61a967c0ed StaticDependenciesID=ad1f16e18162d9bb4a75e0b71d14c891 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Skin_1.fbx
-  importAddress: Guid(b549692f7f04c6c409ff3e2bf2f5e3a7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Skin_1.fbx using Guid(b549692f7f04c6c409ff3e2bf2f5e3a7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter)MaterialLocation.External is obsolete. External Material Location is no longer supported. (Assets/_Game/Models/Player/Base mesh/Skin_1.fbx)
- -> (Import Result ID: '97f3d2799d04384950c8b46352de0f9f') in 0.008425834 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5149fa367f3fe6c357d342d38304dbdc DependenciesID=da8ae55634692f0e9b1890ade83575a4 StaticDependenciesID=88440e3b26fa41edf05dffcdad9a7da3 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 164
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Texture/Mace/T_Mace_AO.tga
-  importAddress: Guid(a8b69a4e8f5449a4d8ead3ef13ed29e0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Mace/T_Mace_AO.tga using Guid(a8b69a4e8f5449a4d8ead3ef13ed29e0) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'cbe94ef311e9c0f28855628b343e1565') in 0.006808166 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=bc77d4137df72e83a510e6845c788af8 DependenciesID=1b7301b62cb8b6cd6d9616596c9070a9 StaticDependenciesID=69764b0b790467764caa8671ae849849 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Skin_3.fbx
-  importAddress: Guid(ea9285ea89bfa1449acc379a399b49e7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Skin_3.fbx using Guid(ea9285ea89bfa1449acc379a399b49e7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '9ae973ea9b422c71cdbf435a91e3f1f4') in 0.007987417 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e3ed6538e2e557ded4d4cfb2719bd949 DependenciesID=e967ff99cb724a753b42a784b6d1b08d StaticDependenciesID=f33a3daf6c77289a5f95042b73da7f92 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 140
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Bracers.prefab
-  importAddress: Guid(805d6e74402c009408caaba344947d2b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Bracers.prefab using Guid(805d6e74402c009408caaba344947d2b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'e3ec323e6073704dcc4d8a38be202433') in 0.004215542 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d3619e4ee45aae01388e14c6ca80833b DependenciesID=d1610765b00e8285e6fff9970df15c8e StaticDependenciesID=a23df18ec167a895b0f5a0ae42e1a9df 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Shield.fbx
-  importAddress: Guid(e2d15f7abb682274dad76653c3438fd7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Shield.fbx using Guid(e2d15f7abb682274dad76653c3438fd7) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '64c89390f94fb00e0cf2afa2cfc651fb') in 0.005372292 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=7be2e6291f7d477ef7908adec6217d8e DependenciesID=def75c0ec3fc48dfc819527130a65e4d StaticDependenciesID=4ae9bc6590020cdf51086a1267de7990 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Helmet.prefab
-  importAddress: Guid(4fcd989eb9c41214794e007e09d863c3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Helmet.prefab using Guid(4fcd989eb9c41214794e007e09d863c3) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1d28fd2a18f8c2790b4831eba94d6f8d') in 0.004860458 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=9a3bc080e37ed6d9f06263c721aa8572 DependenciesID=b537bbea8665e87fb15c6216cf27f458 StaticDependenciesID=7eaefd1d1a08d71aaefc2d0e7b57e58c 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Texture/Mace/T_Mace_MetallicSmoothness.tga
-  importAddress: Guid(ec4473e4bdc974244897b6b52e475b7e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Mace/T_Mace_MetallicSmoothness.tga using Guid(ec4473e4bdc974244897b6b52e475b7e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'cda7088acefc5659efa806ca67636bb1') in 0.009372417 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e48afa625f411a6f916930266ec56564 DependenciesID=3a8655bc40a060962fe3532cdee8b1b0 StaticDependenciesID=4dd3ef8c7157b3213acf51f2fedc8b89 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/_Game/Models/Player/Texture/Armor/T_Armor_Base_color_2.tga
-  importAddress: Guid(5345c934193b7f841a5d2ae0cc4379f6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Armor/T_Armor_Base_color_2.tga using Guid(5345c934193b7f841a5d2ae0cc4379f6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '417d911f2b73b82408f5848b031fec56') in 0.005471 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=b52777d177d73193afb91737a00917ea DependenciesID=19aaf85d58a8eebcb782fb26f11ab542 StaticDependenciesID=0cca31ac73acec6becf811e75e1d52f0 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Texture/Hair
-  importAddress: Guid(c6fc99a0610cf494a92de60cab96b181) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Hair using Guid(c6fc99a0610cf494a92de60cab96b181) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '737b4378f5b572aa95fc32c2d037fbf5') in 0.001773958 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=be30b3e842110e374286cd50d9f4ecb4 DependenciesID=9f8e0126d9ad319c6e670cb33743af05 StaticDependenciesID=7f841870fd2bc2577477def45634dfe2 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Legs_Separate.prefab
-  importAddress: Guid(b9672c408f4fe204a8e640a81c71ff4b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Legs_Separate.prefab using Guid(b9672c408f4fe204a8e640a81c71ff4b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '8c3915559eca30eaa16ad5d45d19cdef') in 0.004289459 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=24e15a0913fb9e0427272ef01455a280 DependenciesID=ca7472685a4d93a05f934610a2f26361 StaticDependenciesID=d4ac78efefd60a5889e4ca45902b028f 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh/Gloves.fbx
-  importAddress: Guid(deb22067e8e1fad47a68af5f892b15a8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh/Gloves.fbx using Guid(deb22067e8e1fad47a68af5f892b15a8) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '8340ffefafb1c24ca12d19b8d0601b4f') in 0.004986875 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=3f5b45a4fa3e3605e8e956d23e13ec9f DependenciesID=427be4d42bf0816f434b998f7c4995dd StaticDependenciesID=14034a25b2ff8f99faaac5cad0c9f144 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Pants.prefab
-  importAddress: Guid(4f7c174899f2f0548b3276b6188823ad) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Pants.prefab using Guid(4f7c174899f2f0548b3276b6188823ad) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b544980464c95a1edfd4a28656847b1c') in 0.003917 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d8b1ca997e6ed19eb74459fb129886d0 DependenciesID=cbf90e9b89bdac46d36a778762197f1c StaticDependenciesID=03ad0a98359f47cc355ebf2fe379815d 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Skin_2.prefab
-  importAddress: Guid(d56a61b7b0540114392a813f8f54b499) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Skin_2.prefab using Guid(d56a61b7b0540114392a813f8f54b499) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'f4d7052aed33d8c0ee474953da27cc2b') in 0.006935041 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=74b86c0a3fb6f799da52fb44f080304f DependenciesID=9f39455e8eeb9320d193a40ade6c3716 StaticDependenciesID=d0acd29750ea8d7f2598db7eed070d03 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 144
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Head.prefab
-  importAddress: Guid(6e1b47e032278274ba1b95775daefe1e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Head.prefab using Guid(6e1b47e032278274ba1b95775daefe1e) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '19b1bd5e452904679f9f8bca2ddcd413') in 0.004351291 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5976307764f7e962ee5a031cc79f8345 DependenciesID=ead9cae86bf21905cb1adb826e1cbd1a StaticDependenciesID=83469c55b34ab5e5b290de6430bbd54d 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/_Game/Models/Player/Texture/Armor/T_Armor_Base_color_4.tga
-  importAddress: Guid(ae5d23a48d368d44ab67069d0f4f2a81) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Armor/T_Armor_Base_color_4.tga using Guid(ae5d23a48d368d44ab67069d0f4f2a81) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'f5cf7bf60bc7fb7ef7fc680144a5353b') in 0.005037042 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=5c5018023bbd24910d0eb729cfca0c9d DependenciesID=bab8c0278dd9355c1fa8c3aea63ea671 StaticDependenciesID=fa8c29d9f9028e7d94c30d3c0427a2fc 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000045 seconds.
-  path: Assets/_Game/Models/Player/Materials/Mat_Mace.mat
-  importAddress: Guid(38c542998ffeb0145bfae4772d5940ef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Materials/Mat_Mace.mat using Guid(38c542998ffeb0145bfae4772d5940ef) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '157e0dc53daed966e5928ef951992ae5') in 0.010077667 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f9a78ae98923d8608109a76a92d6488e DependenciesID=3ad9001639a9fcad2ec6804c5c4126b9 StaticDependenciesID=dd8240c9a082232ddf9188f945b69e51 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000062 seconds.
-  path: Assets/_Game/Models/Player/Texture/Armor/T_Armor_Base_color_1.tga
-  importAddress: Guid(81360f9d5a6581242a2e34b10ee2bd0b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Armor/T_Armor_Base_color_1.tga using Guid(81360f9d5a6581242a2e34b10ee2bd0b) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '6f8e0efbd3079f61b1a0bb04b1f75754') in 0.005201625 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c0d3463c10d81c1d91954384a97f554a DependenciesID=2fa7def7b6cebcabd075c6d1e7c1f0a5 StaticDependenciesID=964b17533759133cd77dbd4c22155097 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000038 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Separated_mesh
-  importAddress: Guid(df1f257eb3619a44d8a190bfc683e952) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Separated_mesh using Guid(df1f257eb3619a44d8a190bfc683e952) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '3c76fca80f2682585566f03edcac10ae') in 0.001829458 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=819d7fa59e1b10d064684121bd8c7bcf DependenciesID=e9c8bee8e09a5f99fb6393827d60c171 StaticDependenciesID=81b9f551dd494b30b09a5e3af157b7e6 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Separated_mesh/Torso.prefab
-  importAddress: Guid(09284ec64e8238c489c3481d58c10056) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Separated_mesh/Torso.prefab using Guid(09284ec64e8238c489c3481d58c10056) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '1bc1cb2eea51aa187edc86f69081371b') in 0.004668708 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6cbcd044ec55c429ac90c8c709caf356 DependenciesID=5baabaee9e331c080b55f04b34035c3f StaticDependenciesID=e22e12983a39ca0c81677798ddbbba20 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 132
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/_Game/Models/Player/Prefab/Skin_1.prefab
-  importAddress: Guid(6aed7d5a7a495f94d8d55a61815701c6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Prefab/Skin_1.prefab using Guid(6aed7d5a7a495f94d8d55a61815701c6) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '6adc5b4e1f335eb7656501c260cbf210') in 0.00788175 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=54af27806ea2b167be66df93b55aa28b DependenciesID=ad2b2dd104df0f51cc94782ea99af98b StaticDependenciesID=c582fcfb48779c695f7b5132eef4c7dc 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 170
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/_Game/Models/Player/Fantasy knight.unity
-  importAddress: Guid(b7df2dffc58c10c49b960ee419ca07ee) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Fantasy knight.unity using Guid(b7df2dffc58c10c49b960ee419ca07ee) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'b8f6e6e2919dec70a068d169038fcbfe') in 0.005442667 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6e92b5272191c963ab53484314e7e6e4 DependenciesID=11515c8b92f90ef0d8e099922c290555 StaticDependenciesID=53cbce2a7744db0bfb2fa6ca4acbe567 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Materials/Mat_Armor.mat
-  importAddress: Guid(4ad238d9914894faf9876c883f622c54) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Materials/Mat_Armor.mat using Guid(4ad238d9914894faf9876c883f622c54) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'eff23737297373905a2553bc760b0914') in 0.003462709 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=1184042d0f59c6fc5a72afd861dcf00d DependenciesID=16a59f50c527c807793305f7d92e7cdb StaticDependenciesID=23644bc0b8f74a3d207ef909d46b22c8 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000054 seconds.
-  path: Assets/_Game/Models/Player/Texture/Hair/T_Hair_Alpha.png
-  importAddress: Guid(130a8911f67ac9548a5f370c0714d52d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Texture/Hair/T_Hair_Alpha.png using Guid(130a8911f67ac9548a5f370c0714d52d) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: 'cf5c3200f81849f1bf651d05a1b4d0bc') in 0.006144375 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4bc10d730b15bc29cdce8ced561c1619 DependenciesID=ded3468ac1a01f9cab776af3c087fe0c StaticDependenciesID=a53b48f7e1f88ffa0b9712bfb52ef134 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000042 seconds.
-  path: Assets/_Game/Models/Player/Base mesh/Skin_2.fbx
-  importAddress: Guid(2fff0198cf015724e893d488bea85383) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d)
-Start importing Assets/_Game/Models/Player/Base mesh/Skin_2.fbx using Guid(2fff0198cf015724e893d488bea85383) Importer(2089858483,b0f066a214c2f5e87bad3c948f4d605d) (ScriptedImporter) -> (Import Result ID: '47007e90a5ac4caff3bbdb298081915e') in 0.006893125 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=385b1fc67aa7df4c0cce57b200db45cf DependenciesID=37a6fd24bedf72ed6dd7198dec1d996b StaticDependenciesID=ee8b71d39aa512e24e20d60c2062800f 
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 144
-
+Received Prepare
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+Thread 0x16fa27000 may have been prematurely finalized
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly DocCodeExamples.dll at Library/ScriptAssemblies/DocCodeExamples.dll not valid. Loading of assembly skipped.
+Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.BurstCompatibilityGen.dll at Library/ScriptAssemblies/Unity.Collections.BurstCompatibilityGen.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.DocCodeSamples.dll at Library/ScriptAssemblies/Unity.Collections.DocCodeSamples.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.PerformanceTests.dll at Library/ScriptAssemblies/Unity.Collections.PerformanceTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.dll at Library/ScriptAssemblies/Unity.Collections.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.Playmode.dll at Library/ScriptAssemblies/Unity.Collections.Tests.Playmode.dll not valid. Loading of assembly skipped.
+Assembly Unity.InputSystem.IntegrationTests.dll at Library/ScriptAssemblies/Unity.InputSystem.IntegrationTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Mathematics.Tests.dll at Library/ScriptAssemblies/Unity.Mathematics.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Editor.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Nuget.Mono-Cecil.dll at Library/ScriptAssemblies/Unity.Nuget.Mono-Cecil.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Config.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Config.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Searcher.EditorTests.dll at Library/ScriptAssemblies/Unity.Searcher.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ShaderGraph.Editor.Tests.dll at Library/ScriptAssemblies/Unity.ShaderGraph.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.UnifiedRayTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.UnifiedRayTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityMcp.Tests.Editor.dll at Library/ScriptAssemblies/UnityMcp.Tests.Editor.dll not valid. Loading of assembly skipped.
+Symbol file LoadedFromMemory is not a mono symbol file
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.719 seconds
+Domain Reload Profiling: 1638ms
+	BeginReloadAssembly (246ms)
+		DisableScriptedObjects (12ms)
+		CreateAndSetChildDomain (63ms)
+	RebuildCommonClasses (38ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (62ms)
+	LoadAllAssembliesAndSetupDomain (556ms)
+		LoadAssemblies (412ms)
+		AnalyzeDomain (212ms)
+			TypeCache.Refresh (15ms)
+			BuildScriptInfoCaches (185ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (719ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (140ms)
+			ProcessInitializeOnLoadAttributes (310ms)
+			ProcessInitializeOnLoadMethodAttributes (69ms)
+		AwakeInstancesAfterBackupRestoration (11ms)
+WARNING: Shader Unsupported: 'Universal Render Pipeline/VR/SpatialMapping/Wireframe' - All subshaders removed
+WARNING: Shader Did you use #pragma only_renderers and omit this platform?
+WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6605 unused Assets / (4.6 MB). Loaded Objects now: 7441.
+Memory consumption went from 171.6 MB to 167.0 MB.
+Total: 11.285875 ms (FindLiveObjects: 1.715708 ms CreateObjectMapping: 0.402292 ms MarkObjects: 6.916459 ms  DeleteObjects: 2.250708 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+WARNING: Shader Unsupported: 'Universal Render Pipeline/VR/SpatialMapping/Wireframe' - All subshaders removed
+WARNING: Shader Did you use #pragma only_renderers and omit this platform?
+WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6594 unused Assets / (3.9 MB). Loaded Objects now: 7441.
+Memory consumption went from 165.2 MB to 161.3 MB.
+Total: 24.519333 ms (FindLiveObjects: 1.165708 ms CreateObjectMapping: 1.150459 ms MarkObjects: 19.766333 ms  DeleteObjects: 2.436375 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+[Licensing::Client] Successfully resolved entitlement details
+Thread 0x16f99b000 may have been prematurely finalized
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly DocCodeExamples.dll at Library/ScriptAssemblies/DocCodeExamples.dll not valid. Loading of assembly skipped.
+Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.BurstCompatibilityGen.dll at Library/ScriptAssemblies/Unity.Collections.BurstCompatibilityGen.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.DocCodeSamples.dll at Library/ScriptAssemblies/Unity.Collections.DocCodeSamples.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.PerformanceTests.dll at Library/ScriptAssemblies/Unity.Collections.PerformanceTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.dll at Library/ScriptAssemblies/Unity.Collections.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.Playmode.dll at Library/ScriptAssemblies/Unity.Collections.Tests.Playmode.dll not valid. Loading of assembly skipped.
+Assembly Unity.InputSystem.IntegrationTests.dll at Library/ScriptAssemblies/Unity.InputSystem.IntegrationTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Mathematics.Tests.dll at Library/ScriptAssemblies/Unity.Mathematics.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Editor.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Nuget.Mono-Cecil.dll at Library/ScriptAssemblies/Unity.Nuget.Mono-Cecil.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Config.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Config.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Searcher.EditorTests.dll at Library/ScriptAssemblies/Unity.Searcher.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ShaderGraph.Editor.Tests.dll at Library/ScriptAssemblies/Unity.ShaderGraph.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.UnifiedRayTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.UnifiedRayTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityMcp.Tests.Editor.dll at Library/ScriptAssemblies/UnityMcp.Tests.Editor.dll not valid. Loading of assembly skipped.
+Symbol file LoadedFromMemory is not a mono symbol file
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.650 seconds
+Domain Reload Profiling: 1433ms
+	BeginReloadAssembly (205ms)
+		DisableScriptedObjects (7ms)
+		CreateAndSetChildDomain (50ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (42ms)
+	LoadAllAssembliesAndSetupDomain (480ms)
+		LoadAssemblies (341ms)
+		AnalyzeDomain (205ms)
+			TypeCache.Refresh (18ms)
+			BuildScriptInfoCaches (174ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (650ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			BeforeProcessingInitializeOnLoad (137ms)
+			ProcessInitializeOnLoadAttributes (280ms)
+			ProcessInitializeOnLoadMethodAttributes (57ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
+WARNING: Shader Unsupported: 'Universal Render Pipeline/VR/SpatialMapping/Wireframe' - All subshaders removed
+WARNING: Shader Did you use #pragma only_renderers and omit this platform?
+WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6605 unused Assets / (5.6 MB). Loaded Objects now: 7444.
+Memory consumption went from 171.9 MB to 166.3 MB.
+Total: 9.043125 ms (FindLiveObjects: 0.397041 ms CreateObjectMapping: 0.573625 ms MarkObjects: 6.192458 ms  DeleteObjects: 1.879459 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Begin MonoManager ReloadAssembly
+Thread 0x16ff13000 may have been prematurely finalized
+Assembly Assembly-CSharp-Editor-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-Editor-firstpass.dll not valid. Loading of assembly skipped.
+Assembly Assembly-CSharp-firstpass.dll at Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll not valid. Loading of assembly skipped.
+Assembly DocCodeExamples.dll at Library/ScriptAssemblies/DocCodeExamples.dll not valid. Loading of assembly skipped.
+Assembly TestNewCustomAssembly.dll at Library/ScriptAssemblies/TestNewCustomAssembly.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.BurstCompatibilityGen.dll at Library/ScriptAssemblies/Unity.Collections.BurstCompatibilityGen.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.DocCodeSamples.dll at Library/ScriptAssemblies/Unity.Collections.DocCodeSamples.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.PerformanceTests.dll at Library/ScriptAssemblies/Unity.Collections.PerformanceTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.dll at Library/ScriptAssemblies/Unity.Collections.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Collections.Tests.Playmode.dll at Library/ScriptAssemblies/Unity.Collections.Tests.Playmode.dll not valid. Loading of assembly skipped.
+Assembly Unity.InputSystem.IntegrationTests.dll at Library/ScriptAssemblies/Unity.InputSystem.IntegrationTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Mathematics.Tests.dll at Library/ScriptAssemblies/Unity.Mathematics.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Editor.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Multiplayer.Center.Tests.dll at Library/ScriptAssemblies/Unity.Multiplayer.Center.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Nuget.Mono-Cecil.dll at Library/ScriptAssemblies/Unity.Nuget.Mono-Cecil.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.PathTracing.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.PathTracing.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Core.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Config.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Config.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Editor.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.RenderPipelines.Universal.Runtime.Tests.dll at Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.Searcher.EditorTests.dll at Library/ScriptAssemblies/Unity.Searcher.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly Unity.ShaderGraph.Editor.Tests.dll at Library/ScriptAssemblies/Unity.ShaderGraph.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Editor.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.TextMeshPro.Tests.dll at Library/ScriptAssemblies/Unity.TextMeshPro.Tests.dll not valid. Loading of assembly skipped.
+Assembly Unity.UnifiedRayTracing.Editor.Tests.dll at Library/ScriptAssemblies/Unity.UnifiedRayTracing.Editor.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.Common.Tests.dll at Library/ScriptAssemblies/UnityEditor.UI.Common.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityEditor.UI.EditorTests.dll at Library/ScriptAssemblies/UnityEditor.UI.EditorTests.dll not valid. Loading of assembly skipped.
+Assembly UnityEngine.UI.Tests.dll at Library/ScriptAssemblies/UnityEngine.UI.Tests.dll not valid. Loading of assembly skipped.
+Assembly UnityMcp.Tests.Editor.dll at Library/ScriptAssemblies/UnityMcp.Tests.Editor.dll not valid. Loading of assembly skipped.
+Symbol file LoadedFromMemory is not a mono symbol file
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Script 'Packages/org.christowm.unity.mcp/Runtime/RuntimeSupport.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+Script 'Packages/org.christowm.unity.mcp/Tests/Playmode/PlaymodeTests.cs' will not be compiled because it exists outside the Assets folder and does not to belong to any assembly definition file.
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.681 seconds
+Domain Reload Profiling: 1498ms
+	BeginReloadAssembly (208ms)
+		DisableScriptedObjects (7ms)
+		CreateAndSetChildDomain (59ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (51ms)
+	LoadAllAssembliesAndSetupDomain (501ms)
+		LoadAssemblies (366ms)
+		AnalyzeDomain (202ms)
+			TypeCache.Refresh (12ms)
+			BuildScriptInfoCaches (178ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (682ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (134ms)
+			ProcessInitializeOnLoadAttributes (306ms)
+			ProcessInitializeOnLoadMethodAttributes (71ms)
+		AwakeInstancesAfterBackupRestoration (10ms)
+WARNING: Shader Unsupported: 'Universal Render Pipeline/VR/SpatialMapping/Wireframe' - All subshaders removed
+WARNING: Shader Did you use #pragma only_renderers and omit this platform?
+WARNING: Shader If subshaders removal was intentional, you may have forgotten turning Fallback off?
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6605 unused Assets / (6.2 MB). Loaded Objects now: 7447.
+Memory consumption went from 174.9 MB to 168.7 MB.
+Total: 10.825792 ms (FindLiveObjects: 1.353708 ms CreateObjectMapping: 0.577417 ms MarkObjects: 6.471916 ms  DeleteObjects: 2.422208 ms)
+
+Prepare: number of updated asset objects reloaded= 0

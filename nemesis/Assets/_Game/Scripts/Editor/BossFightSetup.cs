@@ -118,13 +118,69 @@ namespace Nemesis.Editor
 
             // 6. Create Humbaba (Boss)
             GameObject boss = GameObject.Find("Humbaba");
+            bool isNewBoss = false;
             if (boss == null)
             {
-                boss = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                boss.name = "Humbaba";
-                boss.transform.position = new Vector3(0, 1.5f, 5);
+                boss = new GameObject("Humbaba");
+                boss.transform.position = new Vector3(0, 0, 5);
                 boss.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                isNewBoss = true;
             }
+
+            // Ensure we clean up any root primitive rendering if upgrading from an older setup
+            MeshFilter rootMF = boss.GetComponent<MeshFilter>();
+            if (rootMF != null) DestroyImmediate(rootMF);
+            MeshRenderer rootMR = boss.GetComponent<MeshRenderer>();
+            if (rootMR != null) DestroyImmediate(rootMR);
+
+            // Add standard CapsuleCollider on parent for hit detection
+            CapsuleCollider bCollider = boss.GetComponent<CapsuleCollider>();
+            if (bCollider == null)
+            {
+                bCollider = boss.AddComponent<CapsuleCollider>();
+                bCollider.center = new Vector3(0f, 1f, 0f);
+                bCollider.height = 2f;
+                bCollider.radius = 0.8f;
+            }
+
+            // Instantiation of stage meshes as child GameObjects
+            string[] stagePaths = {
+                "Assets/_Game/Models/Boss/stage_1.fbx",
+                "Assets/_Game/Models/Boss/stage_2.fbx",
+                "Assets/_Game/Models/Boss/stage_3.fbx"
+            };
+
+            for (int i = 0; i < 3; ++i)
+            {
+                string childName = $"Stage_{i + 1}";
+                Transform childTrans = boss.transform.Find(childName);
+                if (childTrans == null)
+                {
+                    GameObject stageAsset = AssetDatabase.LoadAssetAtPath<GameObject>(stagePaths[i]);
+                    if (stageAsset != null)
+                    {
+                        GameObject stageObj = (GameObject)PrefabUtility.InstantiatePrefab(stageAsset);
+                        stageObj.name = childName;
+                        stageObj.transform.SetParent(boss.transform);
+                        stageObj.transform.localPosition = Vector3.zero;
+                        stageObj.transform.localRotation = Quaternion.identity;
+                        stageObj.transform.localScale = Vector3.one;
+
+                        // By default, set Stage_1 active and others inactive
+                        stageObj.SetActive(i == 0);
+                    }
+                    else if (isNewBoss && i == 0)
+                    {
+                        // Fallback capsule visual if no stage FBX meshes are found
+                        GameObject fallback = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                        fallback.name = "PlaceholderVisual";
+                        fallback.transform.SetParent(boss.transform);
+                        fallback.transform.localPosition = new Vector3(0f, 1f, 0f);
+                        DestroyImmediate(fallback.GetComponent<Collider>());
+                    }
+                }
+            }
+
             // Ensure Boss tag exists
             AddTag("Boss");
             boss.tag = "Boss";
@@ -143,6 +199,19 @@ namespace Nemesis.Editor
             var bCtrlConfigField = typeof(BossController).GetField("bossConfig", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             if (bCtrlStatsField != null) bCtrlStatsField.SetValue(bCtrl, bStats);
             if (bCtrlConfigField != null) bCtrlConfigField.SetValue(bCtrl, bossConfig);
+
+            // Explicitly bind the stage models in the Inspector using reflection
+            var stage1Field = typeof(BossController).GetField("stage1Model", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var stage2Field = typeof(BossController).GetField("stage2Model", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var stage3Field = typeof(BossController).GetField("stage3Model", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            Transform t1 = boss.transform.Find("Stage_1");
+            Transform t2 = boss.transform.Find("Stage_2");
+            Transform t3 = boss.transform.Find("Stage_3");
+
+            if (stage1Field != null && t1 != null) stage1Field.SetValue(bCtrl, t1.gameObject);
+            if (stage2Field != null && t2 != null) stage2Field.SetValue(bCtrl, t2.gameObject);
+            if (stage3Field != null && t3 != null) stage3Field.SetValue(bCtrl, t3.gameObject);
 
             if (boss.GetComponent<NemesisWeightReceiver>() == null) boss.AddComponent<NemesisWeightReceiver>();
 
