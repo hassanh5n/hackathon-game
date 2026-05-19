@@ -24,11 +24,6 @@ public class VictorySequence : MonoBehaviour
     [SerializeField] private Transform boss;
     [SerializeField] private BossStats bossStats;
 
-    [Header("Camera")]
-    [SerializeField] private Vector3 victoryOrbitCenter = new Vector3(0f, 3f, 0f);
-    [SerializeField] private float orbitRadius = 6f;
-    [SerializeField] private float orbitHeight = 3f;
-
     [Header("Settings")]
     [SerializeField] private bool returnToMainMenu = true;
     [SerializeField] private float menuReturnDelay = 3f;

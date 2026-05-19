@@ -8,6 +8,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private PlayerStats stats;
     [SerializeField] private PlayerController controller;
     [SerializeField] private GameObject hitboxObject;
+    [SerializeField] private Animator animator;
 
     [Header("Events")]
     public UnityEvent<float> OnAttackLanded;
@@ -27,10 +28,13 @@ public class PlayerCombat : MonoBehaviour
     {
         if (stats == null) stats = GetComponent<PlayerStats>();
         if (controller == null) controller = GetComponent<PlayerController>();
+        if (animator == null) animator = GetComponent<Animator>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
 
         if (stats != null)
         {
             stats.OnPostureBroken.AddListener(HandlePostureBroken);
+            stats.OnPlayerDeath.AddListener(HandlePlayerDeath);
         }
 
         if (hitboxObject != null)
@@ -44,6 +48,7 @@ public class PlayerCombat : MonoBehaviour
         if (stats != null)
         {
             stats.OnPostureBroken.RemoveListener(HandlePostureBroken);
+            stats.OnPlayerDeath.RemoveListener(HandlePlayerDeath);
         }
     }
 
@@ -51,6 +56,12 @@ public class PlayerCombat : MonoBehaviour
     {
         isStaggered = true;
         
+        // Trigger staggered animation
+        if (animator != null)
+        {
+            animator.SetTrigger("Staggered");
+        }
+
         // Interrupt attacks/parries
         StopAllCoroutines();
         CancelInvoke(nameof(RecoverFromStagger)); // Prevent stacking
@@ -60,6 +71,21 @@ public class PlayerCombat : MonoBehaviour
         
         // Recover after an arbitrary stagger time (e.g., 2 seconds)
         Invoke(nameof(RecoverFromStagger), 2f);
+    }
+
+    private void HandlePlayerDeath()
+    {
+        // Trigger death animation
+        if (animator != null)
+        {
+            animator.SetTrigger("Death");
+        }
+
+        // Interrupt everything
+        StopAllCoroutines();
+        if (hitboxObject != null) hitboxObject.SetActive(false);
+        isAttacking = false;
+        isParrying = false;
     }
 
     private void RecoverFromStagger()
@@ -84,6 +110,11 @@ public class PlayerCombat : MonoBehaviour
         isAttacking = true;
         currentAttackDamage = 12f;
         
+        if (animator != null)
+        {
+            animator.SetTrigger("LightAttack");
+        }
+
         if (hitboxObject != null) hitboxObject.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         if (hitboxObject != null) hitboxObject.SetActive(false);
@@ -108,6 +139,11 @@ public class PlayerCombat : MonoBehaviour
         isAttacking = true;
         currentAttackDamage = 28f;
         
+        if (animator != null)
+        {
+            animator.SetTrigger("HeavyAttack");
+        }
+
         // 0.8s windup
         yield return new WaitForSeconds(0.8f);
         
@@ -133,8 +169,17 @@ public class PlayerCombat : MonoBehaviour
     private IEnumerator ParryRoutine()
     {
         isParrying = true;
+        if (animator != null)
+        {
+            animator.SetTrigger("Parry");
+            animator.SetBool("IsParrying", true);
+        }
         yield return new WaitForSeconds(0.4f);
         isParrying = false;
+        if (animator != null)
+        {
+            animator.SetBool("IsParrying", false);
+        }
     }
 
     public void Dodge()

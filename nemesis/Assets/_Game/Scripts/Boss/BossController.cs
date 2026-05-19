@@ -123,8 +123,9 @@ public class BossController : MonoBehaviour
             if (t != null) stage3Model = t.gameObject;
         }
 
-        // Initialize active model based on current stats phase
-        UpdateActiveModel(bossStats.CurrentPhase);
+        // Initialize active model based on current stats phase (fallback to phase 1 if 0 due to execution order)
+        int initialPhase = bossStats.CurrentPhase <= 0 ? 1 : bossStats.CurrentPhase;
+        UpdateActiveModel(initialPhase);
 
         bossStats.OnPhaseChanged.AddListener(HandlePhaseChanged);
         bossStats.OnBossDeath.AddListener(HandleBossDeath);
