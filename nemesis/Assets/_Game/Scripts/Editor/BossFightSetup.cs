@@ -38,12 +38,30 @@ namespace Nemesis.Editor
             GameObject player = GameObject.Find("Zilar");
             if (player == null)
             {
-                player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                player.name = "Zilar";
+                GameObject playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Game/Models/Player/Prefab/Skin_1.prefab");
+                if (playerPrefab != null)
+                {
+                    player = (GameObject)PrefabUtility.InstantiatePrefab(playerPrefab);
+                    player.name = "Zilar";
+                }
+                else
+                {
+                    player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                    player.name = "Zilar";
+                }
                 player.transform.position = new Vector3(0, 1, -5);
             }
             player.tag = "Player";
             player.layer = LayerMask.NameToLayer("Default");
+
+            CapsuleCollider pCollider = player.GetComponent<CapsuleCollider>();
+            if (pCollider == null)
+            {
+                pCollider = player.AddComponent<CapsuleCollider>();
+                pCollider.center = new Vector3(0f, 1f, 0f);
+                pCollider.height = 2f;
+                pCollider.radius = 0.5f;
+            }
 
             Rigidbody pRb = player.GetComponent<Rigidbody>();
             if (pRb == null) pRb = player.AddComponent<Rigidbody>();
@@ -240,7 +258,7 @@ namespace Nemesis.Editor
         private static void AddTag(string tag)
         {
             UnityEngine.Object[] asset = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
-            if (asset != null && asset.length > 0)
+            if (asset != null && asset.Length > 0)
             {
                 SerializedObject so = new SerializedObject(asset[0]);
                 SerializedProperty tags = so.FindProperty("tags");
