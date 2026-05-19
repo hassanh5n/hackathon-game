@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
     public int DeathCount { get; private set; }
     public string SessionId { get; private set; }
 
+    private int _runNumber = 1;
+    public int CurrentRunNumber => _runNumber;
+
+    public event System.Action OnRunStarted;
+
     private void Awake()
     {
         if (Instance == null)
@@ -69,6 +74,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void ResetForNewRun()
     {
+        _runNumber++;
         ChangeState(GameState.BossFight);
+        OnRunStarted?.Invoke();
     }
 }

@@ -16,27 +16,24 @@ public class BossAdaptation : MonoBehaviour
     [SerializeField] private float maxCooldownClamp = 6.0f;
 
     private BossController bossController;
-    private NemesisWeightReceiver weightReceiver;
+    private NemesisAdaptationData _currentAdaptation;
 
     private Dictionary<string, int> playerDodgeCounters = new Dictionary<string, int>();
     private string lastKillingBlow = string.Empty;
-    private NemesisAdaptationData currentAdaptation;
 
     private void Awake()
     {
         bossController = GetComponent<BossController>();
-        
-        // Find NemesisWeightReceiver either on this object or globally
-        weightReceiver = GetComponent<NemesisWeightReceiver>();
-        if (weightReceiver == null)
-        {
-            weightReceiver = FindObjectOfType<NemesisWeightReceiver>();
-        }
+    }
 
-        if (weightReceiver == null)
-        {
-            Debug.LogWarning("[BossAdaptation] NemesisWeightReceiver not found. Boss will use default unadapted behavior.");
-        }
+    private void OnEnable()
+    {
+        NemesisAPIManager.OnNemesisResponse += HandleNemesisResponse;
+    }
+
+    private void OnDisable()
+    {
+        NemesisAPIManager.OnNemesisResponse -= HandleNemesisResponse;
     }
 
     private void Start()
@@ -100,55 +97,114 @@ public class BossAdaptation : MonoBehaviour
     /// </summary>
     public NemesisAdaptationData GetCurrentAdaptation()
     {
-        return currentAdaptation;
+        return _currentAdaptation;
+    }
+
+    private void HandleNemesisResponse(NemesisResponse response)
+    {
+        _currentAdaptation = ConvertToWeights(response.adaptations_applied);
+        Debug.Log($"[BossAdaptation] Nemesis response received. " +
+                  $"Confidence: {_currentAdaptation.adaptationConfidence:F2}, " +
+                  $"Adaptations: {response.adaptations_applied?.Count ?? 0}");
+    }
+
+    private NemesisAdaptationData ConvertToWeights(List<string> adaptationIds)
+    {
+        NemesisAdaptationData data = NemesisAdaptationData.Default;
+
+        if (adaptationIds != null && adaptationIds.Count > 0)
+        {
+            data.adaptationConfidence = 1.0f;
+            foreach (string id in adaptationIds)
+            {
+                switch (id)
+                {
+                    case "PUNISH_RIGHT_DODGE":
+                        data.punishCounterWeight += 0.3f;
+                        break;
+                    case "PUNISH_LEFT_DODGE":
+                        data.punishCounterWeight += 0.3f;
+                        break;
+                    case "PUNISH_BACKSTEP":
+                        data.punishCounterWeight += 0.2f;
+                        break;
+                    case "INCREASE_AGGRESSION":
+                        data.aggressionWeight += 0.4f;
+                        break;
+                    case "DECREASE_AGGRESSION":
+                        data.aggressionWeight -= 0.3f;
+                        break;
+                    case "SHIFT_PATTERN":
+                        data.patternShiftWeight += 0.5f;
+                        break;
+                    case "HOLD_PATTERN":
+                        data.patternShiftWeight -= 0.3f;
+                        break;
+                    case "ADD_DEFENSE_PHASE":
+                        data.defenseWeight += 0.4f;
+                        break;
+                    default:
+                        Debug.LogWarning($"[BossAdaptation] Unrecognized adaptation string: {id}");
+                        break;
+                }
+            }
+        }
+        else
+        {
+            data.adaptationConfidence = 0.0f;
+        }
+
+        data.aggressionWeight = Mathf.Clamp(data.aggressionWeight, 0.3f, 2.0f);
+        data.patternShiftWeight = Mathf.Clamp(data.patternShiftWeight, 0.0f, 1.0f);
+        data.punishCounterWeight = Mathf.Clamp(data.punishCounterWeight, 0.3f, 2.0f);
+        data.defenseWeight = Mathf.Clamp(data.defenseWeight, 0.3f, 2.0f);
+
+        return data;
     }
 
     private void HandleRunStarted()
     {
-        if (weightReceiver != null && weightReceiver.CurrentAdaptation != null)
+        if (_currentAdaptation == null)
         {
-            currentAdaptation = weightReceiver.CurrentAdaptation;
-        }
-        else
-        {
-            currentAdaptation = GetDefaultAdaptation();
+            Debug.Log("[BossAdaptation] Run 1 — no prior adaptation data, using defaults.");
+            _currentAdaptation = NemesisAdaptationData.Default;
         }
 
         ApplyAdaptation();
     }
 
-    private void HandleStageChanged(BossStage stage)
+    private void HandleStageChanged(BossController.BossStage stage)
     {
         ApplyPatternShiftOverrides(stage);
 
-        if (currentAdaptation != null && currentAdaptation.defenseWeight > 1.0f)
+        if (_currentAdaptation != null && _currentAdaptation.defenseWeight > 1.0f)
         {
-            float immunityDuration = currentAdaptation.defenseWeight * 0.5f;
+            float immunityDuration = _currentAdaptation.defenseWeight * 0.5f;
             StartCoroutine(ApplyDefensiveImmunity(immunityDuration));
         }
     }
 
     private void ApplyAdaptation()
     {
-        if (currentAdaptation == null) return;
+        if (_currentAdaptation == null) return;
 
         int runNumber = GameManager.Instance != null ? GameManager.Instance.CurrentRunNumber : 1;
 
-        if (currentAdaptation.adaptationConfidence < 0.3f)
+        if (_currentAdaptation.adaptationConfidence < 0.3f)
         {
-            Debug.LogWarning($"[BossAdaptation] Nemesis adaptation confidence too low ({currentAdaptation.adaptationConfidence:F2} < 0.3). Reverting to default behavior. Need more run data.");
-            currentAdaptation = GetDefaultAdaptation();
+            Debug.LogWarning($"[BossAdaptation] Nemesis adaptation confidence too low ({_currentAdaptation.adaptationConfidence:F2} < 0.3). Reverting to default behavior. Need more run data.");
+            _currentAdaptation = NemesisAdaptationData.Default;
         }
 
         Debug.Log($"[BossAdaptation] Applying Adaptation for Run {runNumber} | " +
-                  $"Aggression: {currentAdaptation.aggressionWeight:F2} | " +
-                  $"Pattern Shift: {currentAdaptation.patternShiftWeight:F2} | " +
-                  $"Punish Counter: {currentAdaptation.punishCounterWeight:F2} | " +
-                  $"Defense: {currentAdaptation.defenseWeight:F2} | " +
-                  $"Confidence: {currentAdaptation.adaptationConfidence:F2}");
+                  $"Aggression: {_currentAdaptation.aggressionWeight:F2} | " +
+                  $"Pattern Shift: {_currentAdaptation.patternShiftWeight:F2} | " +
+                  $"Punish Counter: {_currentAdaptation.punishCounterWeight:F2} | " +
+                  $"Defense: {_currentAdaptation.defenseWeight:F2} | " +
+                  $"Confidence: {_currentAdaptation.adaptationConfidence:F2}");
 
         // 1. Apply Aggression Weight (Inversely scale cooldown)
-        float aggressionClamped = Mathf.Max(0.1f, currentAdaptation.aggressionWeight);
+        float aggressionClamped = Mathf.Max(0.1f, _currentAdaptation.aggressionWeight);
         float newCooldown = baseAttackCooldown / aggressionClamped;
         bossController.AttackCooldown = Mathf.Clamp(newCooldown, minCooldownClamp, maxCooldownClamp);
 
@@ -159,14 +215,14 @@ public class BossAdaptation : MonoBehaviour
         ApplyPatternShiftOverrides(bossController.CurrentStage);
     }
 
-    private void ApplyPatternShiftOverrides(BossStage stage)
+    private void ApplyPatternShiftOverrides(BossController.BossStage stage)
     {
-        if (currentAdaptation == null) return;
+        if (_currentAdaptation == null) return;
 
         List<string> stageAttacks = GetAttacksForStage(stage);
 
         // Pattern Shift Logic
-        if (currentAdaptation.patternShiftWeight > 0.5f)
+        if (_currentAdaptation.patternShiftWeight > 0.5f)
         {
             // Randomize attack selection weights to break player predictability
             foreach (string attack in stageAttacks)
@@ -196,12 +252,12 @@ public class BossAdaptation : MonoBehaviour
         }
 
         // Punish Counter Logic
-        if (currentAdaptation.punishCounterWeight > 1.0f)
+        if (_currentAdaptation.punishCounterWeight > 1.0f)
         {
             string mostDodgedAttack = GetMostDodgedAttack();
             if (!string.IsNullOrEmpty(mostDodgedAttack) && stageAttacks.Contains(mostDodgedAttack))
             {
-                float punishingWeight = currentAdaptation.punishCounterWeight * 1.5f;
+                float punishingWeight = _currentAdaptation.punishCounterWeight * 1.5f;
                 bossController.SetAttackWeightOverride(mostDodgedAttack, punishingWeight);
             }
         }
@@ -240,30 +296,18 @@ public class BossAdaptation : MonoBehaviour
         return mostDodged;
     }
 
-    private List<string> GetAttacksForStage(BossStage stage)
+    private List<string> GetAttacksForStage(BossController.BossStage stage)
     {
         switch (stage)
         {
-            case BossStage.STAGE_ONE:
+            case BossController.BossStage.STAGE_ONE:
                 return new List<string> { "GROUND_SLAM", "CEDAR_SWEEP", "ROAR" };
-            case BossStage.STAGE_TWO:
+            case BossController.BossStage.STAGE_TWO:
                 return new List<string> { "ROOT_BURST", "SAPLING_SUMMON", "VINE_WHIP" };
-            case BossStage.STAGE_THREE:
+            case BossController.BossStage.STAGE_THREE:
                 return new List<string> { "DIVINE_FIRE", "PHASE_STEP", "TABLET_STORM", "MIRROR_ATTACK" };
             default:
                 return new List<string>();
         }
-    }
-
-    private NemesisAdaptationData GetDefaultAdaptation()
-    {
-        return new NemesisAdaptationData
-        {
-            aggressionWeight = 1.0f,
-            patternShiftWeight = 0.5f,
-            punishCounterWeight = 1.0f,
-            defenseWeight = 1.0f,
-            adaptationConfidence = 1.0f
-        };
     }
 }

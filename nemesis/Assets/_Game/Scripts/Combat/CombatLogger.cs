@@ -74,12 +74,6 @@ public class CombatLogger : MonoBehaviour
 {
     public static CombatLogger Instance { get; private set; }
 
-    /// <summary>
-    /// Fired when the backend responds with adaptations and a taunt.
-    /// Listeners: BossController/NemesisWeightReceiver, DeathScreenUI
-    /// </summary>
-    public static event Action<NemesisResponse> OnNemesisResponse;
-
     [Header("Configuration")]
     [SerializeField] private GameConfig config;
 
@@ -112,12 +106,6 @@ public class CombatLogger : MonoBehaviour
         {
             Destroy(gameObject);
             return;
-        }
-
-        _bossAdaptation = FindObjectOfType<BossAdaptation>();
-        if (_bossAdaptation == null)
-        {
-            Debug.LogWarning("[CombatLogger] BossAdaptation not found in scene!");
         }
 
         _nemesisAPIManager = FindObjectOfType<NemesisAPIManager>();
@@ -176,6 +164,10 @@ public class CombatLogger : MonoBehaviour
         {
             bossStats = bossObj.GetComponent<BossStats>();
         }
+        
+        _bossAdaptation = FindObjectOfType<BossAdaptation>();
+        if (_bossAdaptation == null)
+            Debug.LogWarning("[CombatLogger] BossAdaptation not found on scene load.");
     }
 
     #region Event Subscriptions
@@ -287,7 +279,7 @@ public class CombatLogger : MonoBehaviour
 
     private void HandlePlayerDeath()
     {
-        _bossAdaptation?.RecordKillingBlow(lastBossAttackId);
+        _bossAdaptation?.RecordKillingBlow(_lastBossAttackName);
 
         float duration = Time.time - runStartTime;
         int totalAttacks = lightAttacks + heavyAttacks;
@@ -326,55 +318,6 @@ public class CombatLogger : MonoBehaviour
         };
 
         _nemesisAPIManager?.AnalyzeDeath(request);
-
-        string backendUrl = "http://localhost:8000";
-        if (config != null)
-        {
-            backendUrl = config.backendBaseUrl;
-        }
-        else if (GameManager.Instance != null && GameManager.Instance.Config != null)
-        {
-            backendUrl = GameManager.Instance.Config.backendBaseUrl;
-        }
-
-        StartCoroutine(PostDeathReport(request, backendUrl + "/analyze-death"));
-    }
-
-    private IEnumerator PostDeathReport(DeathAnalysisRequest report, string url)
-    {
-        string jsonData = JsonUtility.ToJson(report);
-        Debug.Log($"[CombatLogger] Sending death report to {url}:\n{jsonData}");
-
-        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
-        {
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.timeout = 10;
-
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                try
-                {
-                    NemesisResponse response = JsonUtility.FromJson<NemesisResponse>(request.downloadHandler.text);
-                    Debug.Log($"[CombatLogger] Nemesis response: {response.adaptations_applied?.Count ?? 0} adaptations, taunt: {response.taunt}");
-                    OnNemesisResponse?.Invoke(response);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogWarning($"[CombatLogger] Failed to parse backend response: {e.Message}");
-                    OnNemesisResponse?.Invoke(null);
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"[CombatLogger] Backend request failed: {request.error}");
-                OnNemesisResponse?.Invoke(null);
-            }
-        }
     }
 
     private void ResetRunData()

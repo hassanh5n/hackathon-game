@@ -16,7 +16,7 @@ public class NemesisAPIManager : MonoBehaviour
     /// Fired when the backend responds with adaptations and a taunt.
     /// Listeners: NemesisWeightReceiver, DeathScreenUI
     /// </summary>
-    public static event Action<NemesisResponse> OnNemesisResponse;
+    public static event System.Action<NemesisResponse> OnNemesisResponse;
 
     [Header("Configuration")]
     [SerializeField] private GameConfig config;
