@@ -17,7 +17,7 @@ MonoBehaviour:
   playerMaxPosture: 100
   staminaRegenRate: 15
   playerMoveSpeed: 5
-  playerDodgeForce: 8
+  playerDodgeForce: 12
   dodgeCooldown: 0.8
   flaskCount: 3
   tabletCount: 2
@@ -27,4 +27,4 @@ MonoBehaviour:
   bossStage3Threshold: 0.3
   mercyTriggerDeathCount: 8
   maxActiveAdaptations: 4
-  backendBaseUrl: http://localhost:8000
+  backendBaseUrl: http://192.168.18.235:8000
